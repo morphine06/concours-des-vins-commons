@@ -1,0 +1,490 @@
+<!--
+Modiifer également le projet XXX
+-->
+<template>
+  <div>
+    <div class="frame">
+      <div class="row mb-3">
+        <div class="col-md-5">
+          <h4>Entreprise</h4>
+          <m-form-text
+            class="mb-2"
+            label="Nom de l'entreprise ou de l'exploitation *"
+            :name="$Utils.randomstring('pa_society')"
+            v-model="row_pa.pa_society"
+          ></m-form-text>
+          <m-form-text
+            class="mb-1"
+            label="Adresse"
+            :name="$Utils.randomstring('pa_address1')"
+            v-model="row_pa.pa_address1"
+          ></m-form-text>
+          <m-form-text
+            class="mb-2"
+            :name="$Utils.randomstring('pa_address2')"
+            v-model="row_pa.pa_address2"
+          ></m-form-text>
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <m-form-text
+                label="Code postal"
+                :name="$Utils.randomstring('pa_zip')"
+                v-model="row_pa.pa_zip"
+              ></m-form-text>
+            </div>
+            <div class="col-md-6">
+              <m-form-text
+                label="Ville"
+                :name="$Utils.randomstring('pa_city')"
+                v-model="row_pa.pa_city"
+              ></m-form-text>
+            </div>
+          </div>
+          <m-form-text
+            label="Site web"
+            :name="$Utils.randomstring('pa_web')"
+            v-model="row_pa.pa_web"
+          ></m-form-text>
+        </div>
+        <div class="col-md-6 offset-md-1">
+          <h4>Coordonnées</h4>
+          <m-form-select
+            class="mb-2"
+            label="Civilité *"
+            :items="$store.state.items_civility"
+            :name="$Utils.randomstring('pa_civility')"
+            v-model="row_pa.pa_civility"
+          ></m-form-select>
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <m-form-text
+                label="Prénom *"
+                :name="$Utils.randomstring('pa_firstname')"
+                v-model="row_pa.pa_firstname"
+              ></m-form-text>
+            </div>
+            <div class="col-md-6">
+              <m-form-text
+                label="Nom *"
+                :name="$Utils.randomstring('pa_name')"
+                v-model="row_pa.pa_name"
+              ></m-form-text>
+            </div>
+          </div>
+          <m-form-text
+            class="mb-2"
+            label="Fonction"
+            :name="$Utils.randomstring('pa_fonction')"
+            v-model="row_pa.pa_fonction"
+          ></m-form-text>
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <m-form-text
+                label="Téléphone fixe"
+                :name="$Utils.randomstring('pa_phone_fix')"
+                v-model="row_pa.pa_phone_fix"
+              ></m-form-text>
+            </div>
+            <div class="col-md-6">
+              <m-form-text
+                label="Téléphone mobile"
+                :name="$Utils.randomstring('pa_phone_mobile')"
+                v-model="row_pa.pa_phone_mobile"
+              ></m-form-text>
+            </div>
+          </div>
+          <!-- <m-form-text
+            label="Email *"
+            :name="$Utils.randomstring('pa_email')"
+            v-model="row_pa.pa_email"
+          ></m-form-text> -->
+        </div>
+      </div>
+    </div>
+    <div class="frame">
+      <div class="d-flex justify-content-between">
+        <m-form-checkbox
+          class="mb-2"
+          label="<span class='fw-bold'>Je souhaite être candidat</span>"
+          :name="$Utils.randomstring('pa_candidat')"
+          v-model="row_pa.pa_candidat"
+          @input="checkboxCandidat"
+        ></m-form-checkbox>
+        <div class="d-flex align-items-center" v-if="$Utils.isAdmin()">
+          <div v-if="row_pa.pa_candidat_valide" class="me-2">
+            Candidat validé
+          </div>
+          <div v-else class="me-2">Candidat non validé</div>
+          <label class="switch">
+            <input v-model="row_pa.pa_candidat_valide" type="checkbox" />
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+      <div v-if="row_pa.pa_candidat">
+        <div class="row">
+          <div class="col-md-5">
+            <div class="d-flex mb-3">
+              <h4>Adresse de facturation</h4>
+              <div>
+                <button
+                  class="btn btn-primary ms-4 btn-sm"
+                  @click="copyAddress"
+                >
+                  Copier
+                </button>
+              </div>
+            </div>
+            <div>
+              <m-form-text
+                class="mb-2"
+                label="Nom de l'entreprise ou de l'exploitation *"
+                :name="$Utils.randomstring('pa_society_fac')"
+                v-model="row_pa.pa_society_fac"
+              ></m-form-text>
+              <m-form-text
+                class="mb-1"
+                label="Adresse"
+                :name="$Utils.randomstring('pa_address1_fac')"
+                v-model="row_pa.pa_address1_fac"
+              ></m-form-text>
+              <m-form-text
+                class="mb-2"
+                :name="$Utils.randomstring('pa_address2_fac')"
+                v-model="row_pa.pa_address2_fac"
+              ></m-form-text>
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <m-form-text
+                    label="Code postal"
+                    :name="$Utils.randomstring('pa_zip_fac')"
+                    v-model="row_pa.pa_zip_fac"
+                  ></m-form-text>
+                </div>
+                <div class="col-md-6">
+                  <m-form-text
+                    label="Ville"
+                    :name="$Utils.randomstring('pa_city_fac')"
+                    v-model="row_pa.pa_city_fac"
+                  ></m-form-text>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="frame">
+      <div class="d-flex justify-content-between">
+        <m-form-checkbox
+          class="mb-2"
+          label="<span class='fw-bold'>Je souhaite être juré</span>"
+          :name="$Utils.randomstring('pa_jure')"
+          v-model="row_pa.pa_jure"
+          @input="checkboxJure"
+        ></m-form-checkbox>
+
+        <div class="d-flex align-items-center" v-if="$Utils.isAdmin()">
+          <div v-if="row_pa.pa_jure_valide" class="me-2">Juré validé</div>
+          <div v-else class="me-2">Juré non validé</div>
+          <label class="switch">
+            <input
+              :disabled="disabledJure"
+              v-model="row_pa.pa_jure_valide"
+              type="checkbox"
+            />
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+      <div v-if="row_pa.pa_jure">
+        <h4>Plus d'informations</h4>
+        <div class="d-flex align-items-center mb-2">
+          <div class="fw-bold me-4" style="width:360px">
+            Est-ce votre première participation ?
+          </div>
+          <m-form-select
+            style="width:200px"
+            :name="$Utils.randomstring('pa_firstparticipation')"
+            v-model="row_pa.pa_firstparticipation"
+            :items="$store.state.items_boolean"
+          ></m-form-select>
+        </div>
+        <div class="d-flex align-items-center mb-2">
+          <div class="fw-bold me-4" style="width:360px">
+            Dans quelle catégorie vous situez-vous ?
+          </div>
+          <m-form-select
+            style="width:300px"
+            :name="$Utils.randomstring('pa_typejure')"
+            v-model="row_pa.pa_typejure"
+            :items="$store.state.items_typejure"
+          ></m-form-select>
+        </div>
+        <div class="d-flex align-items-center mb-2">
+          <div class="fw-bold me-4" style="width:360px">
+            Avez-vous suivi des cours de dégustation ?
+          </div>
+          <m-form-select
+            style="width:200px"
+            :name="$Utils.randomstring('pa_coursdegustation')"
+            v-model="row_pa.pa_coursdegustation"
+            :items="$store.state.items_boolean"
+          ></m-form-select>
+        </div>
+        <div>
+          <p class="mb-1 mt-3">
+            Je déclare sur l'honneur que mes liens directs ou indirects avec les
+            entreprises, établissements, organisations professionnelles ou
+            associations dont les activités, produits ou intérêts pouvant
+            concerner les vins présentés au concours sont les suivants :
+          </p>
+          <div class="d-flex align-items-end ps-4">
+            <m-form-radio
+              style="width:150px"
+              :name="$Utils.randomstring('pa_liensexistant')"
+              id="pa_liensexistant"
+              v-model="row_pa.pa_liensexistant"
+              :items="$store.state.items_liensJure"
+            ></m-form-radio>
+
+            <m-form-text
+              style="width:250px"
+              inputGroupClass="input-group-sm"
+              :name="$Utils.randomstring('pa_liensexistant_more')"
+              v-model="row_pa.pa_liensexistant_more"
+            ></m-form-text>
+          </div>
+        </div>
+        <hr />
+        <h4>Centres de dégustations</h4>
+        <p class="fw-bold">Choisissez votre centre de dégustation :</p>
+        <m-form-radio
+          class="ps-5"
+          :name="$Utils.randomstring('pa_centredegustation')"
+          id="pa_centredegustation"
+          v-model="row_pa.pa_centredegustation"
+          :items="items_centredegustation"
+        ></m-form-radio>
+
+        <!-- <m-form-checkbox
+          class="mt-3 ps-5"
+          label="Je souhaite participer aussi à la dégustation du vignoble de Gaillac le 42 mars 2002"
+          :name="$Utils.randomstring('pa_gaillac')"
+          v-model="row_pa.pa_gaillac"
+          
+        ></m-form-checkbox> -->
+      </div>
+    </div>
+    <m-confirm-dialog
+      v-model="confirmJureValide"
+      text="Vous allez valider le juré, confirmez-vous cette action ?"
+      title="Confirmation"
+      @canceled="cancelJureValide()"
+      @confirmed="saveCandidat()"
+    ></m-confirm-dialog>
+    <m-message-dialog
+      v-model="dialogErr"
+      title="Erreur"
+      :text="dialogErrTxt"
+    ></m-message-dialog>
+  </div>
+</template>
+
+<script>
+// @ is an alias to /src
+// import HelloWorld from "@/components/HelloWorld.vue";
+
+export default {
+  name: "FormCandidat",
+  components: {},
+  props: {
+    pa_id: Number,
+    keyload: Number
+  },
+  data() {
+    return {
+      dialogErr: false,
+      dialogErrTxt: "",
+      row_pa: {},
+      jureValide: false,
+      confirmJureValide: false,
+      disabledJure: false,
+      items_centredegustation: [
+        { value: 1, text: "Vignoble 1" },
+        { value: 2, text: "Vignoble 2" },
+        { value: 3, text: "Vignoble 3" },
+        { value: 4, text: "Vignoble 4" },
+        { value: 5, text: "Vignoble 5" }
+      ]
+    };
+  },
+  watch: {
+    keyload: function(v) {}
+  },
+  async mounted() {
+    this.loadParticipation();
+  },
+  methods: {
+    async loadParticipation() {
+      let params = {};
+      if (this.pa_id == -1) params = {};
+      let response = await this.$axios.get(
+        this.$config.server_url + "/api/1.0/participations/" + this.pa_id,
+        { params }
+      );
+      this.row_pa = response.data.data;
+      this.jureValide = this.row_pa.pa_jure_valide;
+    },
+    copyAddress() {
+      this.row_pa.pa_society_fac = this.row_pa.pa_society;
+      this.row_pa.pa_address1_fac = this.row_pa.pa_address1;
+      this.row_pa.pa_address2_fac = this.row_pa.pa_address2;
+      this.row_pa.pa_city_fac = this.row_pa.pa_city;
+      this.row_pa.pa_zip_fac = this.row_pa.pa_zip;
+      // this.emitCandidat();
+    },
+    checkboxCandidat() {
+      if (this.row_pa.pa_candidat) this.row_pa.pa_candidat_valide = true;
+      else this.row_pa.pa_candidat_valide = false;
+    },
+    checkboxJure() {
+      if (this.row_pa.pa_jure) this.disabledJure = false;
+      else this.disabledJure = true;
+    },
+    tryToSaveWin(login) {
+      // console.log("je passe");
+      this.row_pa.login = login;
+      let err = [];
+      let fieldRequired = [
+        {
+          field: "pa_society",
+          text: "nom de l'entreprise",
+          type: "pa_candidat"
+        },
+        { field: "pa_civility", text: "civilité" },
+        { field: "pa_name", text: "nom" },
+        { field: "pa_firstname", text: "prénom" }
+        // { field: "pa_email", text: "email" },
+        /*         { field: "lo_login", text: "login", object: "login" },
+        { field: "lo_pass", text: "mot de passe", object: "login" } */
+      ];
+      for (let ifi = 0; ifi < fieldRequired.length; ifi++) {
+        const field = fieldRequired[ifi];
+        if (
+          !field.object &&
+          !this.row_pa[field.field] &&
+          (!field.type || (field.type && this.row_pa[field.type]))
+        )
+          err.push(field);
+        if (field.object && !this.row_pa[field.object][field.field])
+          err.push(field);
+      }
+      if (!login.lo_login) err.push({ text: "login" });
+      if (!login.lo_pass && !this.row_pa.pa_id)
+        err.push({ text: "mot de passe" });
+      // console.log("this.row_pa", this.row_pa);
+      if (!this.row_pa.pa_candidat && !this.row_pa.pa_jure) {
+        err.push({
+          text:
+            "<span class='fw-bold'>Vous devez choisir d'être candidat ou juré ou les deux</span>"
+        });
+      }
+      // console.log("err", err);
+      if (err.length) {
+        this.dialogErrTxt =
+          "<span class='fw-bold'>Vous devez remplir les champs : </span><br>";
+        for (let ierr = 0; ierr < err.length; ierr++) {
+          const error = err[ierr];
+          this.dialogErrTxt += error.text + " <br>";
+        }
+        this.dialogErr = true;
+        return;
+      }
+      // confirme juré validé
+      if (!this.jureValide && this.row_pa.pa_jure_valide) {
+        this.confirmJureValide = true;
+        this.jureValideConfirmed = true;
+      } else {
+        this.saveCandidat();
+      }
+    },
+    cancelJureValide() {
+      this.confirmJureValide = false;
+      this.jureValideConfirmed = false;
+    },
+    trimFields() {
+      let tabField = [
+        "pa_name",
+        "pa_firstname",
+        "pa_society",
+        "pa_zip",
+        "pa_city",
+        "pa_web",
+        "pa_phone_mobile",
+        "pa_phone_fix"
+      ];
+      for (let i = 0; i < tabField.length; i++) {
+        const field = tabField[i];
+        this.row_pa[field] = this.row_pa[field].trim();
+      }
+    },
+    async saveCandidat() {
+      this.confirmJureValide = false;
+      if (this.jureValideConfirmed) this.row_pa.sendEmailToJureValide = true;
+      await this.trimFields();
+      //this.row_pa.pa_email = this.row_pa.pa_email.trim();
+      let response;
+      if (this.row_pa.pa_id) {
+        response = await this.$axios.put(
+          this.$config.server_url +
+            "/api/1.0/participations/" +
+            this.row_pa.pa_id,
+          this.row_pa
+        );
+      } else {
+        this.row_pa.pa_cgu_date = "0000-00-00 00:00:00";
+        this.row_pa.pa_year = this.$store.state.year;
+        response = await this.$axios.post(
+          this.$config.server_url + "/api/1.0/participations",
+          this.row_pa
+        );
+      }
+      if (response.data.err) {
+        this.$store.dispatch("showDialogError", response.data.err.message);
+        return;
+      }
+      this.$store.dispatch("showToast", {
+        title: "Candidat",
+        text: "Le candidat a bien été enregistré",
+        color: "green"
+      });
+      this.row_pa = response.data.data;
+      this.$emit("formCandidatJureActions", {
+        action: "saved",
+        row_pa: this.row_pa
+      });
+    },
+    async deleteCandidat() {
+      let response = await this.$axios.delete(
+        this.$config.server_url + "/api/1.0/participations/" + this.row_pa.pa_id
+      );
+      this.confirmdelete = false;
+      if (response.data.data.success) {
+        this.$router.push("/candidats"),
+          this.$store.dispatch("showToast", {
+            title: "Candidat",
+            text:
+              "Le candidat " +
+              response.data.data.pa_society +
+              " a bien été supprimé",
+            color: "green"
+          });
+        this.$emit("formCandidatJureActions", { action: "deleted" });
+      }
+    }
+  }
+};
+</script>
+
+<style lang="scss" scoped></style>
