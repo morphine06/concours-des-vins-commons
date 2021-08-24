@@ -25,14 +25,6 @@ Modiifer également le projet XXX
             v-model="row_wi.wi_name3"
             :name="$Utils.randomstring('wi_name3')"
           ></m-form-text>
-          <!-- <m-form-combobox
-                class="mb-2"
-        v-model="row_wi.de_id"
-        label="Dénomination"
-        :store-url="$config.server_url + '/api/1.0/denomination'"
-        item-value="de_id"
-        :item-text="de_name"
-      ></m-form-combobox> -->
           <m-form-select
             label="Dénomination *"
             class="mb-2"
@@ -320,7 +312,8 @@ export default {
   name: "FormWine",
   components: {},
   props: {
-    wi_id: Number
+    wi_id: Number,
+     from:String
   },
   data() {
     return {
@@ -358,16 +351,18 @@ export default {
     this.contenants = [];
     this.loadDenominations();
     this.loadWine();
+          
   },
   methods: {
     async loadDenominations() {
+      let route = this.from === "candidats" ? "candidats" : "api";
       let params = {
         de_year: this.$store.state.year,
         de_save: 1,
         sort: "de_name ASC"
       };
       let response = await this.$axios.get(
-        this.$config.server_url + "/api/1.0/denominations/",
+        this.$config.server_url + "/"+route+"/1.0/denominations/",
         { params }
       );
       let rows_de = response.data.data;
@@ -379,10 +374,11 @@ export default {
       this.denominations = rows_de;
     },
     async loadWine() {
+      let route = this.from === "candidats" ? "candidats" : "api";
       let params = {};
       if (this.wi_id == -1) params = {};
       let response = await this.$axios.get(
-        this.$config.server_url + "/api/1.0/wines/" + this.wi_id,
+        this.$config.server_url + "/"+route+"/1.0/wines/" + this.wi_id,
         { params }
       );
       let row_wi = response.data.data;
@@ -600,12 +596,13 @@ export default {
     },
 
     async saveFiles(file, num) {
+      let route = this.from === "candidats" ? "candidats" : "api";
       if (!file) return;
       let formData = new FormData();
       formData.append("file", file, file.name);
       await this.$axios.post(
         this.$config.server_url +
-          "/api/1.0/wines/" +
+          "/"+route+"/1.0/wines/" +
           this.row_wi.wi_id +
           "/files/" +
           num +
@@ -620,10 +617,11 @@ export default {
       );
     },
     async deleteFile(num) {
+      let route = this.from === "candidats" ? "candidats" : "api";
       // console.log("num", num);
       await this.$axios.delete(
         this.$config.server_url +
-          "/api/1.0/wines/" +
+          "/"+route+"/1.0/wines/" +
           this.row_wi.wi_id +
           "/files/" +
           num +
@@ -643,8 +641,11 @@ export default {
       });
     },
     downloadFile(num) {
+      let route = this.from === "candidats" ? "candidats" : "api";
+      let url = this.from === "candidats" ? this.$config.candidats_url : this.$config.backoffice_url;
+      console.log('this.from, url',this.from, url);
       window.open(
-        `${this.$config.server_url}/api/1.0/wines/${this.row_wi.wi_id}/files/${num}/${this.row_wi.wi_year}?token=${this.$store.state.accesstoken}&origin=${this.$config.backoffice_url}`,
+        `${this.$config.server_url}/${route}/1.0/wines/${this.row_wi.wi_id}/files/${num}/${this.row_wi.wi_year}?token=${this.$store.state.accesstoken}&origin=${url}`,
         "_blank"
       );
     },
@@ -698,6 +699,7 @@ export default {
       }
     },
     async saveWin() {
+      let route = this.from === "candidats" ? "candidats" : "api";
       let response;
       // console.log("this.row_wi.wi_valid", this.row_wi.wi_valid);
       delete this.row_wi.denomination;
@@ -715,13 +717,13 @@ export default {
       }
       if (this.row_wi.wi_id) {
         response = await this.$axios.put(
-          this.$config.server_url + "/api/1.0/wines/" + this.row_wi.wi_id,
+          this.$config.server_url + "/"+route+"/1.0/wines/" + this.row_wi.wi_id,
           this.row_wi
         );
       } else {
         this.row_wi.wi_year = this.$store.state.year;
         response = await this.$axios.post(
-          this.$config.server_url + "/api/1.0/wines",
+          this.$config.server_url + "/"+route+"/1.0/wines",
           this.row_wi
         );
       }
@@ -755,8 +757,9 @@ export default {
       this.confirmdelete = true;
     },
     async deleteWin() {
+      let route = this.from === "candidats" ? "candidats" : "api";
       await this.$axios.delete(
-        this.$config.server_url + "/api/1.0/wines/" + this.row_wi.wi_id
+        this.$config.server_url + "/"+route+"/1.0/wines/" + this.row_wi.wi_id
       );
       this.confirmdelete = false;
 

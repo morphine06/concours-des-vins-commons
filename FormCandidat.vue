@@ -93,11 +93,6 @@ Modiifer également le projet XXX
               ></m-form-text>
             </div>
           </div>
-          <!-- <m-form-text
-            label="Email *"
-            :name="$Utils.randomstring('pa_email')"
-            v-model="row_pa.pa_email"
-          ></m-form-text> -->
         </div>
       </div>
     </div>
@@ -110,7 +105,7 @@ Modiifer également le projet XXX
           v-model="row_pa.pa_candidat"
           @input="checkboxCandidat"
         ></m-form-checkbox>
-        <div class="d-flex align-items-center" v-if="$Utils.isAdmin()">
+        <div class="d-flex align-items-center" v-if="from === 'backoffice' && $Utils.isAdmin()">
           <div v-if="row_pa.pa_candidat_valide" class="me-2">
             Candidat validé
           </div>
@@ -184,7 +179,7 @@ Modiifer également le projet XXX
           @input="checkboxJure"
         ></m-form-checkbox>
 
-        <div class="d-flex align-items-center" v-if="$Utils.isAdmin()">
+        <div class="d-flex align-items-center" v-if="from === 'backoffice' && $Utils.isAdmin()">
           <div v-if="row_pa.pa_jure_valide" class="me-2">Juré validé</div>
           <div v-else class="me-2">Juré non validé</div>
           <label class="switch">
@@ -300,7 +295,8 @@ export default {
   components: {},
   props: {
     pa_id: Number,
-    keyload: Number
+    keyload: Number,
+    from:String
   },
   data() {
     return {
@@ -327,10 +323,11 @@ export default {
   },
   methods: {
     async loadParticipation() {
+      let route = this.from === "candidats" ? "candidats" : "api";
       let params = {};
       if (this.pa_id == -1) params = {};
       let response = await this.$axios.get(
-        this.$config.server_url + "/api/1.0/participations/" + this.pa_id,
+        this.$config.server_url + "/"+route+"/1.0/participations/" + this.pa_id,
         { params }
       );
       this.row_pa = response.data.data;
@@ -430,6 +427,7 @@ export default {
       }
     },
     async saveCandidat() {
+      let route = this.from === "candidats" ? "candidats" : "api";
       this.confirmJureValide = false;
       if (this.jureValideConfirmed) this.row_pa.sendEmailToJureValide = true;
       await this.trimFields();
@@ -438,7 +436,7 @@ export default {
       if (this.row_pa.pa_id) {
         response = await this.$axios.put(
           this.$config.server_url +
-            "/api/1.0/participations/" +
+            "/"+route+"/1.0/participations/" +
             this.row_pa.pa_id,
           this.row_pa
         );
@@ -446,7 +444,7 @@ export default {
         this.row_pa.pa_cgu_date = "0000-00-00 00:00:00";
         this.row_pa.pa_year = this.$store.state.year;
         response = await this.$axios.post(
-          this.$config.server_url + "/api/1.0/participations",
+          this.$config.server_url + "/"+route+"/1.0/participations",
           this.row_pa
         );
       }
@@ -466,8 +464,9 @@ export default {
       });
     },
     async deleteCandidat() {
+      let route = this.from === "candidats" ? "candidats" : "api";
       let response = await this.$axios.delete(
-        this.$config.server_url + "/api/1.0/participations/" + this.row_pa.pa_id
+        this.$config.server_url + "/"+route+"/1.0/participations/" + this.row_pa.pa_id
       );
       this.confirmdelete = false;
       if (response.data.data.success) {

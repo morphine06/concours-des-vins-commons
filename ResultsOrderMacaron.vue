@@ -11,7 +11,7 @@
         </div>
         <div>
           Nombre de macaron Excellence :
-          {{ row_or.or_excelence | formatChiffreSimple }}
+          {{ row_or.or_excellence | formatChiffreSimple }}
         </div>
       </div>
     </div>
@@ -19,7 +19,7 @@
       <div class="col-md-7">
         <div>
           Sous-total HT :
-          {{ (row_or.or_or + row_or.or_argent + row_or.or_excelence) / 10000 }}
+          {{ (row_or.or_or + row_or.or_argent + row_or.or_excellence) / 10000 }}
           lot(s) de 10 000 x
           {{
             row_or.or_price_macaron
@@ -70,7 +70,8 @@ export default {
   name: "resultsOrderMacaron",
   components: {},
   props: {
-    row_or: Object
+    row_or: Object,
+    from:String
   },
   data() {
     return {
@@ -85,10 +86,9 @@ export default {
   async mounted() {},
   methods: {
     calculTotal() {
-      // console.log("je passe", this.row_or);
       let total = 0;
       let tt =
-        this.row_or.or_or + this.row_or.or_argent + this.row_or.or_excelence;
+        this.row_or.or_or + this.row_or.or_argent + this.row_or.or_excellence;
       if (this.row_or.or_price_macaron)
         total = (tt / 10000) * this.row_or.or_price_macaron;
       else total = (tt / 10000) * this.row_or.yp_macarons_price;
