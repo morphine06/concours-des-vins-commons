@@ -325,6 +325,7 @@ export default {
     async loadParticipation() {
       let route = this.from === "candidats" ? "candidats" : "api";
       let params = {};
+      console.log('this.route, from',this.route, this.from);
       if (this.pa_id == -1) params = {};
       let response = await this.$axios.get(
         this.$config.server_url + "/"+route+"/1.0/participations/" + this.pa_id,
@@ -452,11 +453,13 @@ export default {
         this.$store.dispatch("showDialogError", response.data.err.message);
         return;
       }
-      this.$store.dispatch("showToast", {
-        title: "Candidat",
-        text: "Le candidat a bien été enregistré",
-        color: "green"
-      });
+      if(this.from === "backoffice"){ 
+        this.$store.dispatch("showToast", {
+          title: "Candidat",
+          text: "Le candidat a bien été enregistré",
+          color: "green"
+        });
+      }
       this.row_pa = response.data.data;
       this.$emit("formCandidatJureActions", {
         action: "saved",
