@@ -19,8 +19,8 @@
       <div class="col-md-7">
         <div>
           Sous-total HT :
-          {{ (row_or.or_or + row_or.or_argent + row_or.or_excellence) / 10000 }}
-          lot(s) de 10 000 x
+          {{ (row_or.or_or + row_or.or_argent + row_or.or_excellence) / 1000 }}
+          lot(s) de 1000 x
           {{
             row_or.or_price_macaron
               ? $options.filters.formatPriceDivisePar100(
@@ -90,8 +90,8 @@ export default {
       let tt =
         this.row_or.or_or + this.row_or.or_argent + this.row_or.or_excellence;
       if (this.row_or.or_price_macaron)
-        total = (tt / 10000) * this.row_or.or_price_macaron;
-      else total = (tt / 10000) * this.row_or.yp_macarons_price;
+        total = (tt / 1000) * this.row_or.or_price_macaron;
+      else total = (tt / 1000) * this.row_or.yp_macarons_price;
 
       this.$emit("changetotalOrder", total);
     }
