@@ -466,7 +466,7 @@ export default {
         row_pa: this.row_pa
       });
     },
-    async deleteCandidat() {
+/*     async deleteCandidat() {
       let route = this.from === "candidats" ? "candidats" : "api";
       let response = await this.$axios.delete(
         this.$config.server_url + "/"+route+"/1.0/participations/" + this.row_pa.pa_id
@@ -484,7 +484,7 @@ export default {
           });
         this.$emit("formCandidatJureActions", { action: "deleted" });
       }
-    }
+    } */
   }
 };
 </script>

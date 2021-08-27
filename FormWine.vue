@@ -678,6 +678,12 @@ export default {
       if (!this.row_wi.wi_numlot && !this.row_wi.wi_refcontenant) {
         err.push({ text: "numéro du lot ou référence des contenants" });
       }
+      this.contenants = this.contenants.filter((item)=>{
+        return item.contenant != "" && item.nombre !="";
+      })
+      if(!this.contenants.length) {
+        err.push({ text: "Reste à commercialiser" });
+      }
 
       if (err.length) {
         this.dialogErrTxt =
