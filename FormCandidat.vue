@@ -296,7 +296,8 @@ export default {
   props: {
     pa_id: Number,
     keyload: Number,
-    from:String
+    from:String,
+     signup:Boolean
   },
   data() {
     return {
@@ -326,13 +327,15 @@ export default {
       let route = this.from === "candidats" ? "candidats" : "api";
       let params = {};
       console.log('this.route, from',this.route, this.from);
-      if (this.pa_id == -1) params = {};
-      let response = await this.$axios.get(
-        this.$config.server_url + "/"+route+"/1.0/participations/" + this.pa_id,
-        { params }
-      );
-      this.row_pa = response.data.data;
-      this.jureValide = this.row_pa.pa_jure_valide;
+        if(!this.signup){
+          if (this.pa_id == -1) params = {};
+          let response = await this.$axios.get(
+            this.$config.server_url + "/"+route+"/1.0/participations/" + this.pa_id,
+            { params }
+          );
+          this.row_pa = response.data.data;
+          this.jureValide = this.row_pa.pa_jure_valide;
+        }
     },
     copyAddress() {
       this.row_pa.pa_society_fac = this.row_pa.pa_society;
@@ -424,7 +427,7 @@ export default {
       ];
       for (let i = 0; i < tabField.length; i++) {
         const field = tabField[i];
-        this.row_pa[field] = this.row_pa[field].trim();
+        if(this.row_pa[field])this.row_pa[field] = this.row_pa[field].trim();
       }
     },
     async saveCandidat() {
@@ -444,10 +447,17 @@ export default {
       } else {
         this.row_pa.pa_cgu_date = "0000-00-00 00:00:00";
         this.row_pa.pa_year = this.$store.state.year;
-        response = await this.$axios.post(
-          this.$config.server_url + "/"+route+"/1.0/participations",
-          this.row_pa
-        );
+                if(this.signup){
+          response = await this.$axios.post(
+            this.$config.server_url + "/candidats/1.0/signup",
+            this.row_pa
+          );
+        }else{
+          response = await this.$axios.post(
+            this.$config.server_url + "/"+route+"/1.0/participations",
+            this.row_pa
+          );
+        }
       }
       if (response.data.err) {
         this.$store.dispatch("showDialogError", response.data.err.message);
