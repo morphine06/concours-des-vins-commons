@@ -104,6 +104,7 @@ Modiifer également le projet XXX
           :name="$Utils.randomstring('pa_candidat')"
           v-model="row_pa.pa_candidat"
           @input="checkboxCandidat"
+          :disabled="$dayjs().isAfter(row_yp.yp_end_inscription_date_candidate)" 
         ></m-form-checkbox>
         <div class="d-flex align-items-center" v-if="from === 'backoffice' && $Utils.isAdmin()">
           <div v-if="row_pa.pa_candidat_valide" class="me-2">
@@ -177,6 +178,7 @@ Modiifer également le projet XXX
           :name="$Utils.randomstring('pa_jure')"
           v-model="row_pa.pa_jure"
           @input="checkboxJure"
+          :disabled="$dayjs().isAfter(row_yp.yp_end_inscription_date_jure)" 
         ></m-form-checkbox>
 
         <div class="d-flex align-items-center" v-if="from === 'backoffice' && $Utils.isAdmin()">
@@ -297,7 +299,8 @@ export default {
     pa_id: Number,
     keyload: Number,
     from:String,
-     signup:Boolean
+     signup:Boolean,
+     row_yp: Object,
   },
   data() {
     return {
@@ -313,7 +316,8 @@ export default {
         { value: 3, text: "Vignoble 3" },
         { value: 4, text: "Vignoble 4" },
         { value: 5, text: "Vignoble 5" }
-      ]
+      ],
+      row_yp2:{} 
     };
   },
   watch: {
@@ -321,6 +325,7 @@ export default {
   },
   async mounted() {
     this.loadParticipation();
+    this.row_yp2 = this.row_yp ? this.row_yp :  this.$store.state.preferences.year;
   },
   methods: {
     async loadParticipation() {
@@ -470,10 +475,11 @@ export default {
           color: "green"
         });
       }
-      this.row_pa = response.data.data;
+      this.row_pa = this.signup ? response.data.participation : response.data.data;
       this.$emit("formCandidatJureActions", {
         action: "saved",
-        row_pa: this.row_pa
+        row_pa: this.row_pa,
+        row_lo : this.signup ? response.data.login : {} 
       });
     },
 /*     async deleteCandidat() {
