@@ -104,7 +104,7 @@ Modiifer également le projet XXX
           :name="$Utils.randomstring('pa_candidat')"
           v-model="row_pa.pa_candidat"
           @input="checkboxCandidat"
-          :disabled="$dayjs().isAfter(row_yp.yp_end_inscription_date_candidate)" 
+          :disabled="$dayjs().isAfter(row_yp2.yp_end_inscription_date_candidate)" 
         ></m-form-checkbox>
         <div class="d-flex align-items-center" v-if="from === 'backoffice' && $Utils.isAdmin()">
           <div v-if="row_pa.pa_candidat_valide" class="me-2">
@@ -178,7 +178,7 @@ Modiifer également le projet XXX
           :name="$Utils.randomstring('pa_jure')"
           v-model="row_pa.pa_jure"
           @input="checkboxJure"
-          :disabled="$dayjs().isAfter(row_yp.yp_end_inscription_date_jure)" 
+          :disabled="$dayjs().isAfter(row_yp2.yp_end_inscription_date_jure)" 
         ></m-form-checkbox>
 
         <div class="d-flex align-items-center" v-if="from === 'backoffice' && $Utils.isAdmin()">
