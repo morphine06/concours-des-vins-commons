@@ -676,13 +676,16 @@ export default {
         if (!this.row_wi[field.field]) err.push(field);
       }
       if (!this.row_wi.wi_numlot && !this.row_wi.wi_refcontenant) {
-        err.push({ text: "numéro du lot ou référence des contenants" });
+        err.push({ text: "Numéro du lot ou référence des contenants" });
       }
       this.contenants = this.contenants.filter((item)=>{
         return item.contenant != "" && item.nombre !="";
       })
       if(!this.contenants.length) {
         err.push({ text: "Reste à commercialiser" });
+      }
+      if(this.contenants.length && this.contenance_total < this.contenance_min){
+        err.push({ text: "Minimum de contenance à commercialiser non atteint" });
       }
 
       if (err.length) {

@@ -217,6 +217,13 @@ Modiifer également le projet XXX
             v-model="row_pa.pa_typejure"
             :items="$store.state.items_typejure"
           ></m-form-select>
+          <div class="d-flex align-items-center ms-3 mb-2" v-if="row_pa.pa_typejure === 9">
+            <div class="me-1"> Précisez :</div>
+             <m-form-text
+                    :name="$Utils.randomstring('pa_typejure_other')"
+                    v-model="row_pa.pa_typejure_other"
+              ></m-form-text>
+          </div>
         </div>
         <div class="d-flex align-items-center mb-2">
           <div class="fw-bold me-4" style="width:360px">
