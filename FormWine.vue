@@ -740,7 +740,7 @@ export default {
         this.$store.dispatch("showDialogError", response.data.err.message);
         return;
       }
-
+      this.row_wi = response.data.data; 
       // les fichiers
       for (let i = 1; i <= 3; i++) {
         if (this.filesSelected["file" + i] && !this["deleteFile" + i]) {
