@@ -1,22 +1,61 @@
 {
-  "name": "concours-des-vins-commons",
-  "version": "1.0.4",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/morphine06/concours-des-vins-commons.git"
-  },
-  "author": "morphine06",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/morphine06/concours-des-vins-commons/issues"
-  },
-  "homepage": "https://github.com/morphine06/concours-des-vins-commons#readme",
-  "dependencies": {
-    "dayjs": "^1.10.6"
-  }
+	"name": "concours-des-vins-commons",
+	"version": "1.0.4",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/morphine06/concours-des-vins-commons.git"
+	},
+	"author": "morphine06",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/morphine06/concours-des-vins-commons/issues"
+	},
+	"homepage": "https://github.com/morphine06/concours-des-vins-commons#readme",
+	"dependencies": {
+		"dayjs": "^1.10.6"
+	},
+	"prettier": {},
+	"eslintConfig": {
+		"root": true,
+		"env": {
+			"node": true
+		},
+		"extends": [
+			"plugin:vue/essential",
+			"@vue/prettier"
+		],
+		"rules": {
+			"no-console": [
+				"warn",
+				{
+					"allow": [
+						"warn",
+						"error"
+					]
+				}
+			],
+			"no-const-assign": "warn",
+			"no-this-before-super": "warn",
+			"no-undef": "warn",
+			"no-unreachable": "warn",
+			"no-unused-vars": [
+				"error",
+				{
+					"vars": "all",
+					"args": "none",
+					"ignoreRestSiblings": false
+				}
+			],
+			"constructor-super": "warn",
+			"valid-typeof": "warn"
+		},
+		"parserOptions": {
+			"parser": "babel-eslint"
+		}
+	}
 }
