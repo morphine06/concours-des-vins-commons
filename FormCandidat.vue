@@ -1,6 +1,3 @@
-<!--
-Modiifer également le projet XXX
--->
 <template>
   <div>
     <div class="frame">
@@ -112,7 +109,7 @@ Modiifer également le projet XXX
           </div>
           <div v-else class="me-2">Candidat non validé</div>
           <label class="switch">
-            <input v-model="row_pa.pa_candidat_valide" type="checkbox" />
+            <input v-model="row_pa.pa_candidat_valide" type="checkbox" @change="devalidCandidat"/>
             <span class="slider round"></span>
           </label>
         </div>
@@ -287,6 +284,17 @@ Modiifer également le projet XXX
       @canceled="cancelJureValide()"
       @confirmed="saveCandidat()"
     ></m-confirm-dialog>
+    <m-confirm-dialog
+      v-model="confirmDevalidDialog"
+      text="Voulez vous mettre à 'Non validé' tous les vins de ce candidat ? Attention cette action entraine peut être que vous devez créer un avoir manuellement et que ces vins ne participeront pas au Coucours"
+      title="Confirmation"
+      btnOkTxt="Oui"
+      :threeBtn="true"
+      btn3Txt="Non"
+      @btn3Action="DevalidCandidatNon()"
+      @canceled="DevalidCandidatCancel()"
+      @confirmed="DevalidCandidatOui()"
+    ></m-confirm-dialog>
     <m-message-dialog
       v-model="dialogErr"
       title="Erreur"
@@ -324,7 +332,9 @@ export default {
         { value: 4, text: "Vignoble 4" },
         { value: 5, text: "Vignoble 5" }
       ],
-      row_yp2:{} 
+      row_yp2:{} ,
+      confirmDevalidDialog:false,
+      devalidWinesCandidat:false,
     };
   },
   watch: {
@@ -348,6 +358,26 @@ export default {
           this.row_pa = response.data.data;
           this.jureValide = this.row_pa.pa_jure_valide;
         }
+    },
+    devalidCandidat(){
+      if(!this.row_pa.pa_candidat_valide)this.confirmDevalidDialog = true;
+      if(this.row_pa.pa_candidat_valide)this.row_pa.revalidWinesCandidat = true;
+    },
+    DevalidCandidatOui(){
+      this.confirmDevalidDialog = false;
+      this.row_pa.devalidWinesCandidat = true;
+      this.row_pa.pa_candidat_valide = false ;
+
+    },
+    DevalidCandidatNon(){
+      this.confirmDevalidDialog = false;
+      this.row_pa.devalidWinesCandidat = false;
+      this.row_pa.pa_candidat_valide = false ;
+    },
+    DevalidCandidatCancel(){
+      this.confirmDevalidDialog = false;
+      this.row_pa.devalidWinesCandidat = false;
+      this.row_pa.pa_candidat_valide = true ;
     },
     copyAddress() {
       this.row_pa.pa_society_fac = this.row_pa.pa_society;
