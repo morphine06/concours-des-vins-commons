@@ -83,10 +83,10 @@ export default {
   // components: { draggable },
   props: {
     items: {
-      default: function () {
+      default: function() {
         return [];
       },
-      type: Array,
+      type: Array
     },
     /*     small: {
       default: false,
@@ -94,65 +94,65 @@ export default {
     }, */
     dragable: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     cursorOnRows: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     itemValue: {
       default: "",
-      type: String,
+      type: String
     },
     pagging: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     nbPage: {
       default: 10,
-      type: Number,
+      type: Number
     },
     currentPage: {
       default: 1,
-      type: Number,
+      type: Number
     },
     limit: {
       default: 100,
-      type: Number,
+      type: Number
     },
     total: {
       default: 0,
-      type: Number,
+      type: Number
     },
     skip: {
       default: 0,
-      type: Number,
+      type: Number
     },
     itemHeight: {
       default: 30,
-      type: Number,
+      type: Number
     },
     itemSelected: {
       default: "",
-      type: [String, Number],
+      type: [String, Number]
     },
     urlExportCSV: {
       default: "",
-      type: String,
+      type: String
     },
     urlExportPDF: {
       default: "",
-      type: String,
+      type: String
     },
     tableClass: String,
     backgroundColorTrConditionKey: {
       default: "",
-      type: String,
+      type: String
     },
     backgroundColorTrConditionValue: {
       default: "",
-      type: String,
-    },
+      type: String
+    }
   },
   mounted() {
     this.update(0);
@@ -169,11 +169,11 @@ export default {
       list: [
         { name: "John", text: "", id: 0 },
         { name: "Joao", text: "", id: 1 },
-        { name: "Jean", text: "", id: 2 },
+        { name: "Jean", text: "", id: 2 }
       ],
       dragging: false,
       showOrHideTableMenu: false,
-      currentPage2: this.currentPage,
+      currentPage2: this.currentPage
     };
   },
   watch: {
@@ -186,16 +186,16 @@ export default {
     },
     currentPage2(pageNum) {
       this.$emit("changePage", pageNum);
-    },
+    }
   },
   computed: {
     draggingInfo() {
       return this.dragging ? "under drag" : "";
-    },
+    }
   },
   components: {},
   methods: {
-    clickCallback: function (pageNum) {
+    clickCallback: function(pageNum) {
       // this.$emit("changePage", pageNum);
     },
     onClickWindow() {
@@ -245,8 +245,8 @@ export default {
     // },
     onitemclick(item, indexItem, evt) {
       this.$emit("itemclick", item, indexItem, evt);
-    },
-  },
+    }
+  }
 };
 </script>
 

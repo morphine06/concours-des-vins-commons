@@ -18,10 +18,13 @@
           <p v-html="text"></p>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" @click="cancelWin">
-            Annuler
+          <button class="btn btn-secondary" @click="cancelWin">Annuler</button>
+          <button class="btn btn-primary" @click="deleteWin">
+            {{ btnOkTxt ? btnOkTxt : "Ok" }}
           </button>
-          <button class="btn btn-primary" @click="deleteWin">Ok</button>
+          <button v-if="threeBtn" class="btn btn-primary" @click="btn3Action">
+            {{ btn3Txt }}
+          </button>
         </div>
       </div>
     </div>
@@ -38,19 +41,22 @@ export default {
     sousText: String,
     width: {
       type: String,
-      default: "500px"
-    }
+      default: "500px",
+    },
+    threeBtn: Boolean,
+    btnOkTxt: String,
+    btn3Txt: String,
   },
   data() {
     return {
-      dialog: false
+      dialog: false,
     };
   },
   mounted() {},
   watch: {
-    value: function(val) {
+    value: function (val) {
       this.dialog = val;
-    }
+    },
   },
   components: {},
   methods: {
@@ -59,8 +65,11 @@ export default {
     },
     deleteWin() {
       this.$emit("confirmed");
-    }
-  }
+    },
+    btn3Action() {
+      this.$emit("btn3Action");
+    },
+  },
 };
 </script>
 <style lang="scss">

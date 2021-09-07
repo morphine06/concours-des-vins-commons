@@ -83,7 +83,7 @@
     <div v-if="showInputsDetails">
       <div class="d-flex">
         <m-form-select
-          style="margin-right: 20px"
+          style="margin-right:20px;"
           :items="$store.state.items_fi_subtype"
           v-model="fi_subtype"
           label="Type d'image"
@@ -94,14 +94,14 @@
           label="Description de l'image"
           label-position="top"
           :label-width="9"
-          style="width: 300px"
+          style="width:300px;"
           suffix="m2"
           v-model="fi_description"
         ></m-form-text>
       </div>
       <div class="d-flex">
         <v-btn
-          style="margin-right: 15px"
+          style="margin-right:15px;"
           color="warning2"
           @click="cancelDetails"
           >Annuler</v-btn
@@ -128,7 +128,7 @@ export default {
   props: {
     label: String,
     value: Array,
-    showAddButton: Boolean,
+    showAddButton: Boolean
   },
   data() {
     return {
@@ -140,7 +140,7 @@ export default {
       // files: [],
       showInputs: false,
       showInputsDetails: false,
-      currentRowFi: null,
+      currentRowFi: null
     };
   },
   mounted() {
@@ -153,7 +153,7 @@ export default {
     images2(val) {
       this.$emit("input", val);
       // console.log("val", val);
-    },
+    }
   },
   methods: {
     dragleaveimages(e) {
@@ -166,7 +166,7 @@ export default {
       this.$refs.frameDropImage.style.backgroundColor = "white";
       let droppedFiles = e.dataTransfer.files;
       if (!droppedFiles) return;
-      [...droppedFiles].forEach((f) => {
+      [...droppedFiles].forEach(f => {
         // this.files.push(f);
         this.createThumbnail(f);
       });
@@ -193,11 +193,11 @@ export default {
       if (f.name.match(/\.(jpg|jpeg|png|gif)$/)) {
         var reader = new FileReader();
         var me = this;
-        reader.onload = (function (theFile) {
-          return function (e) {
+        reader.onload = (function(theFile) {
+          return function(e) {
             me.images2.push({
               file: f,
-              binary: e.target.result,
+              binary: e.target.result
             });
           };
         })(f);
@@ -222,8 +222,8 @@ export default {
           formData,
           {
             headers: {
-              "Content-Type": "multipart/form-data",
-            },
+              "Content-Type": "multipart/form-data"
+            }
           }
         );
       }
@@ -269,8 +269,8 @@ export default {
       this.fi_subtype = "";
       this.showInputsDetails = false;
       this.currentRowFi.active = "";
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

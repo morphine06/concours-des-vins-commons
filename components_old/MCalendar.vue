@@ -233,7 +233,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+// @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 .m-calendar {
   padding: 15px;
   .m-calendar-days,
@@ -248,7 +248,7 @@ export default {
         color: #cccccc;
       }
       &.over {
-        background-color: $green;
+        background-color: green;
         color: white;
       }
     }

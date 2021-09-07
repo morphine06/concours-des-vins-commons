@@ -9,11 +9,11 @@ export default {
   name: "mform",
   props: {
     rules: {
-      default: function () {
+      default: function() {
         return [];
       },
-      type: Array,
-    },
+      type: Array
+    }
   },
   mounted() {},
   data() {
@@ -55,7 +55,7 @@ export default {
         if (this.$_.isString(ok) || ok === false) oks = false;
       }
       return oks;
-    },
-  },
+    }
+  }
 };
 </script>

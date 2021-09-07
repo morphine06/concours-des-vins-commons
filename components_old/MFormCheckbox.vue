@@ -19,20 +19,20 @@ export default {
     label: String,
     id: {
       default: "",
-      type: String,
+      type: String
     },
     name: {
       default: "",
-      type: String,
+      type: String
     },
     readonly: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     disabled: {
       default: false,
-      type: Boolean,
-    },
+      type: Boolean
+    }
   },
   mounted() {
     // console.log("this.value", this.value);
@@ -45,11 +45,11 @@ export default {
       id2: "",
       name2: "",
       checked: false,
-      checked2: false,
+      checked2: false
     };
   },
   watch: {
-    checked2: function (val) {},
+    checked2: function(val) {}
   },
   components: {},
   methods: {
@@ -72,8 +72,8 @@ export default {
       if (this.autoSelectOnFocus) evt.target.select();
       // evt.stopPropagation();
       // this.$emit("click", evt);
-    },
-  },
+    }
+  }
 };
 </script>
 

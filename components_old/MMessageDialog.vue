@@ -58,7 +58,7 @@ export default {
     deleteWin() {
       this.dialog = false;
       if (this.redirect) {
-        this.$router.push("/" + this.redirect).catch(err => {});
+        this.$router.push("/" + this.redirect);
       }
       this.$emit("input", false);
       this.$emit("close");

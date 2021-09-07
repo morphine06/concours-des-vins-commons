@@ -1,9 +1,7 @@
 <template>
   <div class="form-group">
-    <label class="label" :class="labelClass" :for="id2" v-if="label">{{
-      label
-    }}</label>
-    <div class="input-group">
+    <label class="label" :for="id2" v-if="label">{{ label }}</label>
+    <div class="input-group" :class="inputGroupClass">
       <div class="input-group-prepend" v-if="prependText">
         <span class="input-group-text" v-html="prependText"></span>
       </div>
@@ -16,7 +14,7 @@
         :name="name"
         :class="{
           'form-control': true,
-          'is-invalid': errormsg2,
+          'is-invalid': errormsg2
         }"
         :maxlength="maxlength"
         :id="id2"
@@ -25,6 +23,9 @@
         :placeholder="placeholder"
         :value="rawvalue"
         :autocomplete="autocomplete"
+        v-tooltip
+        :data-bs-placement="tooltipPosition"
+        :title="tooltip"
         @click="onclick($event)"
         @input="oninput($event)"
         @focus="onfocus($event)"
@@ -41,7 +42,7 @@
         :class="{
           textarea: true,
           'form-control': true,
-          'is-invalid': errormsg2,
+          'is-invalid': errormsg2
         }"
         :id="id2"
         :disabled="disabled"
@@ -50,6 +51,9 @@
         :autocomplete="autocomplete"
         :placeholder="placeholder"
         :rows="rows"
+        v-tooltip
+        :data-bs-placement="tooltipPosition"
+        :title="tooltip"
         @click="onclick($event)"
         @input="oninput($event)"
         @focus="onfocus($event)"
@@ -87,71 +91,72 @@ export default {
     value: [String, Number],
     id: {
       default: "",
-      type: String,
+      type: String
     },
     type: {
       default: "text",
-      type: String,
+      type: String
     },
     name: {
       default: "",
-      type: String,
+      type: String
     },
     rows: {
       default: 4,
-      type: Number,
+      type: Number
     },
     maxlength: {
-      type: String,
+      type: String
     },
     autocomplete: {
       default: "new-password",
-      type: String,
+      type: String
     },
     readonly: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     disabled: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     autoSelectOnFocus: {
       default: true,
-      type: Boolean,
+      type: Boolean
     },
     label: {
       default: "",
-      type: String,
+      type: String
     },
     tooltip: {
       default: "",
-      type: String,
+      type: String
     },
     tooltipPosition: {
       default: "bottom",
-      type: String,
+      type: String
     },
     ariaHaspopup: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     ariaExpanded: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     rules: {
-      default: function () {
+      default: function() {
         return [];
       },
-      type: Array,
+      type: Array
     },
+    inputGroupClass: String,
     placeholder: String,
     prependIcon: String,
     appendIcon: String,
     prependText: String,
     appendText: String,
-    subText: String,
+    subText: String
   },
   mounted() {
     if (this.id2) this.id2 = this.id;
@@ -170,26 +175,16 @@ export default {
       id2: "",
       rawvalue: "",
       errormsg2: "",
-      focus: false,
+      focus: false
     };
   },
   watch: {
-    value: function (val) {
+    value: function(val) {
       this.setRawValue(val);
       // if (val) this.focus = true;
-    },
+    }
   },
-  computed: {
-    labelClass() {
-      let classTxt = "";
-      if (this.type !== "textarea") {
-        classTxt +=
-          this.focus || this.value || this.rawvalue === 0 ? "label_focus" : "";
-      }
-      if (this.type === "textarea") classTxt += " textarea_label";
-      return classTxt;
-    },
-  },
+  computed: {},
   components: {},
   methods: {
     onWindowClick(evt) {
@@ -286,21 +281,12 @@ export default {
     hideDropdown() {
       // console.log("hideDropdown");
       this.$emit("ShowDropdownMenu", false);
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style lang="scss">
-.form-control {
-  border-radius: 0;
-  border-radius: 0;
-  border: 0px;
-  border-bottom: 1px solid #999999;
-  background-color: #ffffff00;
-  height: 30px;
-}
-.input-group > .form-control,
+<style lang="scss" scoped>
 .input-group > .form-control-plaintext,
 .input-group > .custom-select,
 .input-group > .custom-file {
@@ -310,19 +296,6 @@ export default {
   background-color: #ffffff;
   border: 1px solid #eaeaea;
 }
-.label {
-  position: absolute;
-  top: 0;
-  transition: all 0.3s ease;
-}
-.label_focus {
-  top: -20px;
-  font-size: 12px;
-  color: gray;
-}
-.textarea_label {
-  position: relative;
-}
 .m-form-base {
   .m-form-base__container-input {
     textarea {
@@ -330,6 +303,10 @@ export default {
       border: 1px solid gray;
     }
   }
+}
+.input-group-xs .form-control {
+  height: 26px;
+  font-size: 13px;
 }
 // .sub-text {
 //   color: #4950579c;
