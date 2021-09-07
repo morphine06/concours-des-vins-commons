@@ -129,7 +129,7 @@
 const MarkdownIt = require("markdown-it");
 const markdown = new MarkdownIt();
 export default {
-  name: "mformtext",
+  name: "mformtextmarkdown",
   props: {
     value: [String, Number],
     id: {
