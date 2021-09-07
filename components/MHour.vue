@@ -1,5 +1,5 @@
 <template>
-  <div class="m-hour" style="width:520px">
+  <div class="m-hour" style="width: 520px">
     <div class="hours d-flex flex-column mb-2">
       <div class="titre">Les heures</div>
 
@@ -39,17 +39,17 @@ export default {
   name: "mhour",
   props: {
     value: {
-      default: function() {
+      default: function () {
         return "00 : 00";
       },
-      type: String
+      type: String,
     },
     intervalMinute: {
-      default: function() {
+      default: function () {
         return 5;
       },
-      type: Number
-    }
+      type: Number,
+    },
   },
   data() {
     let tabMinutes = [];
@@ -83,9 +83,9 @@ export default {
         "20",
         "21",
         "22",
-        "23"
+        "23",
       ],
-      tabMinutes: tabMinutes
+      tabMinutes: tabMinutes,
     };
   },
   watch: {},
@@ -108,16 +108,16 @@ export default {
     setTime() {
       this.$emit("setTime", {
         hour: this.hourSelected,
-        minutes: this.minuteSelected
+        minutes: this.minuteSelected,
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+// @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 .m-hour {
   padding: 15px;
   .titre {
@@ -128,7 +128,7 @@ export default {
     cursor: pointer;
   }
   .selected {
-    background-color: $green;
+    background-color: green;
   }
 }
 </style>

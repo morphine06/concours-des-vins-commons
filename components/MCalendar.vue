@@ -27,7 +27,7 @@
               @click="setDate(d)"
               :class="{
                 othermonth: currentMonth.month() != d.month(),
-                over: valueInterne.isSame(d)
+                over: valueInterne.isSame(d),
               }"
             >
               {{ d.format("DD") }}
@@ -57,9 +57,7 @@
               :key="indexM"
               @click="setMonth(m, $event)"
               :class="{
-                over: $moment(valueInterne)
-                  .startOf('month')
-                  .isSame(m)
+                over: $moment(valueInterne).startOf('month').isSame(m),
               }"
             >
               {{ m.format("MMMM") }}
@@ -86,9 +84,7 @@
               :key="indexY"
               @click="setYear(y, $event)"
               :class="{
-                over: $moment(valueInterne)
-                  .startOf('year')
-                  .isSame(y)
+                over: $moment(valueInterne).startOf('year').isSame(y),
               }"
             >
               {{ y.format("YYYY") }}
@@ -107,15 +103,15 @@ export default {
   name: "mcalendar",
   props: {
     value: {
-      default: function() {
+      default: function () {
         return moment();
       },
-      type: Object
+      type: Object,
     },
     year: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
@@ -125,7 +121,7 @@ export default {
       tabDaysWeek: [],
       tabMonths: [],
       tabYears: [],
-      currentMonth: moment().startOf("month")
+      currentMonth: moment().startOf("month"),
     };
   },
   mounted() {
@@ -133,11 +129,11 @@ export default {
     this.render();
   },
   watch: {
-    value: function(v) {
+    value: function (v) {
       // this.valueInterne = moment(v).startOf("day");
       this.setEnterValue(v);
       this.render();
-    }
+    },
   },
   methods: {
     setEnterValue(v) {
@@ -198,9 +194,7 @@ export default {
     createTabYears() {
       let tabYears = [];
       let y = -1;
-      let start = moment(this.currentMonth)
-        .startOf("year")
-        .add(-6, "year");
+      let start = moment(this.currentMonth).startOf("year").add(-6, "year");
       for (let i = 0; i < 12; i++) {
         if (i % 3 == 0) y++;
         if (!tabYears[y]) tabYears[y] = [];
@@ -232,14 +226,14 @@ export default {
         this.render();
       }
       // this.$emit("input", this.valueInterne, "year");
-    }
-  }
+    },
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+// @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 .m-calendar {
   padding: 15px;
   .m-calendar-days,
@@ -254,7 +248,7 @@ export default {
         color: #cccccc;
       }
       &.over {
-        background-color: $green;
+        background-color: green;
         color: white;
       }
     }
