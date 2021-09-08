@@ -357,6 +357,7 @@ export default {
           );
           this.row_pa = response.data.data;
           this.jureValide = this.row_pa.pa_jure_valide;
+          this.$emit("participationLoaded",this.row_pa)
         }
     },
     devalidCandidat(){
@@ -380,12 +381,11 @@ export default {
       this.row_pa.pa_candidat_valide = true ;
     },
     copyAddress() {
-      this.row_pa.pa_society_fac = this.row_pa.pa_society;
-      this.row_pa.pa_address1_fac = this.row_pa.pa_address1;
-      this.row_pa.pa_address2_fac = this.row_pa.pa_address2;
-      this.row_pa.pa_city_fac = this.row_pa.pa_city;
-      this.row_pa.pa_zip_fac = this.row_pa.pa_zip;
-      // this.emitCandidat();
+      this.row_pa.pa_society_fac = this.row_pa.pa_society ? this.row_pa.pa_society : "";;
+      this.row_pa.pa_address1_fac = this.row_pa.pa_address1 ? this.row_pa.pa_address1 : "";
+      this.row_pa.pa_address2_fac = this.row_pa.pa_address2 ? this.row_pa.pa_address2 : "";
+      this.row_pa.pa_city_fac = this.row_pa.pa_city ? this.row_pa.pa_city : "";
+      this.row_pa.pa_zip_fac = this.row_pa.pa_zip ? this.row_pa.pa_zip : "";
     },
     checkboxCandidat() {
       if (this.row_pa.pa_candidat) this.row_pa.pa_candidat_valide = true;
@@ -395,37 +395,35 @@ export default {
       if (this.row_pa.pa_jure) this.disabledJure = false;
       else this.disabledJure = true;
     },
-    tryToSaveWin(login) {
-      // console.log("je passe");
+    tryToSaveWin(login, tabErrPassword) {
+      console.log("je passe", tabErrPassword);
       this.row_pa.login = login;
       let err = [];
       let fieldRequired = [
         {
           field: "pa_society",
           text: "nom de l'entreprise",
-          type: "pa_candidat"
         },
         { field: "pa_civility", text: "civilité" },
         { field: "pa_name", text: "nom" },
-        { field: "pa_firstname", text: "prénom" }
-        // { field: "pa_email", text: "email" },
-        /*         { field: "lo_login", text: "login", object: "login" },
-        { field: "lo_pass", text: "mot de passe", object: "login" } */
+        { field: "pa_firstname", text: "prénom" },
       ];
       for (let ifi = 0; ifi < fieldRequired.length; ifi++) {
         const field = fieldRequired[ifi];
-        if (
-          !field.object &&
-          !this.row_pa[field.field] &&
-          (!field.type || (field.type && this.row_pa[field.type]))
-        )
-          err.push(field);
-        if (field.object && !this.row_pa[field.object][field.field])
+        if (!this.row_pa[field.field])
           err.push(field);
       }
-      if (!login.lo_login) err.push({ text: "login" });
-      if (!login.lo_pass && !this.row_pa.pa_id)
+      if (!this.row_pa.login.lo_login) err.push({ text: "login" });
+      if (
+        !this.row_pa.login.lo_pass &&
+        (this.signup || !this.row_pa.login || !this.row_pa.login.lo_id)
+      )
         err.push({ text: "mot de passe" });
+      if(tabErrPassword.length>0){
+        for (let i = 0; i < tabErrPassword.length; i++) {
+          err.push({ text: tabErrPassword[i]})
+        }
+      }
       // console.log("this.row_pa", this.row_pa);
       if (!this.row_pa.pa_candidat && !this.row_pa.pa_jure) {
         err.push({
