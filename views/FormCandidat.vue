@@ -336,7 +336,13 @@ export default {
     return {
       dialogErr: false,
       dialogErrTxt: "",
-      row_pa: {},
+      row_pa: {
+        pa_society_fac:"",
+        pa_address1_fac:"",
+        pa_address2_fac:"",
+        pa_city_fac:'',
+        pa_zip_fac:'',
+      },
       jureValide: false,
       confirmJureValide: false,
       disabledJure: false,
