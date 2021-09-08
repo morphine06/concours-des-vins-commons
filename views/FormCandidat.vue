@@ -101,15 +101,24 @@
           :name="$Utils.randomstring('pa_candidat')"
           v-model="row_pa.pa_candidat"
           @input="checkboxCandidat"
-          :disabled="$dayjs().isAfter(row_yp2.yp_end_inscription_date_candidate)" 
+          :disabled="
+            $dayjs().isAfter(row_yp2.yp_end_inscription_date_candidate)
+          "
         ></m-form-checkbox>
-        <div class="d-flex align-items-center" v-if="from === 'backoffice' && $Utils.isAdmin()">
+        <div
+          class="d-flex align-items-center"
+          v-if="from === 'backoffice' && $Utils.isAdmin()"
+        >
           <div v-if="row_pa.pa_candidat_valide" class="me-2">
             Candidat validé
           </div>
           <div v-else class="me-2">Candidat non validé</div>
           <label class="switch">
-            <input v-model="row_pa.pa_candidat_valide" type="checkbox" @change="devalidCandidat"/>
+            <input
+              v-model="row_pa.pa_candidat_valide"
+              type="checkbox"
+              @change="devalidCandidat"
+            />
             <span class="slider round"></span>
           </label>
         </div>
@@ -175,10 +184,13 @@
           :name="$Utils.randomstring('pa_jure')"
           v-model="row_pa.pa_jure"
           @input="checkboxJure"
-          :disabled="$dayjs().isAfter(row_yp2.yp_end_inscription_date_jure)" 
+          :disabled="$dayjs().isAfter(row_yp2.yp_end_inscription_date_jure)"
         ></m-form-checkbox>
 
-        <div class="d-flex align-items-center" v-if="from === 'backoffice' && $Utils.isAdmin()">
+        <div
+          class="d-flex align-items-center"
+          v-if="from === 'backoffice' && $Utils.isAdmin()"
+        >
           <div v-if="row_pa.pa_jure_valide" class="me-2">Juré validé</div>
           <div v-else class="me-2">Juré non validé</div>
           <label class="switch">
@@ -194,40 +206,43 @@
       <div v-if="row_pa.pa_jure">
         <h4>Plus d'informations</h4>
         <div class="d-flex align-items-center mb-2">
-          <div class="fw-bold me-4" style="width:360px">
+          <div class="fw-bold me-4" style="width: 360px">
             Est-ce votre première participation ?
           </div>
           <m-form-select
-            style="width:200px"
+            style="width: 200px"
             :name="$Utils.randomstring('pa_firstparticipation')"
             v-model="row_pa.pa_firstparticipation"
             :items="$store.state.items_boolean"
           ></m-form-select>
         </div>
         <div class="d-flex align-items-center mb-2">
-          <div class="fw-bold me-4" style="width:360px">
+          <div class="fw-bold me-4" style="width: 360px">
             Dans quelle catégorie vous situez-vous ?
           </div>
           <m-form-select
-            style="width:300px"
+            style="width: 300px"
             :name="$Utils.randomstring('pa_typejure')"
             v-model="row_pa.pa_typejure"
             :items="$store.state.items_typejure"
           ></m-form-select>
-          <div class="d-flex align-items-center ms-3 mb-2" v-if="row_pa.pa_typejure === 9">
-            <div class="me-1"> Précisez :</div>
-             <m-form-text
-                    :name="$Utils.randomstring('pa_typejure_other')"
-                    v-model="row_pa.pa_typejure_other"
-              ></m-form-text>
+          <div
+            class="d-flex align-items-center ms-3 mb-2"
+            v-if="row_pa.pa_typejure === 9"
+          >
+            <div class="me-1">Précisez :</div>
+            <m-form-text
+              :name="$Utils.randomstring('pa_typejure_other')"
+              v-model="row_pa.pa_typejure_other"
+            ></m-form-text>
           </div>
         </div>
         <div class="d-flex align-items-center mb-2">
-          <div class="fw-bold me-4" style="width:360px">
+          <div class="fw-bold me-4" style="width: 360px">
             Avez-vous suivi des cours de dégustation ?
           </div>
           <m-form-select
-            style="width:200px"
+            style="width: 200px"
             :name="$Utils.randomstring('pa_coursdegustation')"
             v-model="row_pa.pa_coursdegustation"
             :items="$store.state.items_boolean"
@@ -242,7 +257,7 @@
           </p>
           <div class="d-flex align-items-end ps-4">
             <m-form-radio
-              style="width:150px"
+              style="width: 150px"
               :name="$Utils.randomstring('pa_liensexistant')"
               id="pa_liensexistant"
               v-model="row_pa.pa_liensexistant"
@@ -250,7 +265,7 @@
             ></m-form-radio>
 
             <m-form-text
-              style="width:250px"
+              style="width: 250px"
               inputGroupClass="input-group-sm"
               :name="$Utils.randomstring('pa_liensexistant_more')"
               v-model="row_pa.pa_liensexistant_more"
@@ -313,9 +328,9 @@ export default {
   props: {
     pa_id: Number,
     keyload: Number,
-    from:String,
-     signup:Boolean,
-     row_yp: Object,
+    from: String,
+    signup: Boolean,
+    row_yp: Object,
   },
   data() {
     return {
@@ -330,19 +345,21 @@ export default {
         { value: 2, text: "Vignoble 2" },
         { value: 3, text: "Vignoble 3" },
         { value: 4, text: "Vignoble 4" },
-        { value: 5, text: "Vignoble 5" }
+        { value: 5, text: "Vignoble 5" },
       ],
-      row_yp2:{} ,
-      confirmDevalidDialog:false,
-      devalidWinesCandidat:false,
+      row_yp2: {},
+      confirmDevalidDialog: false,
+      devalidWinesCandidat: false,
     };
   },
   watch: {
-    keyload: function(v) {}
+    keyload: function (v) {},
   },
   async mounted() {
     this.loadParticipation();
-    this.row_yp2 = this.row_yp ? this.row_yp :  this.$store.state.preferences.year;
+    this.row_yp2 = this.row_yp
+      ? this.row_yp
+      : this.$store.state.preferences.year;
   },
   methods: {
     async loadParticipation() {
@@ -360,25 +377,25 @@ export default {
           this.$emit("participationLoaded",this.row_pa)
         }
     },
-    devalidCandidat(){
-      if(!this.row_pa.pa_candidat_valide)this.confirmDevalidDialog = true;
-      if(this.row_pa.pa_candidat_valide)this.row_pa.revalidWinesCandidat = true;
+    devalidCandidat() {
+      if (!this.row_pa.pa_candidat_valide) this.confirmDevalidDialog = true;
+      if (this.row_pa.pa_candidat_valide)
+        this.row_pa.revalidWinesCandidat = true;
     },
-    DevalidCandidatOui(){
+    DevalidCandidatOui() {
       this.confirmDevalidDialog = false;
       this.row_pa.devalidWinesCandidat = true;
-      this.row_pa.pa_candidat_valide = false ;
-
+      this.row_pa.pa_candidat_valide = false;
     },
-    DevalidCandidatNon(){
+    DevalidCandidatNon() {
       this.confirmDevalidDialog = false;
       this.row_pa.devalidWinesCandidat = false;
-      this.row_pa.pa_candidat_valide = false ;
+      this.row_pa.pa_candidat_valide = false;
     },
-    DevalidCandidatCancel(){
+    DevalidCandidatCancel() {
       this.confirmDevalidDialog = false;
       this.row_pa.devalidWinesCandidat = false;
-      this.row_pa.pa_candidat_valide = true ;
+      this.row_pa.pa_candidat_valide = true;
     },
     copyAddress() {
       this.row_pa.pa_society_fac = this.row_pa.pa_society ? this.row_pa.pa_society : "";;
@@ -427,8 +444,7 @@ export default {
       // console.log("this.row_pa", this.row_pa);
       if (!this.row_pa.pa_candidat && !this.row_pa.pa_jure) {
         err.push({
-          text:
-            "<span class='fw-bold'>Vous devez choisir d'être candidat ou juré ou les deux</span>"
+          text: "<span class='fw-bold'>Vous devez choisir d'être candidat ou juré ou les deux</span>",
         });
       }
       // console.log("err", err);
@@ -463,11 +479,11 @@ export default {
         "pa_city",
         "pa_web",
         "pa_phone_mobile",
-        "pa_phone_fix"
+        "pa_phone_fix",
       ];
       for (let i = 0; i < tabField.length; i++) {
         const field = tabField[i];
-        if(this.row_pa[field])this.row_pa[field] = this.row_pa[field].trim();
+        if (this.row_pa[field]) this.row_pa[field] = this.row_pa[field].trim();
       }
     },
     async saveCandidat() {
@@ -480,21 +496,23 @@ export default {
       if (this.row_pa.pa_id) {
         response = await this.$axios.put(
           this.$config.server_url +
-            "/"+route+"/1.0/participations/" +
+            "/" +
+            route +
+            "/1.0/participations/" +
             this.row_pa.pa_id,
           this.row_pa
         );
       } else {
         this.row_pa.pa_cgu_date = "0000-00-00 00:00:00";
         this.row_pa.pa_year = this.$store.state.year;
-                if(this.signup){
+        if (this.signup) {
           response = await this.$axios.post(
             this.$config.server_url + "/candidats/1.0/signup",
             this.row_pa
           );
-        }else{
+        } else {
           response = await this.$axios.post(
-            this.$config.server_url + "/"+route+"/1.0/participations",
+            this.$config.server_url + "/" + route + "/1.0/participations",
             this.row_pa
           );
         }
@@ -503,21 +521,23 @@ export default {
         this.$store.dispatch("showDialogError", response.data.err.message);
         return;
       }
-      if(this.from === "backoffice"){ 
+      if (this.from === "backoffice") {
         this.$store.dispatch("showToast", {
           title: "Candidat",
           text: "Le candidat a bien été enregistré",
-          color: "green"
+          color: "green",
         });
       }
-      this.row_pa = this.signup ? response.data.participation : response.data.data;
+      this.row_pa = this.signup
+        ? response.data.participation
+        : response.data.data;
       this.$emit("formCandidatJureActions", {
         action: "saved",
         row_pa: this.row_pa,
-        row_lo : this.signup ? response.data.login : {} 
+        row_lo: this.signup ? response.data.login : {},
       });
     },
-/*     async deleteCandidat() {
+    /*     async deleteCandidat() {
       let route = this.from === "candidats" ? "candidats" : "api";
       let response = await this.$axios.delete(
         this.$config.server_url + "/"+route+"/1.0/participations/" + this.row_pa.pa_id
@@ -536,7 +556,7 @@ export default {
         this.$emit("formCandidatJureActions", { action: "deleted" });
       }
     } */
-  }
+  },
 };
 </script>
 
