@@ -286,13 +286,6 @@ Modiifer également le projet XXX
           >
             Télécharger
           </button>
-          <div v-else>
-            <img
-              style="width: 30px"
-              src="/images/icons/icon-stop.png"
-              alt="icon stop"
-            />
-          </div>
         </div>
       </div>
     </div>
@@ -759,19 +752,19 @@ export default {
       // les fichiers
       for (let i = 1; i <= 3; i++) {
         if (this.filesSelected["file" + i] && !this["deleteFile" + i]) {
-          this.saveFiles(this.filesSelected["file" + i], i);
+          await this.saveFiles(this.filesSelected["file" + i], i);
         }
         if (this["deleteFile" + i]) {
-          this.deleteFile(i);
+          await this.deleteFile(i);
         }
       }
       for (let j = 0; j < this.filesAutreRevendication.length; j++) {
         const file = this.filesAutreRevendication[j];
         if (file.file && !file.delete) {
-          this.saveFiles(file.file, j + 10);
+          await this.saveFiles(file.file, j + 10);
         }
         if (file.delete) {
-          this.deleteFile(j + 10);
+          await this.deleteFile(j + 10);
         }
       }
 
