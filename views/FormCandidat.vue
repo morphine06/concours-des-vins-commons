@@ -337,11 +337,11 @@ export default {
       dialogErr: false,
       dialogErrTxt: "",
       row_pa: {
-        pa_society_fac:"",
-        pa_address1_fac:"",
-        pa_address2_fac:"",
-        pa_city_fac:'',
-        pa_zip_fac:'',
+        pa_society_fac: "",
+        pa_address1_fac: "",
+        pa_address2_fac: "",
+        pa_city_fac: "",
+        pa_zip_fac: "",
       },
       jureValide: false,
       confirmJureValide: false,
@@ -371,17 +371,21 @@ export default {
     async loadParticipation() {
       let route = this.from === "candidats" ? "candidats" : "api";
       let params = {};
-      console.log('this.route, from',this.route, this.from);
-        if(!this.signup){
-          if (this.pa_id == -1) params = {};
-          let response = await this.$axios.get(
-            this.$config.server_url + "/"+route+"/1.0/participations/" + this.pa_id,
-            { params }
-          );
-          this.row_pa = response.data.data;
-          this.jureValide = this.row_pa.pa_jure_valide;
-          this.$emit("participationLoaded",this.row_pa)
-        }
+      console.log("this.route, from", this.route, this.from);
+      if (!this.signup) {
+        if (this.pa_id == -1) params = {};
+        let response = await this.$axios.get(
+          this.$config.server_url +
+            "/" +
+            route +
+            "/1.0/participations/" +
+            this.pa_id,
+          { params }
+        );
+        this.row_pa = response.data.data;
+        this.jureValide = this.row_pa.pa_jure_valide;
+        this.$emit("participationLoaded", this.row_pa);
+      }
     },
     devalidCandidat() {
       if (!this.row_pa.pa_candidat_valide) this.confirmDevalidDialog = true;
@@ -404,9 +408,15 @@ export default {
       this.row_pa.pa_candidat_valide = true;
     },
     copyAddress() {
-      this.row_pa.pa_society_fac = this.row_pa.pa_society ? this.row_pa.pa_society : "";;
-      this.row_pa.pa_address1_fac = this.row_pa.pa_address1 ? this.row_pa.pa_address1 : "";
-      this.row_pa.pa_address2_fac = this.row_pa.pa_address2 ? this.row_pa.pa_address2 : "";
+      this.row_pa.pa_society_fac = this.row_pa.pa_society
+        ? this.row_pa.pa_society
+        : "";
+      this.row_pa.pa_address1_fac = this.row_pa.pa_address1
+        ? this.row_pa.pa_address1
+        : "";
+      this.row_pa.pa_address2_fac = this.row_pa.pa_address2
+        ? this.row_pa.pa_address2
+        : "";
       this.row_pa.pa_city_fac = this.row_pa.pa_city ? this.row_pa.pa_city : "";
       this.row_pa.pa_zip_fac = this.row_pa.pa_zip ? this.row_pa.pa_zip : "";
     },
@@ -433,8 +443,7 @@ export default {
       ];
       for (let ifi = 0; ifi < fieldRequired.length; ifi++) {
         const field = fieldRequired[ifi];
-        if (!this.row_pa[field.field])
-          err.push(field);
+        if (!this.row_pa[field.field]) err.push(field);
       }
       if (!this.row_pa.login.lo_login) err.push({ text: "login" });
       if (
@@ -442,9 +451,9 @@ export default {
         (this.signup || !this.row_pa.login || !this.row_pa.login.lo_id)
       )
         err.push({ text: "mot de passe" });
-      if(tabErrPassword.length>0){
+      if (tabErrPassword && tabErrPassword.length > 0) {
         for (let i = 0; i < tabErrPassword.length; i++) {
-          err.push({ text: tabErrPassword[i]})
+          err.push({ text: tabErrPassword[i] });
         }
       }
       // console.log("this.row_pa", this.row_pa);
