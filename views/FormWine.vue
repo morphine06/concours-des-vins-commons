@@ -400,16 +400,16 @@ export default {
 
       this.changeSelect();
       // fichiers
-      for (let i = 0; i < this.row_wi.files.length; i++) {
-        const fileIndex = this.row_wi.files[i];
-        if (parseInt(fileIndex) >= 10) {
-          this.filesAutreRevendication[fileIndex - 10] = {
-            delete: false,
-            file: null,
-            download: true,
-          };
-        }
-      }
+      // for (let i = 0; i < this.row_wi.files.length; i++) {
+      //   const fileIndex = this.row_wi.files[i];
+      //   if (parseInt(fileIndex) >= 10) {
+      //     this.filesAutreRevendication[fileIndex - 10] = {
+      //       delete: false,
+      //       file: null,
+      //       download: true,
+      //     };
+      //   }
+      // }
     },
     defineSelectCouleur() {
       // console.log("je passe");
