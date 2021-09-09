@@ -342,8 +342,8 @@ export default {
   },
   async mounted() {
     this.contenants = [];
-    this.loadDenominations();
-    this.loadWine();
+    await this.loadDenominations();
+    await this.loadWine();
   },
   methods: {
     async loadDenominations() {
@@ -421,7 +421,11 @@ export default {
       if (de) {
         for (let i = 0; i < this.$store.state.items_winesColors.length; i++) {
           const color = this.$store.state.items_winesColors[i];
-          if (de["de_" + color.value])
+          if (
+            de["de_" + color.value] &&
+            de["de_" + color.value].years &&
+            de["de_" + color.value].years.length
+          )
             colors.push({
               text: color.text,
               value: color.key,
@@ -443,7 +447,17 @@ export default {
           let tabMillesimes = [];
           for (let i = 0; i < de["de_" + colorValue.value].years.length; i++) {
             const year = de["de_" + colorValue.value].years[i];
-            tabMillesimes.push({ text: year, value: year });
+            if (year == "*") {
+              for (
+                let iY = 2010;
+                iY <= this.$dayjs().format("YYYY") * 1;
+                iY++
+              ) {
+                tabMillesimes.push({ text: iY, value: iY });
+              }
+            } else if (year == "$") {
+              tabMillesimes.push({ text: "Non millésimé", value: 100000 });
+            } else tabMillesimes.push({ text: year, value: year });
           }
           this.millesimes = tabMillesimes;
         }
