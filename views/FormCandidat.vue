@@ -205,29 +205,29 @@
       </div>
       <div v-if="row_pa.pa_jure">
         <h4>Plus d'informations</h4>
-        <div class="d-flex align-items-center mb-2">
-          <div class="fw-bold me-4" style="width: 360px">
+        <div class="d-md-flex align-items-center mb-2">
+          <div class="fw-bold me-4 width360">
             Est-ce votre première participation ?
           </div>
           <m-form-select
-            style="width: 200px"
+            class="width200"
             :name="$Utils.randomstring('pa_firstparticipation')"
             v-model="row_pa.pa_firstparticipation"
             :items="$store.state.items_boolean"
           ></m-form-select>
         </div>
-        <div class="d-flex align-items-center mb-2">
-          <div class="fw-bold me-4" style="width: 360px">
+        <div class="d-md-flex align-items-center mb-2">
+          <div class="fw-bold me-4 width360" >
             Dans quelle catégorie vous situez-vous ?
           </div>
           <m-form-select
-            style="width: 300px"
+            class="width300"
             :name="$Utils.randomstring('pa_typejure')"
             v-model="row_pa.pa_typejure"
             :items="$store.state.items_typejure"
           ></m-form-select>
           <div
-            class="d-flex align-items-center ms-3 mb-2"
+            class="d-md-flex align-items-center ms-3 mb-2"
             v-if="row_pa.pa_typejure === 9"
           >
             <div class="me-1">Précisez :</div>
@@ -237,12 +237,12 @@
             ></m-form-text>
           </div>
         </div>
-        <div class="d-flex align-items-center mb-2">
-          <div class="fw-bold me-4" style="width: 360px">
+        <div class="d-md-flex align-items-center mb-2">
+          <div class="fw-bold me-4 width360">
             Avez-vous suivi des cours de dégustation ?
           </div>
           <m-form-select
-            style="width: 200px"
+            class="width200"
             :name="$Utils.randomstring('pa_coursdegustation')"
             v-model="row_pa.pa_coursdegustation"
             :items="$store.state.items_boolean"
@@ -255,9 +255,9 @@
             associations dont les activités, produits ou intérêts pouvant
             concerner les vins présentés au concours sont les suivants :
           </p>
-          <div class="d-flex align-items-end ps-4">
+          <div class="d-md-flex align-items-end ps-sm-4">
             <m-form-radio
-              style="width: 150px"
+              class="width150"
               :name="$Utils.randomstring('pa_liensexistant')"
               id="pa_liensexistant"
               v-model="row_pa.pa_liensexistant"
@@ -265,7 +265,7 @@
             ></m-form-radio>
 
             <m-form-text
-              style="width: 250px"
+              class="width250"
               inputGroupClass="input-group-sm"
               :name="$Utils.randomstring('pa_liensexistant_more')"
               v-model="row_pa.pa_liensexistant_more"
@@ -575,4 +575,26 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+
+@media (min-width: 768px) {
+  .width150{
+  width: 150px;
+  }
+  .width250{
+    width: 250px;
+  }
+  .width200{
+    width: 200px;
+  }
+  .width300{
+    width: 300px;
+  }
+  .width360{
+    width: 360px;
+  }
+
+}
+
+</style>
