@@ -10,7 +10,7 @@
     aria-hidden="true"
   >
     <div class="modal-dialog modal-dialog-scrollable" role="document">
-      <div class="modal-content" :style="'width:' + width">
+      <div class="modal-content" :style="getWidth()">
         <div class="modal-header" :style="`border-top: 4px solid ${color};`">
           <h3>{{ title }}</h3>
         </div>
@@ -31,8 +31,8 @@ export default {
     title: String,
     text: String,
     width: {
-      type: String,
-      default: "500px"
+      type: Number,
+      default: 500
     },
     redirect: String,
     color: {
@@ -43,10 +43,18 @@ export default {
 
   data() {
     return {
-      dialog: false
+      dialog: false,
+            windowWidth: window.innerWidth,
     };
   },
-  mounted() {},
+mounted() {
+     this.$nextTick(() => {
+            window.addEventListener('resize', this.onResize);
+        })
+  },
+    destroyed() {
+     window.removeEventListener('resize', this.onResize); 
+  },
   watch: {
     value: function(val) {
       this.dialog = val;
@@ -55,6 +63,18 @@ export default {
   },
   components: {},
   methods: {
+    onResize() {
+      console.log('window.innerWidth',window.innerWidth);
+            this.windowWidth = window.innerWidth
+        },
+    getWidth(){
+      let style = ""
+      let width = this.width ? this.width : 500
+      style = this.windowWidth < width ? "width:100%" : "width:"+width+"px";
+      console.log('style',style);
+      return style;
+
+    },
     deleteWin() {
       this.dialog = false;
       if (this.redirect) {

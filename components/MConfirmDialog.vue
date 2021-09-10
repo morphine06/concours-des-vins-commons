@@ -10,7 +10,7 @@
     aria-hidden="true"
   >
     <div class="modal-dialog modal-dialog-scrollable" role="document">
-      <div class="modal-content" :style="'width:' + width">
+      <div class="modal-content" :style="getWidth()">
         <div class="modal-header">
           <h3>{{ title }}</h3>
         </div>
@@ -40,8 +40,8 @@ export default {
     text: String,
     sousText: String,
     width: {
-      type: String,
-      default: "500px",
+      type: Number,
+      default: 500,
     },
     threeBtn: Boolean,
     btnOkTxt: String,
@@ -50,9 +50,17 @@ export default {
   data() {
     return {
       dialog: false,
+      windowWidth: window.innerWidth,
     };
   },
-  mounted() {},
+  mounted() {
+     this.$nextTick(() => {
+            window.addEventListener('resize', this.onResize);
+        })
+  },
+    destroyed() {
+     window.removeEventListener('resize', this.onResize); 
+  },
   watch: {
     value: function (val) {
       this.dialog = val;
@@ -60,6 +68,18 @@ export default {
   },
   components: {},
   methods: {
+    onResize() {
+      console.log('window.innerWidth',window.innerWidth);
+            this.windowWidth = window.innerWidth
+        },
+    getWidth(){
+      let style = ""
+      let width = this.width ? this.width : 500
+      style = this.windowWidth < width ? "width:100%" : "width:"+width+"px";
+      console.log('style',style);
+      return style;
+
+    },
     cancelWin() {
       this.$emit("canceled");
     },
