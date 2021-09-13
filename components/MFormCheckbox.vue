@@ -3,9 +3,8 @@
     <input
       type="checkbox"
       :disabled="disabled"
-      :checked="value"
+      v-model="value2"
       :name="name2"
-      @input="setValue($event.target.checked)"
     />
     <span class="ms-2" v-html="label"></span>
   </label>
@@ -35,6 +34,7 @@ export default {
     },
   },
   mounted() {
+    this.value2 = this.value;
     // console.log("this.value", this.value);
     //   if(this.value)
     //  if (this.name) this.name2 = this.name;
@@ -43,6 +43,7 @@ export default {
   data() {
     return {
       id2: "",
+      value2: false,
       name2: "",
       checked: false,
       checked2: false,
@@ -50,6 +51,13 @@ export default {
   },
   watch: {
     checked2: function (val) {},
+    value: function (val) {
+      this.value2 = val;
+    },
+    value2: function (val) {
+      // this.$emit("input", val);
+      this.setValue(val);
+    },
   },
   components: {},
   methods: {
@@ -66,7 +74,7 @@ export default {
     },
     onclick(evt) {
       // evt.stopPropagation();
-      this.$emit("click", evt);
+      // this.$emit("click", evt);
     },
     onfocus(evt) {
       if (this.autoSelectOnFocus) evt.target.select();
