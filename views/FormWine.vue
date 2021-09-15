@@ -443,7 +443,7 @@ export default {
         let colorValue = this.$store.state.items_winesColors.find((el) => {
           return el.key === this.row_wi.wi_couleur;
         });
-        if (colorValue) {
+        if (colorValue && de) {
           let tabMillesimes = [];
           for (let i = 0; i < de["de_" + colorValue.value].years.length; i++) {
             const year = de["de_" + colorValue.value].years[i];
