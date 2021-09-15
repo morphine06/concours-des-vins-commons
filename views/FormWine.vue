@@ -347,7 +347,7 @@ export default {
   },
   methods: {
     async loadDenominations() {
-      let route = this.from === "candidats" ? "candidats" : "api";
+      let route = this.from === "candidats" ? "candidats" : "backoffice";
       let params = {
         de_year: this.$store.state.year,
         de_save: 1,
@@ -366,7 +366,7 @@ export default {
       this.denominations = rows_de;
     },
     async loadWine() {
-      let route = this.from === "candidats" ? "candidats" : "api";
+      let route = this.from === "candidats" ? "candidats" : "backoffice";
       let params = {};
       if (this.wi_id == -1) params = {};
       let response = await this.$axios.get(
@@ -602,7 +602,7 @@ export default {
     },
 
     async saveFiles(file, num) {
-      let route = this.from === "candidats" ? "candidats" : "api";
+      let route = this.from === "candidats" ? "candidats" : "backoffice";
       if (!file) return;
       let formData = new FormData();
       formData.append("file", file, file.name);
@@ -625,7 +625,7 @@ export default {
       );
     },
     async deleteFile(num) {
-      let route = this.from === "candidats" ? "candidats" : "api";
+      let route = this.from === "candidats" ? "candidats" : "backoffice";
       // console.log("num", num);
       await this.$axios.delete(
         this.$config.server_url +
@@ -651,7 +651,7 @@ export default {
       });
     },
     downloadFile(num) {
-      let route = this.from === "candidats" ? "candidats" : "api";
+      let route = this.from === "candidats" ? "candidats" : "backoffice";
       let url =
         this.from === "candidats"
           ? this.$config.candidats_url
@@ -726,7 +726,7 @@ export default {
       }
     },
     async saveWin() {
-      let route = this.from === "candidats" ? "candidats" : "api";
+      let route = this.from === "candidats" ? "candidats" : "backoffice";
       let response;
       // console.log("this.row_wi.wi_valid", this.row_wi.wi_valid);
       delete this.row_wi.denomination;
@@ -788,7 +788,7 @@ export default {
       this.confirmdelete = true;
     },
     async deleteWin() {
-      let route = this.from === "candidats" ? "candidats" : "api";
+      let route = this.from === "candidats" ? "candidats" : "backoffice";
       await this.$axios.delete(
         this.$config.server_url +
           "/" +

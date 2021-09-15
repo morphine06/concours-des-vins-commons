@@ -369,7 +369,7 @@ export default {
   },
   methods: {
     async loadParticipation() {
-      let route = this.from === "candidats" ? "candidats" : "api";
+      let route = this.from === "candidats" ? "candidats" : "backoffice";
       let params = {};
       console.log("this.route, from", this.route, this.from);
       if (!this.signup) {
@@ -502,7 +502,7 @@ export default {
       }
     },
     async saveCandidat() {
-      let route = this.from === "candidats" ? "candidats" : "api";
+      let route = this.from === "candidats" ? "candidats" : "backoffice";
       this.confirmJureValide = false;
       if (this.jureValideConfirmed) this.row_pa.sendEmailToJureValide = true;
       await this.trimFields();
@@ -553,7 +553,7 @@ export default {
       });
     },
     /*     async deleteCandidat() {
-      let route = this.from === "candidats" ? "candidats" : "api";
+      let route = this.from === "candidats" ? "candidats" : "backoffice";
       let response = await this.$axios.delete(
         this.$config.server_url + "/"+route+"/1.0/participations/" + this.row_pa.pa_id
       );

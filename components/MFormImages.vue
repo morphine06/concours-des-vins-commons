@@ -43,7 +43,7 @@
                 :src="
                   row_fi.binary
                     ? row_fi.binary
-                    : `${$config.server_url}/api/1.0/images/${row_fi.fi_id}/75/75?token=${$store.state.accesstoken}`
+                    : `${$config.server_url}/backoffice/1.0/images/${row_fi.fi_id}/75/75?token=${$store.state.accesstoken}`
                 "
                 height="75px"
                 width="75px"
@@ -218,7 +218,7 @@ export default {
         formData.append("fi_description", row_fi.fi_description);
         formData.append("image", row_fi.file);
         await this.$axios.post(
-          this.$config.server_url + "/api/1.0/files",
+          this.$config.server_url + "/backoffice/1.0/files",
           formData,
           {
             headers: {

@@ -16,7 +16,7 @@
         style="padding: 2px"
       >
         <v-img
-          :src="`${$config.server_url}/api/1.0/images/${row_fi.fi_id}/75/75?token=${$store.state.accesstoken}`"
+          :src="`${$config.server_url}/backoffice/1.0/images/${row_fi.fi_id}/75/75?token=${$store.state.accesstoken}`"
           height="75px"
           width="75px"
         ></v-img>
@@ -29,7 +29,7 @@
         style="padding:2px;"
       >
         <v-img
-          :src="`${$config.server_url}/api/1.0/files/${row_fi.fi_id}`"
+          :src="`${$config.server_url}/backoffice/1.0/files/${row_fi.fi_id}`"
           height="75px"
           width="75px"
         ></v-img>
