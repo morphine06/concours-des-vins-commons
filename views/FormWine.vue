@@ -711,7 +711,7 @@ export default {
           "<span class='bis'>Vous devez remplir les champs : </span><br>";
         for (let ierr = 0; ierr < err.length; ierr++) {
           const error = err[ierr];
-          this.dialogErrTxt += error.text + " <br>";
+          this.dialogErrTxt += "- " + error.text + " <br>";
         }
         this.dialogErr = true;
         return;

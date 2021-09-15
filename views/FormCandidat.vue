@@ -459,7 +459,7 @@ export default {
       // console.log("this.row_pa", this.row_pa);
       if (!this.row_pa.pa_candidat && !this.row_pa.pa_jure) {
         err.push({
-          text: "<span class='fw-bold'>Vous devez choisir d'être candidat ou juré ou les deux</span>",
+          text: "<span class=''>Vous devez choisir d'être candidat ou juré ou les deux</span>",
         });
       }
       // console.log("err", err);
@@ -468,7 +468,7 @@ export default {
           "<span class='fw-bold'>Vous devez remplir les champs : </span><br>";
         for (let ierr = 0; ierr < err.length; ierr++) {
           const error = err[ierr];
-          this.dialogErrTxt += error.text + " <br>";
+          this.dialogErrTxt += "- " + error.text + " <br>";
         }
         this.dialogErr = true;
         return;
