@@ -83,47 +83,47 @@ export default {
   // components: { draggable },
   props: {
     items: {
-      default: function () {
+      default: function() {
         return [];
       },
-      type: Array,
+      type: Array
     },
     dragable: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     current: {
       default: "",
-      type: [String, Number],
+      type: [String, Number]
     },
     itemValue: {
       default: "",
-      type: String,
+      type: String
     },
     dynamic: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     limit: {
       default: 100,
-      type: Number,
+      type: Number
     },
     total: {
       default: 0,
-      type: Number,
+      type: Number
     },
     skip: {
       default: 0,
-      type: Number,
+      type: Number
     },
     itemHeight: {
       default: 30,
-      type: Number,
+      type: Number
     },
     bgstrip1: {
       default: false,
-      type: Boolean,
-    },
+      type: Boolean
+    }
   },
   mounted() {
     this.update(0);
@@ -136,9 +136,9 @@ export default {
       list: [
         { name: "John", text: "", id: 0 },
         { name: "Joao", text: "", id: 1 },
-        { name: "Jean", text: "", id: 2 },
+        { name: "Jean", text: "", id: 2 }
       ],
-      dragging: false,
+      dragging: false
     };
   },
   watch: {
@@ -160,7 +160,7 @@ export default {
     },
     total(val) {
       // this.calcPadding();
-    },
+    }
   },
   computed: {
     itemHeight2() {
@@ -168,7 +168,7 @@ export default {
     },
     draggingInfo() {
       return this.dragging ? "under drag" : "";
-    },
+    }
   },
   components: {},
   methods: {
@@ -215,8 +215,8 @@ export default {
     },
     onitemclick(item, indexItem, evt) {
       this.$emit("itemclick", item, indexItem, evt);
-    },
-  },
+    }
+  }
 };
 </script>
 

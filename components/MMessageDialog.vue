@@ -44,16 +44,16 @@ export default {
   data() {
     return {
       dialog: false,
-            windowWidth: window.innerWidth,
+      windowWidth: window.innerWidth
     };
   },
-mounted() {
-     this.$nextTick(() => {
-            window.addEventListener('resize', this.onResize);
-        })
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener("resize", this.onResize);
+    });
   },
-    destroyed() {
-     window.removeEventListener('resize', this.onResize); 
+  destroyed() {
+    window.removeEventListener("resize", this.onResize);
   },
   watch: {
     value: function(val) {
@@ -64,16 +64,15 @@ mounted() {
   components: {},
   methods: {
     onResize() {
-      console.log('window.innerWidth',window.innerWidth);
-            this.windowWidth = window.innerWidth
-        },
-    getWidth(){
-      let style = ""
-      let width = this.width ? this.width : 500
-      style = this.windowWidth < width ? "width:100%" : "width:"+width+"px";
-      console.log('style',style);
+      // console.log("window.innerWidth", window.innerWidth);
+      this.windowWidth = window.innerWidth;
+    },
+    getWidth() {
+      let style = "";
+      let width = this.width ? this.width : 500;
+      style = this.windowWidth < width ? "width:100%" : "width:" + width + "px";
+      // console.log("style", style);
       return style;
-
     },
     deleteWin() {
       this.dialog = false;

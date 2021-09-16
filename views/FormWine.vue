@@ -306,7 +306,7 @@ export default {
   components: {},
   props: {
     wi_id: Number,
-    from: String,
+    from: String
   },
   data() {
     return {
@@ -329,16 +329,16 @@ export default {
       filesSelected: {
         file1: null,
         file2: null,
-        file3: null,
+        file3: null
       },
       deleteFile1: false,
       deleteFile2: false,
       deleteFile3: false,
-      filesAutreRevendication: [],
+      filesAutreRevendication: []
     };
   },
   watch: {
-    keyload: function (v) {},
+    keyload: function(v) {}
   },
   async mounted() {
     this.contenants = [];
@@ -351,7 +351,7 @@ export default {
       let params = {
         de_year: this.$store.state.year,
         de_save: 1,
-        sort: "de_name ASC",
+        sort: "de_name ASC"
       };
       let response = await this.$axios.get(
         this.$config.server_url + "/" + route + "/1.0/denominations/",
@@ -384,7 +384,7 @@ export default {
             let tab2 = el.split(":");
             this.contenants.push({
               contenant: parseInt(tab2[0]),
-              nombre: parseInt(tab2[1]),
+              nombre: parseInt(tab2[1])
             });
           }
         }
@@ -415,7 +415,7 @@ export default {
       // console.log("je passe");
       // définition du dropdown couleurs
       let colors = [];
-      let de = this.denominations.find((el) => {
+      let de = this.denominations.find(el => {
         return el.de_id === this.denomination;
       });
       if (de) {
@@ -428,7 +428,7 @@ export default {
           )
             colors.push({
               text: color.text,
-              value: color.key,
+              value: color.key
             });
         }
         this.couleurs = colors;
@@ -436,11 +436,11 @@ export default {
     },
     defineSelectMillesimes() {
       //millesime
-      let de = this.denominations.find((el) => {
+      let de = this.denominations.find(el => {
         return el.de_id === this.row_wi.de_id;
       });
       if (this.row_wi.wi_couleur) {
-        let colorValue = this.$store.state.items_winesColors.find((el) => {
+        let colorValue = this.$store.state.items_winesColors.find(el => {
           return el.key === this.row_wi.wi_couleur;
         });
         if (colorValue && de) {
@@ -619,8 +619,8 @@ export default {
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
-          },
+            "Content-Type": "multipart/form-data"
+          }
         }
       );
     },
@@ -647,7 +647,7 @@ export default {
       this.filesAutreRevendication.push({
         delete: false,
         file: null,
-        download: false,
+        download: false
       });
     },
     downloadFile(num) {
@@ -656,7 +656,7 @@ export default {
         this.from === "candidats"
           ? this.$config.candidats_url
           : this.$config.backoffice_url;
-      console.log("this.from, url", this.from, url);
+      // console.log("this.from, url", this.from, url);
       window.open(
         `${this.$config.server_url}/${route}/1.0/wines/${this.row_wi.wi_id}/files/${num}/${this.row_wi.wi_year}?token=${this.$store.state.accesstoken}&origin=${url}`,
         "_blank"
@@ -682,7 +682,7 @@ export default {
         // { field: "wi_denomination", text: "dénomination" },
         { field: "wi_couleur", text: "couleur" },
         { field: "wi_millesime", text: "millesime" },
-        { field: "wi_cepages", text: "cépages" },
+        { field: "wi_cepages", text: "cépages" }
       ];
       for (let ifi = 0; ifi < fieldRequired.length; ifi++) {
         const field = fieldRequired[ifi];
@@ -691,7 +691,7 @@ export default {
       if (!this.row_wi.wi_numlot && !this.row_wi.wi_refcontenant) {
         err.push({ text: "Numéro du lot ou référence des contenants" });
       }
-      this.contenants = this.contenants.filter((item) => {
+      this.contenants = this.contenants.filter(item => {
         return item.contenant != "" && item.nombre != "";
       });
       if (!this.contenants.length) {
@@ -702,7 +702,7 @@ export default {
         this.contenance_total < this.contenance_min
       ) {
         err.push({
-          text: "Minimum de contenance à commercialiser non atteint",
+          text: "Minimum de contenance à commercialiser non atteint"
         });
       }
 
@@ -799,8 +799,8 @@ export default {
       this.confirmdelete = false;
 
       this.$emit("formWineAction", { action: "deleted" });
-    },
-  },
+    }
+  }
 };
 </script>
 

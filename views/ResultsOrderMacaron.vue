@@ -71,17 +71,17 @@ export default {
   components: {},
   props: {
     row_or: Object,
-    from: String,
+    from: String
   },
   data() {
     return {
-      showFraisDePort: false,
+      showFraisDePort: false
     };
   },
   watch: {
     row_or() {
       this.calculTotal();
-    },
+    }
   },
   async mounted() {},
   methods: {
@@ -94,8 +94,8 @@ export default {
       else total = (tt / 1000) * this.row_or.yp_macarons_price;
 
       this.$emit("changetotalOrder", total);
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -41,49 +41,49 @@ export default {
     value: [String, Number, Object, Boolean],
     id: {
       default: "",
-      type: String,
+      type: String
     },
     name: {
       default: "",
-      type: String,
+      type: String
     },
     autocomplete: {
       default: "new-password",
-      type: String,
+      type: String
     },
     readonly: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     disabled: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     clearable: {
       default: true,
-      type: Boolean,
+      type: Boolean
     },
     autoSelectOnFocus: {
       default: true,
-      type: Boolean,
+      type: Boolean
     },
     label: {
       default: "",
-      type: String,
+      type: String
     },
     tooltip: {
       default: "",
-      type: String,
+      type: String
     },
     tooltipPosition: {
       default: "bottom",
-      type: String,
+      type: String
     },
     rules: {
-      default: function () {
+      default: function() {
         return [];
       },
-      type: Array,
+      type: Array
     },
     placeholder: String,
     prependIcon: String,
@@ -93,14 +93,14 @@ export default {
     subText: String,
     appendToBody: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     items: {
-      default: function () {
+      default: function() {
         return [];
       },
-      type: Array,
-    },
+      type: Array
+    }
   },
   mounted() {
     if (!this.id2) this.id2 = this.$Utils.randomstring();
@@ -139,7 +139,7 @@ export default {
       errormsg2: "",
       showDropdown: false,
       focus: null,
-      focusDropdown: null,
+      focusDropdown: null
     };
   },
   computed: {
@@ -158,34 +158,34 @@ export default {
           ? "label_focus"
           : "";
       return classTxt;
-    },
+    }
   },
   watch: {
-    rawvalue: function (val) {
+    rawvalue: function(val) {
       // console.log("rawvalue", val);
       this.$emit("search", val);
       if (val == "") this.$emit("input", "");
     },
-    value2: function (val) {
+    value2: function(val) {
       // console.log("value2", val);
       let v = null;
       if (val) v = val.value;
       this.$emit("input", v);
     },
-    value: function (val) {
+    value: function(val) {
       // console.log("value", val);
       this.rawvalue = this.findItem(val).text;
       this.value2 = this.findItem(val);
       this.subTextValue = this.findItem(this.value).subtext;
     },
-    focusDropdown: function (val) {
+    focusDropdown: function(val) {
       this.rawvalue = val.item.text;
     },
-    items: function (val) {
+    items: function(val) {
       // this.$nextTick(() => {
       //   this.popper.update();
       // });
-    },
+    }
   },
   components: {},
   methods: {
@@ -227,7 +227,7 @@ export default {
             if (this.items[newIndex]) {
               this.focusDropdown = {
                 item: this.items[newIndex],
-                index: newIndex,
+                index: newIndex
               };
             } else {
               this.focusDropdown = { item: this.items[0], index: 0 };
@@ -239,19 +239,19 @@ export default {
           if (!this.focusDropdown) {
             this.focusDropdown = {
               item: this.items[this.items.length - 1],
-              index: this.items.length - 1,
+              index: this.items.length - 1
             };
           } else {
             let newIndex = this.focusDropdown.index - 1;
             if (this.items[newIndex]) {
               this.focusDropdown = {
                 item: this.items[newIndex],
-                index: newIndex,
+                index: newIndex
               };
             } else {
               this.focusDropdown = {
                 item: this.items[this.items.length - 1],
-                index: this.items.length - 1,
+                index: this.items.length - 1
               };
             }
           }
@@ -286,8 +286,8 @@ export default {
       this.value2 = item;
       this.validate();
       this.$emit("input", item.value);
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

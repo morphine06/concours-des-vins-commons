@@ -16,12 +16,12 @@ export default {
     config: { type: Object, default: () => ({}) },
     label: {
       default: "",
-      type: String,
-    },
+      type: String
+    }
   },
   data: () => ({
     editor: null,
-    buttons: ["bold", "underline", "italic", "|", "brush", "paragraph"],
+    buttons: ["bold", "underline", "italic", "|", "brush", "paragraph"]
   }),
   computed: {
     editorConfig() {
@@ -34,7 +34,7 @@ export default {
       }
       if (this.extraButtons) config.extraButtons = this.extraButtons;
       return config;
-    },
+    }
   },
   watch: {
     value(newValue) {
@@ -42,18 +42,16 @@ export default {
         this.editor.value = newValue;
         this.$emit("input", newValue);
       }
-    },
+    }
   },
   mounted() {
     this.editor = new this.$Jodit(this.$refs.jodit, this.editorConfig);
     this.editor.value = this.value;
-    this.editor.events.on("change", (newValue) =>
-      this.$emit("input", newValue)
-    );
+    this.editor.events.on("change", newValue => this.$emit("input", newValue));
   },
   beforeDestroy() {
     this.editor.destruct();
-  },
+  }
 };
 </script>
 
