@@ -54,44 +54,44 @@ export default {
     value: [String, Number, Object],
     // searchInput: Function,
     items: {
-      default: function () {
+      default: function() {
         return [];
       },
-      type: Array,
+      type: Array
     },
     id: {
       default: "",
-      type: String,
+      type: String
     },
     name: {
       default: "",
-      type: String,
+      type: String
     },
     autocomplete: {
       default: "new-password",
-      type: String,
+      type: String
     },
     readonly: {
       default: true,
-      type: Boolean,
+      type: Boolean
     },
     autoSelectOnFocus: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     disabled: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     nodatatext: {
       default: "",
-      type: String,
+      type: String
     },
     rules: {
-      default: function () {
+      default: function() {
         return [];
-      },
-    },
+      }
+    }
   },
   mounted() {
     if (!this.id2) this.id2 = this.$Utils.randomstring();
@@ -105,18 +105,18 @@ export default {
       name2,
       value2,
       rawvalue,
-      errormsg2: "",
+      errormsg2: ""
     };
   },
   watch: {
-    rawvalue: function (val) {
+    rawvalue: function(val) {
       this.$emit("search", val);
       if (val == "") this.$emit("input", "");
     },
-    value: function (val) {
+    value: function(val) {
       this.rawvalue = this.findItem(val).text;
       this.value2 = this.findItem(val);
-    },
+    }
   },
   components: {},
   methods: {
@@ -156,8 +156,8 @@ export default {
       this.value2 = item;
       this.validate();
       this.$emit("input", item.value);
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

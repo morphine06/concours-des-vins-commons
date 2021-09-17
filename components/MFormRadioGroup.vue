@@ -21,34 +21,34 @@ export default {
     value: [String, Number],
     id: {
       default: "",
-      type: String,
+      type: String
     },
     type: {
       default: "text",
-      type: String,
+      type: String
     },
     name: {
       default: "",
-      type: String,
+      type: String
     },
     autocomplete: {
       default: "new-password",
-      type: String,
+      type: String
     },
     readonly: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     disabled: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     autoSelectOnFocus: {
       default: true,
-      type: Boolean,
+      type: Boolean
     },
     prependIcon: String,
-    appendIcon: String,
+    appendIcon: String
   },
   mounted() {
     if (this.name) this.name2 = this.name;
@@ -63,15 +63,15 @@ export default {
   data() {
     return {
       id2: "",
-      name2: "",
+      name2: ""
     };
   },
   watch: {
-    value: function (val) {
+    value: function(val) {
       this.$nextTick(() => {
         this.setValue(val);
       });
-    },
+    }
   },
   components: {},
   methods: {
@@ -90,8 +90,8 @@ export default {
       if (this.autoSelectOnFocus) evt.target.select();
       // evt.stopPropagation();
       // this.$emit("click", evt);
-    },
-  },
+    }
+  }
 };
 </script>
 

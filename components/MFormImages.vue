@@ -43,7 +43,7 @@
                 :src="
                   row_fi.binary
                     ? row_fi.binary
-                    : `${$config.server_url}/api/1.0/images/${row_fi.fi_id}/75/75?token=${$store.state.accesstoken}`
+                    : `${$config.server_url}/backoffice/1.0/images/${row_fi.fi_id}/75/75?token=${$store.state.accesstoken}`
                 "
                 height="75px"
                 width="75px"
@@ -128,7 +128,7 @@ export default {
   props: {
     label: String,
     value: Array,
-    showAddButton: Boolean,
+    showAddButton: Boolean
   },
   data() {
     return {
@@ -140,7 +140,7 @@ export default {
       // files: [],
       showInputs: false,
       showInputsDetails: false,
-      currentRowFi: null,
+      currentRowFi: null
     };
   },
   mounted() {
@@ -153,7 +153,7 @@ export default {
     images2(val) {
       this.$emit("input", val);
       // console.log("val", val);
-    },
+    }
   },
   methods: {
     dragleaveimages(e) {
@@ -166,7 +166,7 @@ export default {
       this.$refs.frameDropImage.style.backgroundColor = "white";
       let droppedFiles = e.dataTransfer.files;
       if (!droppedFiles) return;
-      [...droppedFiles].forEach((f) => {
+      [...droppedFiles].forEach(f => {
         // this.files.push(f);
         this.createThumbnail(f);
       });
@@ -193,11 +193,11 @@ export default {
       if (f.name.match(/\.(jpg|jpeg|png|gif)$/)) {
         var reader = new FileReader();
         var me = this;
-        reader.onload = (function (theFile) {
-          return function (e) {
+        reader.onload = (function(theFile) {
+          return function(e) {
             me.images2.push({
               file: f,
-              binary: e.target.result,
+              binary: e.target.result
             });
           };
         })(f);
@@ -218,12 +218,12 @@ export default {
         formData.append("fi_description", row_fi.fi_description);
         formData.append("image", row_fi.file);
         await this.$axios.post(
-          this.$config.server_url + "/api/1.0/files",
+          this.$config.server_url + "/backoffice/1.0/files",
           formData,
           {
             headers: {
-              "Content-Type": "multipart/form-data",
-            },
+              "Content-Type": "multipart/form-data"
+            }
           }
         );
       }
@@ -269,8 +269,8 @@ export default {
       this.fi_subtype = "";
       this.showInputsDetails = false;
       this.currentRowFi.active = "";
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

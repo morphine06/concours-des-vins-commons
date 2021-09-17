@@ -41,44 +41,43 @@ export default {
     sousText: String,
     width: {
       type: Number,
-      default: 500,
+      default: 500
     },
     threeBtn: Boolean,
     btnOkTxt: String,
-    btn3Txt: String,
+    btn3Txt: String
   },
   data() {
     return {
       dialog: false,
-      windowWidth: window.innerWidth,
+      windowWidth: window.innerWidth
     };
   },
   mounted() {
-     this.$nextTick(() => {
-            window.addEventListener('resize', this.onResize);
-        })
+    this.$nextTick(() => {
+      window.addEventListener("resize", this.onResize);
+    });
   },
-    destroyed() {
-     window.removeEventListener('resize', this.onResize); 
+  destroyed() {
+    window.removeEventListener("resize", this.onResize);
   },
   watch: {
-    value: function (val) {
+    value: function(val) {
       this.dialog = val;
-    },
+    }
   },
   components: {},
   methods: {
     onResize() {
-      console.log('window.innerWidth',window.innerWidth);
-            this.windowWidth = window.innerWidth
-        },
-    getWidth(){
-      let style = ""
-      let width = this.width ? this.width : 500
-      style = this.windowWidth < width ? "width:100%" : "width:"+width+"px";
-      console.log('style',style);
+      // console.log("window.innerWidth", window.innerWidth);
+      this.windowWidth = window.innerWidth;
+    },
+    getWidth() {
+      let style = "";
+      let width = this.width ? this.width : 500;
+      style = this.windowWidth < width ? "width:100%" : "width:" + width + "px";
+      // console.log("style", style);
       return style;
-
     },
     cancelWin() {
       this.$emit("canceled");
@@ -88,8 +87,8 @@ export default {
     },
     btn3Action() {
       this.$emit("btn3Action");
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

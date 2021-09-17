@@ -33,11 +33,11 @@ export default {
     //  value: [String, Number],
     id: {
       default: "",
-      type: String,
+      type: String
     },
     picker: {
       default: "",
-      type: String,
+      type: String
     },
     placeholder: String,
     //  type: {
@@ -50,23 +50,23 @@ export default {
     //  },
     label: {
       default: "",
-      type: String,
+      type: String
     },
     labelWidth: {
       default: 4,
-      type: Number,
+      type: Number
     },
     labelPosition: {
       default: "left",
-      type: String,
+      type: String
     },
     labelFontSize: {
       default: "medium",
-      type: String,
+      type: String
     },
     errormsg: {
       default: "",
-      type: String,
+      type: String
     },
     //  autocomplete: {
     //    default: "new-password",
@@ -85,7 +85,7 @@ export default {
       type: Boolean
     }, */
     prependIcon: String,
-    appendIcon: String,
+    appendIcon: String
     // prepend: String,
     // append: String
   },
@@ -123,11 +123,11 @@ export default {
       classContainerLabel,
       classContainerInput,
       classContainerPrepend,
-      classContainerAppend,
+      classContainerAppend
     };
   },
   watch: {
-    value: function (val) {},
+    value: function(val) {}
   },
   components: {},
   methods: {
@@ -139,8 +139,8 @@ export default {
       if (this.autoSelectOnFocus) evt.target.select();
       // evt.stopPropagation();
       // this.$emit("click", evt);
-    },
-  },
+    }
+  }
 };
 </script>
 

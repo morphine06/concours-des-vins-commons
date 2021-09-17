@@ -217,7 +217,7 @@
           ></m-form-select>
         </div>
         <div class="d-md-flex align-items-center mb-2">
-          <div class="fw-bold me-4 width360" >
+          <div class="fw-bold me-4 width360">
             Dans quelle catégorie vous situez-vous ?
           </div>
           <m-form-select
@@ -330,7 +330,7 @@ export default {
     keyload: Number,
     from: String,
     signup: Boolean,
-    row_yp: Object,
+    row_yp: Object
   },
   data() {
     return {
@@ -341,7 +341,7 @@ export default {
         pa_address1_fac: "",
         pa_address2_fac: "",
         pa_city_fac: "",
-        pa_zip_fac: "",
+        pa_zip_fac: ""
       },
       jureValide: false,
       confirmJureValide: false,
@@ -351,27 +351,25 @@ export default {
         { value: 2, text: "Vignoble 2" },
         { value: 3, text: "Vignoble 3" },
         { value: 4, text: "Vignoble 4" },
-        { value: 5, text: "Vignoble 5" },
+        { value: 5, text: "Vignoble 5" }
       ],
       row_yp2: {},
       confirmDevalidDialog: false,
-      devalidWinesCandidat: false,
+      devalidWinesCandidat: false
     };
   },
   watch: {
-    keyload: function (v) {},
+    keyload: function(v) {}
   },
   async mounted() {
-    this.loadParticipation();
-    this.row_yp2 = this.row_yp
-      ? this.row_yp
-      : this.$store.state.preferences.year;
+    await this.loadParticipation();
+    this.row_yp2 = this.row_yp ? this.row_yp : this.$store.state.yearObj;
   },
   methods: {
     async loadParticipation() {
-      let route = this.from === "candidats" ? "candidats" : "api";
+      let route = this.from === "candidats" ? "candidats" : "backoffice";
       let params = {};
-      console.log("this.route, from", this.route, this.from);
+      // console.log("this.route, from", this.route, this.from);
       if (!this.signup) {
         if (this.pa_id == -1) params = {};
         let response = await this.$axios.get(
@@ -429,17 +427,18 @@ export default {
       else this.disabledJure = true;
     },
     tryToSaveWin(login, tabErrPassword) {
+      // console.log("je passe", tabErrPassword);
       this.row_pa.login = login;
       this.row_pa.lo_id = login.lo_id;
       let err = [];
       let fieldRequired = [
         {
           field: "pa_society",
-          text: "nom de l'entreprise",
+          text: "nom de l'entreprise"
         },
         { field: "pa_civility", text: "civilité" },
         { field: "pa_name", text: "nom" },
-        { field: "pa_firstname", text: "prénom" },
+        { field: "pa_firstname", text: "prénom" }
       ];
       for (let ifi = 0; ifi < fieldRequired.length; ifi++) {
         const field = fieldRequired[ifi];
@@ -459,7 +458,8 @@ export default {
       // console.log("this.row_pa", this.row_pa);
       if (!this.row_pa.pa_candidat && !this.row_pa.pa_jure) {
         err.push({
-          text: "<span class='fw-bold'>Vous devez choisir d'être candidat ou juré ou les deux</span>",
+          text:
+            "<span class=''>Vous devez choisir d'être candidat ou juré ou les deux</span>"
         });
       }
       // console.log("err", err);
@@ -468,7 +468,7 @@ export default {
           "<span class='fw-bold'>Vous devez remplir les champs : </span><br>";
         for (let ierr = 0; ierr < err.length; ierr++) {
           const error = err[ierr];
-          this.dialogErrTxt += error.text + " <br>";
+          this.dialogErrTxt += "- " + error.text + " <br>";
         }
         this.dialogErr = true;
         return;
@@ -494,7 +494,7 @@ export default {
         "pa_city",
         "pa_web",
         "pa_phone_mobile",
-        "pa_phone_fix",
+        "pa_phone_fix"
       ];
       for (let i = 0; i < tabField.length; i++) {
         const field = tabField[i];
@@ -502,7 +502,7 @@ export default {
       }
     },
     async saveCandidat() {
-      let route = this.from === "candidats" ? "candidats" : "api";
+      let route = this.from === "candidats" ? "candidats" : "backoffice";
       this.confirmJureValide = false;
       if (this.jureValideConfirmed) this.row_pa.sendEmailToJureValide = true;
       await this.trimFields();
@@ -540,7 +540,7 @@ export default {
         this.$store.dispatch("showToast", {
           title: "Candidat",
           text: "Le candidat a bien été enregistré",
-          color: "green",
+          color: "green"
         });
       }
       this.row_pa = this.signup
@@ -549,11 +549,11 @@ export default {
       this.$emit("formCandidatJureActions", {
         action: "saved",
         row_pa: this.row_pa,
-        row_lo: this.signup ? response.data.login : {},
+        row_lo: this.signup ? response.data.login : {}
       });
-    },
+    }
     /*     async deleteCandidat() {
-      let route = this.from === "candidats" ? "candidats" : "api";
+      let route = this.from === "candidats" ? "candidats" : "backoffice";
       let response = await this.$axios.delete(
         this.$config.server_url + "/"+route+"/1.0/participations/" + this.row_pa.pa_id
       );
@@ -571,30 +571,26 @@ export default {
         this.$emit("formCandidatJureActions", { action: "deleted" });
       }
     } */
-  },
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-
-
 @media (min-width: 768px) {
-  .width150{
-  width: 150px;
+  .width150 {
+    width: 150px;
   }
-  .width250{
+  .width250 {
     width: 250px;
   }
-  .width200{
+  .width200 {
     width: 200px;
   }
-  .width300{
+  .width300 {
     width: 300px;
   }
-  .width360{
+  .width360 {
     width: 360px;
   }
-
 }
-
 </style>

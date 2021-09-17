@@ -45,7 +45,7 @@ export default {
         type: "pdf"
       };
       let response = await this.$axios.get(
-        this.$config.server_url + "/api/1.0/exporttable",
+        this.$config.server_url + "/backoffice/1.0/exporttable",
         { params: query }
       );
       if (!response || !response.data) return;
