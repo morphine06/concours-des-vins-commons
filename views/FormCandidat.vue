@@ -429,8 +429,8 @@ export default {
       else this.disabledJure = true;
     },
     tryToSaveWin(login, tabErrPassword) {
-      console.log("je passe", tabErrPassword);
       this.row_pa.login = login;
+      this.row_pa.lo_id = login.lo_id;
       let err = [];
       let fieldRequired = [
         {
