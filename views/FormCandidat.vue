@@ -100,7 +100,7 @@
           label="<span class='fw-bold'>Je souhaite être candidat</span>"
           :name="$Utils.randomstring('pa_candidat')"
           v-model="row_pa.pa_candidat"
-          @input="checkboxCandidat"
+          @change="checkboxCandidat"
           :disabled="
             $dayjs().isAfter(row_yp2.yp_end_inscription_date_candidate)
           "
@@ -418,7 +418,8 @@ export default {
       this.row_pa.pa_city_fac = this.row_pa.pa_city ? this.row_pa.pa_city : "";
       this.row_pa.pa_zip_fac = this.row_pa.pa_zip ? this.row_pa.pa_zip : "";
     },
-    checkboxCandidat() {
+    checkboxCandidat(val) {
+      this.row_pa.pa_candidat = val;
       if (this.row_pa.pa_candidat) this.row_pa.pa_candidat_valide = true;
       else this.row_pa.pa_candidat_valide = false;
     },

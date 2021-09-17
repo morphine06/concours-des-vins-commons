@@ -5,6 +5,7 @@
       :disabled="disabled"
       v-model="value2"
       :name="name2"
+      @change="onchange($event)"
     />
     <span class="ms-2" v-html="label"></span>
   </label>
@@ -18,20 +19,20 @@ export default {
     label: String,
     id: {
       default: "",
-      type: String
+      type: String,
     },
     name: {
       default: "",
-      type: String
+      type: String,
     },
     readonly: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     disabled: {
       default: false,
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   mounted() {
     this.value2 = this.value;
@@ -46,18 +47,18 @@ export default {
       value2: false,
       name2: "",
       checked: false,
-      checked2: false
+      checked2: false,
     };
   },
   watch: {
-    checked2: function(val) {},
-    value: function(val) {
+    checked2: function (val) {},
+    value: function (val) {
       this.value2 = val;
     },
-    value2: function(val) {
+    value2: function (val) {
       // this.$emit("input", val);
       this.setValue(val);
-    }
+    },
   },
   components: {},
   methods: {
@@ -80,8 +81,12 @@ export default {
       if (this.autoSelectOnFocus) evt.target.select();
       // evt.stopPropagation();
       // this.$emit("click", evt);
+    },
+    onchange(evt){
+      let v = evt.target.checked;
+      this.$emit("change",v, evt);
     }
-  }
+  },
 };
 </script>
 
