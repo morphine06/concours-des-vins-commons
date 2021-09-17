@@ -674,7 +674,6 @@ export default {
     },
     tryToSaveWin(row_pa) {
       // console.log("row_pa", row_pa);
-      this.row_wi.participation = row_pa;
       // console.log("this.row_wi", this.row_wi);
       let err = [];
       let fieldRequired = [
@@ -682,8 +681,9 @@ export default {
         // { field: "wi_denomination", text: "dénomination" },
         { field: "wi_couleur", text: "couleur" },
         { field: "wi_millesime", text: "millesime" },
-        { field: "wi_cepages", text: "cépages" }
+        { field: "wi_cepages", text: "cépages" },
       ];
+      if(!row_pa.pa_id) err.push({ text: "Candiadat" });
       for (let ifi = 0; ifi < fieldRequired.length; ifi++) {
         const field = fieldRequired[ifi];
         if (!this.row_wi[field.field]) err.push(field);
@@ -691,7 +691,7 @@ export default {
       if (!this.row_wi.wi_numlot && !this.row_wi.wi_refcontenant) {
         err.push({ text: "Numéro du lot ou référence des contenants" });
       }
-      this.contenants = this.contenants.filter(item => {
+      this.contenants = this.contenants.filter((item) => {
         return item.contenant != "" && item.nombre != "";
       });
       if (!this.contenants.length) {
@@ -702,7 +702,7 @@ export default {
         this.contenance_total < this.contenance_min
       ) {
         err.push({
-          text: "Minimum de contenance à commercialiser non atteint"
+          text: "Minimum de contenance à commercialiser non atteint",
         });
       }
 
@@ -716,6 +716,7 @@ export default {
         this.dialogErr = true;
         return;
       }
+      this.row_wi.participation = row_pa;
       this.saveWin();
     },
     trimFields() {
