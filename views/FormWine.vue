@@ -680,7 +680,6 @@ export default {
         // { field: "wi_denomination", text: "dénomination" },
         { field: "wi_couleur", text: "couleur" },
         { field: "wi_millesime", text: "millesime" },
-        { field: "wi_cepages", text: "cépages" },
       ];
       if(!row_pa.pa_id) err.push({ text: "Candiadat" });
       for (let ifi = 0; ifi < fieldRequired.length; ifi++) {

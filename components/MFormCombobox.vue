@@ -12,6 +12,7 @@
     :labelPosition="labelPosition"
     :disabled="disabled"
     :appendToBody="appendToBody"
+    @change="onchange($event)"
   ></m-form-select>
 </template>
 
@@ -87,6 +88,9 @@ export default {
     onfocus(evt) {
       this.search_go("");
       this.$emit("focus", evt);
+    },
+    onchange(evt){
+      this.$emit("change", evt);
     },
     async search_go(val) {
       // console.log("search_go", val);
