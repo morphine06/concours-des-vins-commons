@@ -55,7 +55,7 @@ Modiifer également le projet XXX
             @input="changeSelect('millesime')"
           ></m-form-select>
           <m-form-text
-            label="Cépages *"
+            label="Cépages"
             type="textarea"
             :rows="3"
             v-model="row_wi.wi_cepages"
@@ -401,11 +401,11 @@ export default {
       this.changeSelect();
       // fichiers autre revendication
       for (let i = 2; i < 6; i++) {
-        if (this.row_wi['wi_revendication'+ i]) {
-          this.filesAutreRevendication.push( {
+        if (this.row_wi["wi_revendication" + i]) {
+          this.filesAutreRevendication.push({
             delete: false,
             file: null,
-            download: true,
+            download: true
           });
         }
       }
@@ -679,9 +679,9 @@ export default {
         { field: "wi_name", text: "nom" },
         // { field: "wi_denomination", text: "dénomination" },
         { field: "wi_couleur", text: "couleur" },
-        { field: "wi_millesime", text: "millesime" },
+        { field: "wi_millesime", text: "millesime" }
       ];
-      if(!row_pa.pa_id) err.push({ text: "Candiadat" });
+      if (!row_pa.pa_id) err.push({ text: "Candiadat" });
       for (let ifi = 0; ifi < fieldRequired.length; ifi++) {
         const field = fieldRequired[ifi];
         if (!this.row_wi[field.field]) err.push(field);
@@ -689,7 +689,7 @@ export default {
       if (!this.row_wi.wi_numlot && !this.row_wi.wi_refcontenant) {
         err.push({ text: "Numéro du lot ou référence des contenants" });
       }
-      this.contenants = this.contenants.filter((item) => {
+      this.contenants = this.contenants.filter(item => {
         return item.contenant != "" && item.nombre != "";
       });
       if (!this.contenants.length) {
@@ -700,7 +700,7 @@ export default {
         this.contenance_total < this.contenance_min
       ) {
         err.push({
-          text: "Minimum de contenance à commercialiser non atteint",
+          text: "Minimum de contenance à commercialiser non atteint"
         });
       }
 
