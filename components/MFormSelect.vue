@@ -8,6 +8,7 @@
         ref="myinput"
         v-model="value2"
         label="text"
+        :id="id2"
         :options="items"
         style="width: 100%"
         :disabled="disabled"
@@ -17,7 +18,7 @@
         :appendToBody="appendToBody"
       ></v-select>
 
-      <div :id="id2" class="invalid-feedback" v-if="errormsg2">
+      <div class="invalid-feedback" v-if="errormsg2">
         {{ errormsg2 }}
       </div>
     </div>

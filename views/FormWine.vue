@@ -480,6 +480,10 @@ export default {
         this.row_wi.wi_millesime = null;
         this.millesime = "";
         this.millesimes = [];
+        //insert script calcul contenance min selon denomination et couleur
+        var script = document.createElement("script");
+        script.innerHTML = this.$store.state.yearObj.yp_script_contenance_min;
+        document.head.appendChild(script);
       }
       if (what === "millesime" && !this.ignoreSelects) {
         this.row_wi.wi_millesime = this.millesime;
