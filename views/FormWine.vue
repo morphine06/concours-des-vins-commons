@@ -27,6 +27,7 @@ Modiifer également le projet XXX
           ></m-form-text>
           <m-form-select
             label="Dénomination *"
+            id="selectDenomination"
             class="mb-2"
             :name="$Utils.randomstring('de_id')"
             :items="denominations"
@@ -37,6 +38,7 @@ Modiifer également le projet XXX
           <m-form-select
             label="Couleur *"
             class="mb-2"
+             id="selectCouleur"
             :name="$Utils.randomstring('wi_couleur')"
             :items="couleurs"
             v-model="couleur"
@@ -83,39 +85,41 @@ Modiifer également le projet XXX
           ></m-form-text>
 
           <h4 class="mt-3">Reste à commercialiser</h4>
-          <div
-            class="row mb-2 d-flex align-items-end"
-            v-for="(contenant, index) in contenants"
-            :key="index"
-          >
-            <div class="col-md-5">
-              <m-form-select
-                label="Contenant *"
-                :name="$Utils.randomstring('wi_contenant')"
-                :items="$store.state.items_contenants"
-                v-model="contenant.contenant"
-                :rules="[$Validation.mandatory]"
-              ></m-form-select>
-            </div>
-            <div class="col-md-5">
-              <m-form-text
-                label="Nombre *"
-                type="number"
-                v-model="contenant.nombre"
-                :name="$Utils.randomstring('wi_nombre')"
-                @input="calculContenance(contenant)"
-              ></m-form-text>
-            </div>
-            <div class="col-md-1">
-              <div class="pointer" @click="deleteContenant(index)">
-                <icon width="22" height="22" color="red" name="times"></icon>
+          <div v-if="contenance_min">
+            <div
+              class="row mb-2 d-flex align-items-end"
+              v-for="(contenant, index) in contenants"
+              :key="index"
+            >
+              <div class="col-md-5">
+                <m-form-select
+                  label="Contenant *"
+                  :name="$Utils.randomstring('wi_contenant')"
+                  :items="$store.state.items_contenants"
+                  v-model="contenant.contenant"
+                  :rules="[$Validation.mandatory]"
+                ></m-form-select>
+              </div>
+              <div class="col-md-5">
+                <m-form-text
+                  label="Nombre *"
+                  type="number"
+                  v-model="contenant.nombre"
+                  :name="$Utils.randomstring('wi_nombre')"
+                  @input="calculContenance(contenant)"
+                ></m-form-text>
+              </div>
+              <div class="col-md-1">
+                <div class="pointer" @click="deleteContenant(index)">
+                  <icon width="22" height="22" color="red" name="times"></icon>
+                </div>
               </div>
             </div>
           </div>
-          <button @click="addContenant" class="btn btn-primary btn-sm">
+          <button @click="addContenant" :disabled="!contenance_min" class="btn btn-primary btn-sm">
             Ajouter
           </button>
-          <div class="fw-bold mt-3 ps-4">
+          <div class="fw-bold mt-3 ps-4" v-if="contenance_min">
             <div v-if="contenance_total > 0">
               {{ contenance_total / 100 }} cl soit
               {{ contenance_total / 10000 }} l soit
@@ -324,7 +328,7 @@ export default {
       millesime: "",
       contenants: [],
       contenance_total: 0,
-      contenance_min: 10000000,
+      contenance_min: 0,
       //file
       filesSelected: {
         file1: null,
@@ -480,7 +484,6 @@ export default {
         this.row_wi.wi_millesime = null;
         this.millesime = "";
         this.millesimes = [];
-        //insert script calcul contenance min selon denomination et couleur
         var script = document.createElement("script");
         script.innerHTML = this.$store.state.yearObj.yp_script_contenance_min;
         document.head.appendChild(script);
