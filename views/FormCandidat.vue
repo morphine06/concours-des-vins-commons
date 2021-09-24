@@ -338,6 +338,7 @@ export default {
   components: {},
   props: {
     pa_id: Number,
+    row_pa_tocopy: Number,
     keyload: Number,
     from: String,
     signup: Boolean,
@@ -370,7 +371,9 @@ export default {
     };
   },
   watch: {
-    keyload: function(v) {}
+    row_pa_tocopy: function(v) {
+      this.loadParticipation();
+    }
   },
   async mounted() {
     await this.loadParticipation();
@@ -383,6 +386,7 @@ export default {
       // console.log("this.route, from", this.route, this.from);
       if (!this.signup) {
         if (this.pa_id == -1) params = {};
+        if(this.row_pa_tocopy )params.lo_id = this.row_pa_tocopy
         let response = await this.$axios.get(
           this.$config.server_url +
             "/" +
@@ -394,6 +398,7 @@ export default {
         this.row_pa = response.data.data;
         this.jureValide = this.row_pa.pa_jure_valide;
         this.$emit("participationLoaded", this.row_pa);
+        
       }
     },
     devalidCandidat() {
