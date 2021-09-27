@@ -90,17 +90,6 @@
               ></m-form-text>
             </div>
           </div>
-          <div class="row mb-2">
-            <div class="col-md-6">
-              <m-form-text
-                v-if="from === 'backoffice' && $Utils.isAdmin()"
-                class="mb-2"
-                label="Code analytique"
-                :name="$Utils.randomstring('pa_analytique_code')"
-                v-model="row_pa.pa_analytique_code"
-              ></m-form-text>
-            </div>
-          </div>
         </div>
       </div>
     </div>
