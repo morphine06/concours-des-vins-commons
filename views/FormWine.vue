@@ -298,6 +298,7 @@ Modiifer également le projet XXX
       title="Erreur"
       :text="dialogErrTxt"
     ></m-message-dialog>
+    <div ref="myscript"></div>
   </div>
 </template>
 
@@ -348,6 +349,9 @@ export default {
     this.contenants = [];
     await this.loadDenominations();
     await this.loadWine();
+    var script = document.createElement("script");
+    script.innerHTML = this.$store.state.yearObj.yp_script_contenance_min;
+    this.$refs.myscript.appendChild(script);
   },
   methods: {
     async loadDenominations() {
@@ -484,9 +488,7 @@ export default {
         this.row_wi.wi_millesime = null;
         this.millesime = "";
         this.millesimes = [];
-        var script = document.createElement("script");
-        script.innerHTML = this.$store.state.yearObj.yp_script_contenance_min;
-        document.head.appendChild(script);
+        this.contenance_min = calculContenanceMin(this.denominations, this.row_wi);
       }
       if (what === "millesime" && !this.ignoreSelects) {
         this.row_wi.wi_millesime = this.millesime;
