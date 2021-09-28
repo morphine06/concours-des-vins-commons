@@ -213,7 +213,7 @@
             class="width200"
             :name="$Utils.randomstring('pa_firstparticipation')"
             v-model="row_pa.pa_firstparticipation"
-            :items="$store.state.items_boolean"
+            :items="$store.state.items_boolean_int"
           ></m-form-select>
         </div>
         <div class="d-md-flex align-items-center mb-2">
@@ -245,7 +245,7 @@
             class="width200"
             :name="$Utils.randomstring('pa_coursdegustation')"
             v-model="row_pa.pa_coursdegustation"
-            :items="$store.state.items_boolean"
+            :items="$store.state.items_boolean_int"
           ></m-form-select>
         </div>
         <div>
@@ -450,7 +450,7 @@ export default {
         const field = fieldRequired[ifi];
         if (!this.row_pa[field.field]) err.push(field);
       }
-      if (!this.row_pa.login.lo_login) err.push({ text: "login" });
+      if (!this.row_pa.login.lo_login) err.push({ text: "login (en bas de la fenêtre)" });
       if (
         !this.row_pa.login.lo_pass &&
         (this.signup || !this.row_pa.login || !this.row_pa.login.lo_id)
@@ -460,6 +460,15 @@ export default {
         for (let i = 0; i < tabErrPassword.length; i++) {
           err.push({ text: tabErrPassword[i] });
         }
+      }
+      // champs obligatoire du juré 
+      if (this.row_pa.pa_jure) {
+        if (!this.row_pa.pa_firstparticipation) err.push({ text: "juré : première participation" });
+        if (!this.row_pa.pa_typejure) err.push({ text: "juré : catégorie" });
+        if (this.row_pa.pa_typejure === 9 && !this.row_pa.pa_typejure_other) err.push({ text: "juré catégorie : précisez" });
+        if (!this.row_pa.pa_coursdegustation) err.push({ text: "juré : cours de dégustation" });
+        if (!this.row_pa.pa_liensexistant) err.push({ text: "juré : lien existant" });
+        if ((this.row_pa.pa_liensexistant === "1" || this.row_pa.pa_liensexistant === 1) && !this.row_pa.pa_liensexistant_more) err.push({ text: "juré lien existant : précisez" });
       }
       // console.log("this.row_pa", this.row_pa);
       if (!this.row_pa.pa_candidat && !this.row_pa.pa_jure) {
