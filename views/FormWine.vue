@@ -140,7 +140,7 @@ Modiifer également le projet XXX
     </div>
     <div class="frame">
       <h4>Fichiers</h4>
-      <div class="row mb-4 d-flex align-items-end">
+      <div class="row mb-4 d-flex align-items-center">
         <div class="col-md-3">
           <label class="label">Déclaration de revendication 1 *</label>
         </div>
@@ -157,6 +157,9 @@ Modiifer également le projet XXX
             :name="$Utils.randomstring('deleteFile1')"
             v-model="deleteFile1"
           ></m-form-checkbox>
+        </div>
+          <div class="col-md-1"  >
+          <img v-if="row_wi.wi_revendication" class="img-fluid" :src="getFileUrl(1)" alt="appercu fichier">
         </div>
         <div class="col-md-2 d-flex justify-content-center">
           <button
@@ -185,7 +188,7 @@ Modiifer également le projet XXX
       </div>
 
       <div
-        class="row mb-4 d-flex align-items-end"
+        class="row mb-4 d-flex align-items-center"
         v-for="(autreFile, index) in filesAutreRevendication"
         :key="index"
       >
@@ -217,6 +220,9 @@ Modiifer également le projet XXX
             v-model="autreFile.delete"
           ></m-form-checkbox>
         </div>
+         <div class="col-md-1">
+          <img class="img-fluid" :src="getFileUrl(index+10)" alt="appercu fichier">
+        </div>
         <div class="col-md-2 d-flex justify-content-center">
           <button
             v-if="autreFile.download"
@@ -228,7 +234,7 @@ Modiifer également le projet XXX
         </div>
       </div>
 
-      <div class="row mb-4 d-flex align-items-end">
+      <div class="row mb-4 d-flex align-items-center">
         <div class="col-md-3">
           <label class="label">Rapport d'analyse *</label>
         </div>
@@ -245,6 +251,9 @@ Modiifer également le projet XXX
             :name="$Utils.randomstring('deleteFile2')"
             v-model="deleteFile2"
           ></m-form-checkbox>
+        </div>
+         <div class="col-md-1" >
+          <img v-if="row_wi.wi_analyse" class="img-fluid" :src="getFileUrl(2)" alt="appercu fichier">
         </div>
         <div class="col-md-2 d-flex justify-content-center">
           <button
@@ -264,7 +273,7 @@ Modiifer également le projet XXX
         </div>
       </div>
 
-      <div class="row mb-4 d-flex align-items-end">
+      <div class="row mb-4 d-flex align-items-center">
         <div class="col-md-3">
           <label class="label">Fiche technique *</label>
         </div>
@@ -281,6 +290,9 @@ Modiifer également le projet XXX
             :name="$Utils.randomstring('deleteFile3')"
             v-model="deleteFile3"
           ></m-form-checkbox>
+        </div>
+        <div class="col-md-1" >
+          <img v-if="row_wi.wi_fichetech" class="img-fluid" :src="getFileUrl(3)" alt="appercu fichier">
         </div>
         <div class="col-md-2 d-flex justify-content-center">
           <button
@@ -339,7 +351,8 @@ export default {
       deleteFile1: false,
       deleteFile2: false,
       deleteFile3: false,
-      filesAutreRevendication: []
+      filesAutreRevendication: [],
+      forcereload:0
     };
   },
   watch: {
@@ -354,6 +367,13 @@ export default {
     this.$refs.myscript.appendChild(script);
   },
   methods: {
+    getFileUrl(num) {
+        let res =""
+        if(this.from === "backoffice")
+       res = `${this.$config.server_url}/backoffice/1.0/wines/${this.row_wi.wi_id}/files/${num}/${this.row_wi.wi_year}?icon=true&forcereload=${this.forcereload}&token=${this.$store.state.accesstoken}&origin=${this.$config.backoffice_url}`;
+       if(this.from === "candidats") res = `${this.$config.server_url}/candidats/1.0/wines/${this.row_wi.wi_id}/files/${num}/${this.row_wi.wi_year}?icon=true&forcereload=${this.forcereload}&token=${this.$store.state.accesstoken}&origin=${this.$config.candidats_url}`;
+      return res;
+    },
     async loadDenominations() {
       let route = this.from === "candidats" ? "candidats" : "backoffice";
       let params = {
@@ -789,7 +809,7 @@ export default {
           await this.deleteFile(j + 10);
         }
       }
-
+      this.forcereload++;
       this.$emit("formWineAction", { action: "saved" });
     },
     deleteConfirmWin() {
