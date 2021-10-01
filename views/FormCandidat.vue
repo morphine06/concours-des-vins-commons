@@ -375,7 +375,7 @@ export default {
       // console.log("this.route, from", this.route, this.from);
       if (!this.signup) {
         if (this.pa_id == -1) params = {};
-        if(this.row_pa_tocopy )params.lo_id = this.row_pa_tocopy
+        if (this.row_pa_tocopy) params.lo_id = this.row_pa_tocopy;
         let response = await this.$axios.get(
           this.$config.server_url +
             "/" +
@@ -387,7 +387,6 @@ export default {
         this.row_pa = response.data.data;
         this.jureValide = this.row_pa.pa_jure_valide;
         this.$emit("participationLoaded", this.row_pa);
-        
       }
     },
     devalidCandidat() {
@@ -450,7 +449,8 @@ export default {
         const field = fieldRequired[ifi];
         if (!this.row_pa[field.field]) err.push(field);
       }
-      if (!this.row_pa.login.lo_login) err.push({ text: "login (en bas de la fenêtre)" });
+      if (!this.row_pa.login.lo_login)
+        err.push({ text: "login (en bas de la fenêtre)" });
       if (
         !this.row_pa.login.lo_pass &&
         (this.signup || !this.row_pa.login || !this.row_pa.login.lo_id)
@@ -461,14 +461,23 @@ export default {
           err.push({ text: tabErrPassword[i] });
         }
       }
-      // champs obligatoire du juré 
+      // champs obligatoire du juré
       if (this.row_pa.pa_jure) {
-        if (!this.row_pa.pa_firstparticipation) err.push({ text: "juré : première participation" });
+        if (!this.row_pa.pa_firstparticipation)
+          err.push({ text: "juré : première participation" });
         if (!this.row_pa.pa_typejure) err.push({ text: "juré : catégorie" });
-        if (this.row_pa.pa_typejure === 9 && !this.row_pa.pa_typejure_other) err.push({ text: "juré catégorie : précisez" });
-        if (!this.row_pa.pa_coursdegustation) err.push({ text: "juré : cours de dégustation" });
-        if (!this.row_pa.pa_liensexistant) err.push({ text: "juré : lien existant" });
-        if ((this.row_pa.pa_liensexistant === "1" || this.row_pa.pa_liensexistant === 1) && !this.row_pa.pa_liensexistant_more) err.push({ text: "juré lien existant : précisez" });
+        if (this.row_pa.pa_typejure === 9 && !this.row_pa.pa_typejure_other)
+          err.push({ text: "juré catégorie : précisez" });
+        if (!this.row_pa.pa_coursdegustation)
+          err.push({ text: "juré : cours de dégustation" });
+        if (!this.row_pa.pa_liensexistant)
+          err.push({ text: "juré : lien existant" });
+        if (
+          (this.row_pa.pa_liensexistant === "1" ||
+            this.row_pa.pa_liensexistant === 1) &&
+          !this.row_pa.pa_liensexistant_more
+        )
+          err.push({ text: "juré lien existant : précisez" });
       }
       // console.log("this.row_pa", this.row_pa);
       if (!this.row_pa.pa_candidat && !this.row_pa.pa_jure) {

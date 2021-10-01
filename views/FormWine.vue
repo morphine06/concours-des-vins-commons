@@ -38,7 +38,7 @@ Modiifer également le projet XXX
           <m-form-select
             label="Couleur *"
             class="mb-2"
-             id="selectCouleur"
+            id="selectCouleur"
             :name="$Utils.randomstring('wi_couleur')"
             :items="couleurs"
             v-model="couleur"
@@ -116,7 +116,11 @@ Modiifer également le projet XXX
               </div>
             </div>
           </div>
-          <button @click="addContenant" :disabled="!contenance_min" class="btn btn-primary btn-sm">
+          <button
+            @click="addContenant"
+            :disabled="!contenance_min"
+            class="btn btn-primary btn-sm"
+          >
             Ajouter
           </button>
           <div class="fw-bold mt-3 ps-4" v-if="contenance_min">
@@ -158,8 +162,13 @@ Modiifer également le projet XXX
             v-model="deleteFile1"
           ></m-form-checkbox>
         </div>
-          <div class="col-md-1"  >
-          <img v-if="row_wi.wi_revendication" class="img-fluid" :src="getFileUrl(1)" alt="appercu fichier">
+        <div class="col-md-1">
+          <img
+            v-if="row_wi.wi_revendication"
+            class="img-fluid"
+            :src="getFileUrl(1)"
+            alt="appercu fichier"
+          />
         </div>
         <div class="col-md-2 d-flex justify-content-center">
           <button
@@ -220,8 +229,12 @@ Modiifer également le projet XXX
             v-model="autreFile.delete"
           ></m-form-checkbox>
         </div>
-         <div class="col-md-1">
-          <img class="img-fluid" :src="getFileUrl(index+10)" alt="appercu fichier">
+        <div class="col-md-1">
+          <img
+            class="img-fluid"
+            :src="getFileUrl(index + 10)"
+            alt="appercu fichier"
+          />
         </div>
         <div class="col-md-2 d-flex justify-content-center">
           <button
@@ -252,8 +265,13 @@ Modiifer également le projet XXX
             v-model="deleteFile2"
           ></m-form-checkbox>
         </div>
-         <div class="col-md-1" >
-          <img v-if="row_wi.wi_analyse" class="img-fluid" :src="getFileUrl(2)" alt="appercu fichier">
+        <div class="col-md-1">
+          <img
+            v-if="row_wi.wi_analyse"
+            class="img-fluid"
+            :src="getFileUrl(2)"
+            alt="appercu fichier"
+          />
         </div>
         <div class="col-md-2 d-flex justify-content-center">
           <button
@@ -291,8 +309,13 @@ Modiifer également le projet XXX
             v-model="deleteFile3"
           ></m-form-checkbox>
         </div>
-        <div class="col-md-1" >
-          <img v-if="row_wi.wi_fichetech" class="img-fluid" :src="getFileUrl(3)" alt="appercu fichier">
+        <div class="col-md-1">
+          <img
+            v-if="row_wi.wi_fichetech"
+            class="img-fluid"
+            :src="getFileUrl(3)"
+            alt="appercu fichier"
+          />
         </div>
         <div class="col-md-2 d-flex justify-content-center">
           <button
@@ -352,7 +375,7 @@ export default {
       deleteFile2: false,
       deleteFile3: false,
       filesAutreRevendication: [],
-      forcereload:0
+      forcereload: 0
     };
   },
   watch: {
@@ -368,10 +391,11 @@ export default {
   },
   methods: {
     getFileUrl(num) {
-        let res =""
-        if(this.from === "backoffice")
-       res = `${this.$config.server_url}/backoffice/1.0/wines/${this.row_wi.wi_id}/files/${num}/${this.row_wi.wi_year}?icon=true&forcereload=${this.forcereload}&token=${this.$store.state.accesstoken}&origin=${this.$config.backoffice_url}`;
-       if(this.from === "candidats") res = `${this.$config.server_url}/candidats/1.0/wines/${this.row_wi.wi_id}/files/${num}/${this.row_wi.wi_year}?icon=true&forcereload=${this.forcereload}&token=${this.$store.state.accesstoken}&origin=${this.$config.candidats_url}`;
+      let res = "";
+      if (this.from === "backoffice")
+        res = `${this.$config.server_url}/backoffice/1.0/wines/${this.row_wi.wi_id}/files/${num}/${this.row_wi.wi_year}?icon=true&forcereload=${this.forcereload}&token=${this.$store.state.accesstoken}&origin=${this.$config.backoffice_url}`;
+      if (this.from === "candidats")
+        res = `${this.$config.server_url}/candidats/1.0/wines/${this.row_wi.wi_id}/files/${num}/${this.row_wi.wi_year}?icon=true&forcereload=${this.forcereload}&token=${this.$store.state.accesstoken}&origin=${this.$config.candidats_url}`;
       return res;
     },
     async loadDenominations() {
@@ -508,7 +532,11 @@ export default {
         this.row_wi.wi_millesime = null;
         this.millesime = "";
         this.millesimes = [];
-        this.contenance_min = calculContenanceMin(this.denominations, this.row_wi);
+        if (window.calculContenanceMin)
+          this.contenance_min = window.calculContenanceMin(
+            this.denominations,
+            this.row_wi
+          );
       }
       if (what === "millesime" && !this.ignoreSelects) {
         this.row_wi.wi_millesime = this.millesime;
