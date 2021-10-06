@@ -383,6 +383,21 @@ export default {
   },
   async mounted() {
     this.contenants = [];
+    let me = this;
+    async function waitPrefLoaded() {
+      return new Promise((accept, reject) => {
+        function goHear() {
+          // console.log("goHear", me.$store.state.yearObj);
+          window.setTimeout(() => {
+            if (me.$store.state.yearObj.yp_script_contenance_min)
+              return accept();
+            goHear();
+          }, 10);
+        }
+        goHear();
+      });
+    }
+    await waitPrefLoaded();
     var script = document.createElement("script");
     script.innerHTML = this.$store.state.yearObj.yp_script_contenance_min;
     this.$refs.myscript.appendChild(script);
@@ -532,11 +547,6 @@ export default {
         this.row_wi.wi_millesime = null;
         this.millesime = "";
         this.millesimes = [];
-        if (window.calculContenanceMin)
-          this.contenance_min = window.calculContenanceMin(
-            this.denominations,
-            this.row_wi
-          );
       }
       if (what === "millesime" && !this.ignoreSelects) {
         this.row_wi.wi_millesime = this.millesime;
@@ -551,6 +561,11 @@ export default {
           }
         }
       }
+      if (window.calculContenanceMin)
+        this.contenance_min = window.calculContenanceMin(
+          this.denominations,
+          this.row_wi
+        );
 
       /*       if (what === "denomination") {
         console.log("je passe denomination");
