@@ -383,11 +383,11 @@ export default {
   },
   async mounted() {
     this.contenants = [];
-    await this.loadDenominations();
-    await this.loadWine();
     var script = document.createElement("script");
     script.innerHTML = this.$store.state.yearObj.yp_script_contenance_min;
     this.$refs.myscript.appendChild(script);
+    await this.loadDenominations();
+    await this.loadWine();
   },
   methods: {
     getFileUrl(num) {
