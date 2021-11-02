@@ -366,7 +366,7 @@ export default {
   },
   async mounted() {
     await this.loadParticipation();
-    this.row_yp2 = this.row_yp ? this.row_yp : this.$store.state.yearObj;
+    this.row_yp2 = this.row_yp ? this.row_yp : this.row_pa.yearpreferences;
   },
   methods: {
     async loadParticipation() {
