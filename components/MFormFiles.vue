@@ -6,7 +6,7 @@
       ref="theinputfile"
       :label="label"
       :multiple="multiple"
-      :accept="type === 'images' ? 'image/*' : 'file/*'"
+      :accept="type === 'images' ? 'image/*' : '*/*'"
       @change="handleChangeFile($event)"
     />
     <div wrap align-center v-if="type === 'images'">
@@ -16,9 +16,7 @@
         style="padding: 2px"
       >
         <v-img
-          :src="
-            `${$config.server_url}/backoffice/1.0/images/${row_fi.fi_id}/75/75?token=${$store.state.accesstoken}`
-          "
+          :src="`${$config.server_url}/backoffice/1.0/images/${row_fi.fi_id}/75/75?token=${$store.state.accesstoken}`"
           height="75px"
           width="75px"
         ></v-img>
@@ -48,11 +46,11 @@ export default {
     multiple: { type: Boolean, default: false },
     label: String,
     type: String,
-    offer: Object
+    offer: Object,
   },
   data() {
     return {
-      files: []
+      files: [],
     };
   },
   mounted() {},
@@ -65,8 +63,8 @@ export default {
     reset() {
       this.files = [];
       this.$refs.theinputfile.value = "";
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped lang="scss"></style>
