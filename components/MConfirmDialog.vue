@@ -18,7 +18,7 @@
           <p v-html="text"></p>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" @click="cancelWin">Annuler</button>
+          <button class="btn btn-secondary" @click="cancelWin">{{btnCancelTxt ? btnCancelTxt : "Annuler"}}</button>
           <button class="btn btn-primary" @click="deleteWin">
             {{ btnOkTxt ? btnOkTxt : "Ok" }}
           </button>
@@ -45,6 +45,7 @@ export default {
     },
     threeBtn: Boolean,
     btnOkTxt: String,
+    btnCancelTxt:String,
     btn3Txt: String
   },
   data() {
