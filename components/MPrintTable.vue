@@ -30,7 +30,7 @@ export default {
       users_limit: 50,
       users_total: 0,
       users: [],
-      cols: []
+      cols: [],
     };
   },
   async mounted() {
@@ -42,7 +42,7 @@ export default {
       // console.log("this.usersType", this.usersType);
       let query = {
         table: this.$route.params.table,
-        type: "pdf"
+        type: "pdf",
       };
       let response = await this.$axios.get(
         this.$config.server_url + "/backoffice/1.0/exporttable",
@@ -58,8 +58,8 @@ export default {
         window.print();
         window.close();
       }, 500);
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped></style>

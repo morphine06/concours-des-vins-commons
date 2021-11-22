@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: "mformcombobox",
+  name: "m-form-combobox",
   props: [
     "value",
     "label",
@@ -35,7 +35,7 @@ export default {
     "itemTextParams",
     "itemValue",
     "disabled",
-    "appendToBody"
+    "appendToBody",
   ],
   data() {
     let val = "",
@@ -52,7 +52,7 @@ export default {
       val,
       items,
       isLoading: false,
-      search: null
+      search: null,
     };
   },
   watch: {
@@ -62,7 +62,7 @@ export default {
       else if (val == "") this.$emit("input", null);
     },
 
-    value: function(val) {
+    value: function (val) {
       if (!val) {
         this.items = [];
         this.row = null;
@@ -73,7 +73,7 @@ export default {
       this.items = [val];
       this.row = val;
       this.val = val.value;
-    }
+    },
   },
   components: {},
   methods: {
@@ -89,7 +89,7 @@ export default {
       this.search_go("");
       this.$emit("focus", evt);
     },
-    onchange(evt){
+    onchange(evt) {
       this.$emit("change", evt);
     },
     async search_go(val) {
@@ -102,10 +102,10 @@ export default {
       Object.assign(params, storeParams);
       // console.log("params", params);
       let response = await this.$axios.get(this.storeUrl, {
-        params
+        params,
       });
       this.isLoading = false;
-      response.data.data.map(v => {
+      response.data.data.map((v) => {
         this._setTextAndValue(v);
       });
       this.items = response.data.data;
@@ -113,7 +113,7 @@ export default {
 
     acceptAll(item, queryText, itemText) {
       return true;
-    }
-  }
+    },
+  },
 };
 </script>

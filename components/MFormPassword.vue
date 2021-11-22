@@ -91,7 +91,7 @@
 
 <script>
 export default {
-  name: "mformpassword",
+  name: "m-form-password",
   components: {},
   props: {
     /* rules définit les règle à respecter pour le mot de passe, objet attendu :
@@ -110,7 +110,7 @@ export default {
     // si on affiche les regles ou non
     showRules: Boolean,
     // si le mot de passe  est requi
-    required: Boolean
+    required: Boolean,
   },
   data() {
     return {
@@ -125,7 +125,7 @@ export default {
       same_password: false,
       showPassword: false,
       showPassword2: false,
-      alert_password: ""
+      alert_password: "",
     };
   },
   computed: {},
@@ -188,8 +188,8 @@ export default {
         err_password,
         this.password1
       );
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">

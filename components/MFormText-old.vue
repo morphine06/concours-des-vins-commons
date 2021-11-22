@@ -16,7 +16,7 @@
         :name="name"
         :class="{
           'form-control': true,
-          'is-invalid': errormsg2
+          'is-invalid': errormsg2,
         }"
         :maxlength="maxlength"
         :id="id2"
@@ -41,7 +41,7 @@
         :class="{
           textarea: true,
           'form-control': true,
-          'is-invalid': errormsg2
+          'is-invalid': errormsg2,
         }"
         :id="id2"
         :disabled="disabled"
@@ -82,76 +82,76 @@
 
 <script>
 export default {
-  name: "mformtext",
+  name: "m-form-text",
   props: {
     value: [String, Number],
     id: {
       default: "",
-      type: String
+      type: String,
     },
     type: {
       default: "text",
-      type: String
+      type: String,
     },
     name: {
       default: "",
-      type: String
+      type: String,
     },
     rows: {
       default: 4,
-      type: Number
+      type: Number,
     },
     maxlength: {
-      type: String
+      type: String,
     },
     autocomplete: {
       default: "new-password",
-      type: String
+      type: String,
     },
     readonly: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     disabled: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     autoSelectOnFocus: {
       default: true,
-      type: Boolean
+      type: Boolean,
     },
     label: {
       default: "",
-      type: String
+      type: String,
     },
     tooltip: {
       default: "",
-      type: String
+      type: String,
     },
     tooltipPosition: {
       default: "bottom",
-      type: String
+      type: String,
     },
     ariaHaspopup: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     ariaExpanded: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     rules: {
-      default: function() {
+      default: function () {
         return [];
       },
-      type: Array
+      type: Array,
     },
     placeholder: String,
     prependIcon: String,
     appendIcon: String,
     prependText: String,
     appendText: String,
-    subText: String
+    subText: String,
   },
   mounted() {
     if (this.id2) this.id2 = this.id;
@@ -170,14 +170,14 @@ export default {
       id2: "",
       rawvalue: "",
       errormsg2: "",
-      focus: false
+      focus: false,
     };
   },
   watch: {
-    value: function(val) {
+    value: function (val) {
       this.setRawValue(val);
       // if (val) this.focus = true;
-    }
+    },
   },
   computed: {
     labelClass() {
@@ -188,7 +188,7 @@ export default {
       }
       if (this.type === "textarea") classTxt += " textarea_label";
       return classTxt;
-    }
+    },
   },
   components: {},
   methods: {
@@ -286,8 +286,8 @@ export default {
     hideDropdown() {
       // console.log("hideDropdown");
       this.$emit("ShowDropdownMenu", false);
-    }
-  }
+    },
+  },
 };
 </script>
 

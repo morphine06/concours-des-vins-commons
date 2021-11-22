@@ -36,20 +36,20 @@
 //import moment from "moment";
 
 export default {
-  name: "mhour",
+  name: "m-hour",
   props: {
     value: {
-      default: function() {
+      default: function () {
         return "00 : 00";
       },
-      type: String
+      type: String,
     },
     intervalMinute: {
-      default: function() {
+      default: function () {
         return 5;
       },
-      type: Number
-    }
+      type: Number,
+    },
   },
   data() {
     let tabMinutes = [];
@@ -83,9 +83,9 @@ export default {
         "20",
         "21",
         "22",
-        "23"
+        "23",
       ],
-      tabMinutes: tabMinutes
+      tabMinutes: tabMinutes,
     };
   },
   watch: {},
@@ -108,10 +108,10 @@ export default {
     setTime() {
       this.$emit("setTime", {
         hour: this.hourSelected,
-        minutes: this.minuteSelected
+        minutes: this.minuteSelected,
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

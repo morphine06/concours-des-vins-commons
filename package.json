@@ -20,8 +20,10 @@
     "dayjs": "^1.10.6"
   },
   "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.5.15",
     "@vue/eslint-config-prettier": "^6.0.0",
-    "babel-eslint": "^10.1.0",
+    "@babel/core": "^7.16.0",
+    "@babel/eslint-parser": "^7.16.3",
     "eslint": "^8.2.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.0.3",
@@ -64,7 +66,7 @@
       "valid-typeof": "warn"
     },
     "parserOptions": {
-      "parser": "babel-eslint"
+      "parser": "@babel/eslint-parser"
     }
   }
 }

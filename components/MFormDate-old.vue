@@ -4,65 +4,65 @@
 
 <script>
 export default {
-  name: "mformdate",
+  name: "m-form-date",
   props: {
     options: Object,
     value: [String, Number],
     id: {
       default: "",
-      type: String
+      type: String,
     },
     type: {
       default: "text",
-      type: String
+      type: String,
     },
     name: {
       default: "",
-      type: String
+      type: String,
     },
     rows: {
       default: 4,
-      type: Number
+      type: Number,
     },
     autocomplete: {
       default: "new-password",
-      type: String
+      type: String,
     },
     readonly: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     disabled: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     autoSelectOnFocus: {
       default: true,
-      type: Boolean
+      type: Boolean,
     },
     label: {
       default: "",
-      type: String
+      type: String,
     },
     tooltip: {
       default: "",
-      type: String
+      type: String,
     },
     tooltipPosition: {
       default: "bottom",
-      type: String
+      type: String,
     },
     rules: {
-      default: function() {
+      default: function () {
         return [];
       },
-      type: Array
+      type: Array,
     },
     prependIcon: String,
     appendIcon: String,
     prependText: String,
     appendText: String,
-    placeholder: String
+    placeholder: String,
   },
   mounted() {
     // if (!this.id2) this.id2 = this.$Utils.randomstring();
@@ -79,16 +79,16 @@ export default {
       errormsg2: "",
       rawdate: "",
       date,
-      menu: false
+      menu: false,
     };
   },
   watch: {
-    date: function(val) {
+    date: function (val) {
       this.$emit("input", val);
     },
-    value: function(val) {
+    value: function (val) {
       this.setValue(val);
-    }
+    },
   },
   components: {},
   methods: {
@@ -123,7 +123,7 @@ export default {
     },
     onfocus(evt) {
       this.$emit("focus", evt);
-    }
-  }
+    },
+  },
 };
 </script>
