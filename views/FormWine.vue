@@ -294,7 +294,7 @@ Modiifer également le projet XXX
 
       <div class="row mb-4 d-flex align-items-center">
         <div class="col-md-3">
-          <label class="label">Fiche technique *</label>
+          <label class="label">Fiche technique</label>
         </div>
         <div class="col-md-4">
           <m-form-file
