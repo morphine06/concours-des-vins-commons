@@ -51,9 +51,21 @@
       <div class="col-md-5">
         <div class="frame bg-gray rounded-0">
           <div class="d-flex align-items-center">
-            <div>Total :</div>
+            <div>HT :</div>
+            <h5 class="color-red ms-2">
+              {{ row_or.or_price_ht | formatPriceDivisePar100 }} 
+            </h5>
+          </div>
+          <div class="d-flex align-items-center">
+            <div>TVA :</div>
+            <h5 class="color-red ms-2">
+              {{ row_or.or_price_tva | formatPriceDivisePar100 }} 
+            </h5>
+          </div>
+          <div class="d-flex align-items-center">
+            <div>Total TTC :</div>
             <h2 class="color-red ms-2">
-              {{ row_or.or_price_ht | formatPriceDivisePar100 }} HT
+              {{ row_or.or_price_ttc | formatPriceDivisePar100 }} TTC
             </h2>
           </div>
           <div class="color-red">
