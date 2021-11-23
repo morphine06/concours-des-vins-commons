@@ -328,6 +328,46 @@ Modiifer également le projet XXX
           </button>
         </div>
       </div>
+
+      <div class="row mb-4 d-flex align-items-center">
+        <div class="col-md-3">
+          <label class="label"
+            >Photo du vin (sera affiché sur le site web si le vin est
+            médaillé)</label
+          >
+        </div>
+        <div class="col-md-4">
+          <m-form-file
+            ref="inputFile4"
+            id="file_4"
+            @inputfile="fileJusteSelected4"
+          />
+        </div>
+        <div class="col-md-1">
+          <m-form-checkbox
+            label="Effacer"
+            :name="$Utils.randomstring('deleteFile4')"
+            v-model="deleteFile4"
+          ></m-form-checkbox>
+        </div>
+        <div class="col-md-1">
+          <img
+            v-if="row_wi.wi_photo"
+            class="img-fluid"
+            :src="getFileUrl(4)"
+            alt="appercu fichier"
+          />
+        </div>
+        <div class="col-md-2 d-flex justify-content-center">
+          <button
+            v-if="row_wi.wi_photo"
+            class="btn btn-primary btn-sm"
+            @click="downloadFile(4)"
+          >
+            Télécharger
+          </button>
+        </div>
+      </div>
     </div>
     <m-message-dialog
       v-model="dialogErr"
@@ -375,6 +415,7 @@ export default {
       deleteFile1: false,
       deleteFile2: false,
       deleteFile3: false,
+      deleteFile4: false,
       filesAutreRevendication: [],
       forcereload: 0,
     };
@@ -668,6 +709,9 @@ export default {
     fileJusteSelected3(files) {
       this.filesSelected.file3 = files[0];
     },
+    fileJusteSelected4(files) {
+      this.filesSelected.file4 = files[0];
+    },
     fileJusteSelected10($event) {
       let index = parseInt($event.target.id.split("-")[1]);
       this.filesAutreRevendication[index].file = $event.target.files[0];
@@ -836,7 +880,7 @@ export default {
       }
       this.row_wi = response.data.data;
       // les fichiers
-      for (let i = 1; i <= 3; i++) {
+      for (let i = 1; i <= 4; i++) {
         if (this.filesSelected["file" + i] && !this["deleteFile" + i]) {
           await this.saveFiles(this.filesSelected["file" + i], i);
         }
