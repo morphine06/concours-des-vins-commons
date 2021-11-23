@@ -18,16 +18,16 @@
 
 <script>
 export default {
-  name: "malertdialog",
+  name: "m-alert-dialog",
   props: {
     value: Boolean,
     text: String,
     container: String,
     width: {
       type: String,
-      default: "1000px"
+      default: "1000px",
     },
-    alertColor: String
+    alertColor: String,
   },
 
   data() {
@@ -39,8 +39,8 @@ export default {
   methods: {
     close() {
       this.$emit("close");
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">

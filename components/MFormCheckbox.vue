@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: "mformcheckbox",
+  name: "m-form-checkbox",
   props: {
     value: [String, Number, Boolean],
     label: String,
@@ -82,10 +82,10 @@ export default {
       // evt.stopPropagation();
       // this.$emit("click", evt);
     },
-    onchange(evt){
+    onchange(evt) {
       let v = evt.target.checked;
-      this.$emit("change",v, evt);
-    }
+      this.$emit("change", v, evt);
+    },
   },
 };
 </script>

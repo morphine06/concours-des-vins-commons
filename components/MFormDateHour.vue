@@ -76,45 +76,45 @@
 import MFormBase from "./MFormBase";
 
 export default {
-  name: "mformdatehour",
+  name: "m-form-date-hour",
   extends: MFormBase,
   props: {
     id: {
       default: "",
-      type: String
+      type: String,
     },
     name: {
       default: "",
-      type: String
+      type: String,
     },
     value: [String, Object],
     prefix: String,
     autocomplete: {
       default: "new-password",
-      type: String
+      type: String,
     },
     readonly: {
       default: true,
-      type: Boolean
+      type: Boolean,
     },
     hidedate: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     usemoment: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     disabled: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     rules: {
-      default: function() {
+      default: function () {
         return [];
       },
-      type: Array
-    }
+      type: Array,
+    },
   },
   mounted() {
     if (!this.id2) this.id2 = this.$Utils.randomstring();
@@ -131,27 +131,27 @@ export default {
       date,
       time,
       menudate: false,
-      menutime: false
+      menutime: false,
     };
   },
   watch: {
-    date: function(val) {
+    date: function (val) {
       let d = this.date + " " + this.time;
       // console.warn("d1", d);
       console.warn("d", d);
       if (this.usemoment) d = this.$moment(d);
       this.$emit("input", d);
     },
-    time: function(val) {
+    time: function (val) {
       let d = this.date + " " + this.time;
       if (this.usemoment) d = this.$moment(d);
       // console.log("d2", d);
       this.$emit("input", d);
     },
-    value: function(val) {
+    value: function (val) {
       // console.log("val", val, this.name);
       this.setValue(val);
-    }
+    },
   },
   components: {},
   methods: {
@@ -198,7 +198,7 @@ export default {
     },
     onfocus2(evt) {
       this.$emit("focus", evt);
-    }
-  }
+    },
+  },
 };
 </script>

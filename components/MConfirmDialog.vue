@@ -18,7 +18,9 @@
           <p v-html="text"></p>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" @click="cancelWin">{{btnCancelTxt ? btnCancelTxt : "Annuler"}}</button>
+          <button class="btn btn-secondary" @click="cancelWin">
+            {{ btnCancelTxt ? btnCancelTxt : "Annuler" }}
+          </button>
           <button class="btn btn-primary" @click="deleteWin">
             {{ btnOkTxt ? btnOkTxt : "Ok" }}
           </button>
@@ -33,7 +35,7 @@
 
 <script>
 export default {
-  name: "mconfirmdialog",
+  name: "m-confirm-dialog",
   props: {
     value: Boolean,
     title: String,
@@ -41,17 +43,17 @@ export default {
     sousText: String,
     width: {
       type: Number,
-      default: 500
+      default: 500,
     },
     threeBtn: Boolean,
     btnOkTxt: String,
-    btnCancelTxt:String,
-    btn3Txt: String
+    btnCancelTxt: String,
+    btn3Txt: String,
   },
   data() {
     return {
       dialog: false,
-      windowWidth: window.innerWidth
+      windowWidth: window.innerWidth,
     };
   },
   mounted() {
@@ -63,9 +65,9 @@ export default {
     window.removeEventListener("resize", this.onResize);
   },
   watch: {
-    value: function(val) {
+    value: function (val) {
       this.dialog = val;
-    }
+    },
   },
   components: {},
   methods: {
@@ -88,8 +90,8 @@ export default {
     },
     btn3Action() {
       this.$emit("btn3Action");
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">

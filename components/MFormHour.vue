@@ -46,51 +46,51 @@ import moment from "moment";
 // import { createPopper } from "@popperjs/core";
 
 export default {
-  name: "mformhour",
+  name: "m-form-hour",
   // extends: MFormBase,
   props: {
     value: [String, Object],
     id: {
       default: "",
-      type: String
+      type: String,
     },
     name: {
       default: "",
-      type: String
+      type: String,
     },
     autocomplete: {
       default: "new-password",
-      type: String
+      type: String,
     },
     readonly: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     disabled: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     autoSelectOnFocus: {
       default: true,
-      type: Boolean
+      type: Boolean,
     },
     label: {
       default: "",
-      type: String
+      type: String,
     },
     tooltip: {
       default: "",
-      type: String
+      type: String,
     },
     tooltipPosition: {
       default: "bottom",
-      type: String
+      type: String,
     },
     rules: {
-      default: function() {
+      default: function () {
         return [];
       },
-      type: Array
+      type: Array,
     },
     placeholder: String,
     prependIcon: String,
@@ -100,12 +100,12 @@ export default {
 
     formatInput: {
       default: "YYYY-MM-DD",
-      type: String
+      type: String,
     },
     formatValue: {
       default: "HH:mm",
-      type: String
-    }
+      type: String,
+    },
   },
   mounted() {
     if (this.value) {
@@ -115,7 +115,7 @@ export default {
     if (!this.id2) this.id2 = this.$Utils.randomstring();
     this.$nextTick(() => {
       new this.$Popper(this.$refs.myinput.$el, this.$refs.mydropdown, {
-        placement: "bottom-start"
+        placement: "bottom-start",
       });
     });
   },
@@ -135,18 +135,18 @@ export default {
       hourTemp: "00",
       minuteTemp: "00",
       badNumber: false,
-      minutesSelected: false
+      minutesSelected: false,
     };
   },
   watch: {
-    rawvalue: function(val) {},
-    value: function(val) {
+    rawvalue: function (val) {},
+    value: function (val) {
       this.setEnterValue(val);
       /* this.value2 = this.value
         ? moment(this.value, this.formatValue)
         : moment();
       this.rawvalue = this.value2.format(this.formatInput); */
-    }
+    },
   },
   components: {},
   methods: {
@@ -228,8 +228,8 @@ export default {
     onclick(evt) {},
     onclickDropdown(evt) {
       evt.stopPropagation();
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">

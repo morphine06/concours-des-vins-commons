@@ -40,7 +40,7 @@
 
 <script>
 export default {
-  name: "mselect",
+  name: "m-form-files",
   components: {},
   props: {
     multiple: { type: Boolean, default: false },

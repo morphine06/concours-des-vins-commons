@@ -51,51 +51,51 @@ import moment from "moment";
 // import { createPopper } from "@popperjs/core";
 
 export default {
-  name: "mformdate",
+  name: "m-form-date",
   // extends: MFormBase,
   props: {
     value: [String, Object, Number],
     id: {
       default: "",
-      type: String
+      type: String,
     },
     name: {
       default: "",
-      type: String
+      type: String,
     },
     autocomplete: {
       default: "new-password",
-      type: String
+      type: String,
     },
     readonly: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     disabled: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     autoSelectOnFocus: {
       default: true,
-      type: Boolean
+      type: Boolean,
     },
     label: {
       default: "",
-      type: String
+      type: String,
     },
     tooltip: {
       default: "",
-      type: String
+      type: String,
     },
     tooltipPosition: {
       default: "bottom",
-      type: String
+      type: String,
     },
     rules: {
-      default: function() {
+      default: function () {
         return [];
       },
-      type: Array
+      type: Array,
     },
     placeholder: String,
     prependIcon: String,
@@ -106,18 +106,18 @@ export default {
 
     formatInput: {
       default: "DD/MM/YYYY",
-      type: String
+      type: String,
     },
     formatValue: {
       default: "YYYY-MM-DD",
-      type: String
+      type: String,
     },
     year: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     /// props projet
-    classInput: String
+    classInput: String,
   },
   mounted() {
     if (!this.id2) this.id2 = this.$Utils.randomstring();
@@ -133,7 +133,7 @@ export default {
       //   this.$refs.mydropdown
       // );
       new this.$Popper(this.$refs.myinput.$el, this.$refs.mydropdown, {
-        placement: "bottom-start"
+        placement: "bottom-start",
       });
     });
   },
@@ -150,7 +150,7 @@ export default {
       rawvalue: moment().format(),
       errormsg2: "",
       showDropdown: false,
-      dateColor: ""
+      dateColor: "",
     };
   },
   watch: {
@@ -158,7 +158,7 @@ export default {
     //   this.$emit("search", val);
     //   if (val == "") this.$emit("input", "");
     // },
-    value: function(val) {
+    value: function (val) {
       // console.log("val", val);
       // if (val !== "Invalid date" && val !== "0000-00-00")
       this.setEnterValue(val);
@@ -166,7 +166,7 @@ export default {
       //   ? moment(this.value, this.formatValue)
       //   : moment();
       // this.rawvalue = this.valueInterne.format(this.formatInput);
-    }
+    },
   },
   components: {},
   methods: {
@@ -282,8 +282,8 @@ export default {
       }
       this.informInvalid(oks.join(","));
       return false;
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">

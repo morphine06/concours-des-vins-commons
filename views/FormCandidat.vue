@@ -331,7 +331,7 @@ export default {
     keyload: Number,
     from: String,
     signup: Boolean,
-    row_yp: Object
+    row_yp: Object,
   },
   data() {
     return {
@@ -342,7 +342,7 @@ export default {
         pa_address1_fac: "",
         pa_address2_fac: "",
         pa_city_fac: "",
-        pa_zip_fac: ""
+        pa_zip_fac: "",
       },
       jureValide: false,
       confirmJureValide: false,
@@ -352,17 +352,17 @@ export default {
         { value: 2, text: "Vignoble 2" },
         { value: 3, text: "Vignoble 3" },
         { value: 4, text: "Vignoble 4" },
-        { value: 5, text: "Vignoble 5" }
+        { value: 5, text: "Vignoble 5" },
       ],
       row_yp2: {},
       confirmDevalidDialog: false,
-      devalidWinesCandidat: false
+      devalidWinesCandidat: false,
     };
   },
   watch: {
-    row_pa_tocopy: function(v) {
+    row_pa_tocopy: function (v) {
       this.loadParticipation();
-    }
+    },
   },
   async mounted() {
     await this.loadParticipation();
@@ -439,11 +439,11 @@ export default {
       let fieldRequired = [
         {
           field: "pa_society",
-          text: "nom de l'entreprise"
+          text: "nom de l'entreprise",
         },
         { field: "pa_civility", text: "civilité" },
         { field: "pa_name", text: "nom" },
-        { field: "pa_firstname", text: "prénom" }
+        { field: "pa_firstname", text: "prénom" },
       ];
       for (let ifi = 0; ifi < fieldRequired.length; ifi++) {
         const field = fieldRequired[ifi];
@@ -482,8 +482,7 @@ export default {
       // console.log("this.row_pa", this.row_pa);
       if (!this.row_pa.pa_candidat && !this.row_pa.pa_jure) {
         err.push({
-          text:
-            "<span class=''>Vous devez choisir d'être candidat ou juré ou les deux</span>"
+          text: "<span class=''>Vous devez choisir d'être candidat ou juré ou les deux</span>",
         });
       }
       // console.log("err", err);
@@ -518,7 +517,7 @@ export default {
         "pa_city",
         "pa_web",
         "pa_phone_mobile",
-        "pa_phone_fix"
+        "pa_phone_fix",
       ];
       for (let i = 0; i < tabField.length; i++) {
         const field = tabField[i];
@@ -564,7 +563,7 @@ export default {
         this.$store.dispatch("showToast", {
           title: "Candidat",
           text: "Le candidat a bien été enregistré",
-          color: "green"
+          color: "green",
         });
       }
       this.row_pa = this.signup
@@ -573,9 +572,9 @@ export default {
       this.$emit("formCandidatJureActions", {
         action: "saved",
         row_pa: this.row_pa,
-        row_lo: this.signup ? response.data.login : {}
+        row_lo: this.signup ? response.data.login : {},
       });
-    }
+    },
     /*     async deleteCandidat() {
       let route = this.from === "candidats" ? "candidats" : "backoffice";
       let response = await this.$axios.delete(
@@ -595,7 +594,7 @@ export default {
         this.$emit("formCandidatJureActions", { action: "deleted" });
       }
     } */
-  }
+  },
 };
 </script>
 

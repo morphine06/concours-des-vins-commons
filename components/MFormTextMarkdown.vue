@@ -2,7 +2,7 @@
   <div class="form-group textarea-markdown">
     <label
       :class="{
-        label: true
+        label: true,
       }"
       :for="id2"
       v-if="label"
@@ -64,7 +64,7 @@
         class="textarea"
         :class="{
           'form-control': true,
-          'is-invalid': errormsg2
+          'is-invalid': errormsg2,
         }"
         :id="id2"
         :disabled="disabled"
@@ -129,66 +129,66 @@
 const MarkdownIt = require("markdown-it");
 const markdown = new MarkdownIt();
 export default {
-  name: "mformtextmarkdown",
+  name: "m-form-text-markdown",
   props: {
     value: [String, Number],
     id: {
       default: "",
-      type: String
+      type: String,
     },
     name: {
       default: "",
-      type: String
+      type: String,
     },
     rows: {
       default: 4,
-      type: Number
+      type: Number,
     },
     autocomplete: {
       default: "new-password",
-      type: String
+      type: String,
     },
     readonly: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     disabled: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     autoSelectOnFocus: {
       default: true,
-      type: Boolean
+      type: Boolean,
     },
     label: {
       default: "",
-      type: String
+      type: String,
     },
     tooltip: {
       default: "",
-      type: String
+      type: String,
     },
     tooltipPosition: {
       default: "bottom",
-      type: String
+      type: String,
     },
     ariaHaspopup: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     ariaExpanded: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     rules: {
-      default: function() {
+      default: function () {
         return [];
       },
-      type: Array
+      type: Array,
     },
     placeholder: String,
     appendText: String,
-    subText: String
+    subText: String,
   },
   mounted() {
     if (this.id2) this.id2 = this.id;
@@ -214,7 +214,7 @@ export default {
           element: "Titre",
           write: `###•Titre <br /> #####•Petit titre`,
           show: this.tableResult(`### Titre \n ##### Petit titre`),
-          explication: `Ajouter des dièzes et un espace devant le titre. plus vous ajoutez de dièze, plus le titre sera petit`
+          explication: `Ajouter des dièzes et un espace devant le titre. plus vous ajoutez de dièze, plus le titre sera petit`,
         },
         {
           element: "Paragraphe",
@@ -223,14 +223,14 @@ export default {
           explication: `Pour faire un nouveau paragraphe, sauter deux lignes, c'est à
                 dire laisser une ligne vide entre les deux paragraphes. En
                 effet, ne sauter qu'une seule ligne n'aura aucun effet et le
-                texte de résultat sera en continu.`
+                texte de résultat sera en continu.`,
         },
         {
           element: "Retour ligne",
           write: `texte texte texte••¶<br />texte texte¶`,
           show: this.tableResult(`texte texte texte  \ntexte texte`),
           explication: `Pour faire un simple retour à la ligne, mettre deux espaces en
-                fin de ligne.`
+                fin de ligne.`,
         },
         {
           element: "Ligne de séparation",
@@ -238,29 +238,29 @@ export default {
           show: this.tableResult(
             `texte texte texte\n\n----------\ntexte texte`
           ),
-          explication: `sauté une ligne puis mettre une série de tirets.`
+          explication: `sauté une ligne puis mettre une série de tirets.`,
         },
         {
           element: "Texte gras",
           write: `**texte gras**`,
           show: this.tableResult(`**texte gras**`),
-          explication: `encadrez le texte avec deux étoiles sans espaces.`
+          explication: `encadrez le texte avec deux étoiles sans espaces.`,
         },
         {
           element: "Texte italique",
           write: `*texte italique*`,
           show: this.tableResult(`*texte italique*`),
-          explication: `encadrez le texte avec une étoile sans espaces.`
-        }
-      ]
+          explication: `encadrez le texte avec une étoile sans espaces.`,
+        },
+      ],
     };
   },
   watch: {
-    value: function(val) {
+    value: function (val) {
       // console.log("val", val);
       // if (val) this.focus = true;
       this.value2 = val;
-    }
+    },
   },
   components: {},
   computed: {},
@@ -367,8 +367,8 @@ export default {
     },
     tableResult(val) {
       return markdown.render(val);
-    }
-  }
+    },
+  },
 };
 </script>
 

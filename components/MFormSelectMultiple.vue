@@ -43,7 +43,7 @@
         :key="item.value"
         :class="{
           'dropdown-item': true,
-          focusDropdown: focusDropdown && focusDropdown.index === i
+          focusDropdown: focusDropdown && focusDropdown.index === i,
         }"
         role="menuitem"
         @click.stop="setValue2($event, item)"
@@ -60,51 +60,51 @@
 // import { createPopper } from "@popperjs/core";
 
 export default {
-  name: "mformselectmultiple",
+  name: "m-form-select-multiple",
   // extends: MFormBase,
   props: {
     value: Array,
     id: {
       default: "",
-      type: String
+      type: String,
     },
     name: {
       default: "",
-      type: String
+      type: String,
     },
     autocomplete: {
       default: "new-password",
-      type: String
+      type: String,
     },
     readonly: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     disabled: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     autoSelectOnFocus: {
       default: true,
-      type: Boolean
+      type: Boolean,
     },
     label: {
       default: "",
-      type: String
+      type: String,
     },
     tooltip: {
       default: "",
-      type: String
+      type: String,
     },
     tooltipPosition: {
       default: "bottom",
-      type: String
+      type: String,
     },
     rules: {
-      default: function() {
+      default: function () {
         return [];
       },
-      type: Array
+      type: Array,
     },
     placeholder: String,
     prependIcon: String,
@@ -113,11 +113,11 @@ export default {
     appendText: String,
     subText: String,
     items: {
-      default: function() {
+      default: function () {
         return [];
       },
-      type: Array
-    }
+      type: Array,
+    },
   },
   mounted() {},
 
@@ -151,7 +151,7 @@ export default {
       focusDropdown: null,
       rawvalue,
       rawitems,
-      multipleValues: []
+      multipleValues: [],
     };
   },
   watch: {},
@@ -194,7 +194,7 @@ export default {
             if (this.items[newIndex]) {
               this.focusDropdown = {
                 item: this.items[newIndex],
-                index: newIndex
+                index: newIndex,
               };
             } else {
               this.focusDropdown = { item: this.items[0], index: 0 };
@@ -206,19 +206,19 @@ export default {
           if (!this.focusDropdown) {
             this.focusDropdown = {
               item: this.items[this.items.length - 1],
-              index: this.items.length - 1
+              index: this.items.length - 1,
             };
           } else {
             let newIndex = this.focusDropdown.index - 1;
             if (this.items[newIndex]) {
               this.focusDropdown = {
                 item: this.items[newIndex],
-                index: newIndex
+                index: newIndex,
               };
             } else {
               this.focusDropdown = {
                 item: this.items[this.items.length - 1],
-                index: this.items.length - 1
+                index: this.items.length - 1,
               };
             }
           }
@@ -268,8 +268,8 @@ export default {
     clikInput() {
       this.focus = true;
       this.showDropdown = true;
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

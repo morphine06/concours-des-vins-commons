@@ -45,13 +45,13 @@
 
 <script>
 export default {
-  name: "mtoast",
+  name: "m-toast",
   props: {
     toasts: {
-      default: function() {
+      default: function () {
         return [];
-      }
-    }
+      },
+    },
   },
 
   data() {
@@ -63,8 +63,8 @@ export default {
   methods: {
     close(index) {
       this.$emit("close", index);
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">

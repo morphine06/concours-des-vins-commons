@@ -25,26 +25,26 @@
 
 <script>
 export default {
-  name: "mmessagedialog",
+  name: "m-message-dialog",
   props: {
     value: Boolean,
     title: String,
     text: String,
     width: {
       type: Number,
-      default: 500
+      default: 500,
     },
     redirect: String,
     color: {
       type: String,
-      default: "red"
-    }
+      default: "red",
+    },
   },
 
   data() {
     return {
       dialog: false,
-      windowWidth: window.innerWidth
+      windowWidth: window.innerWidth,
     };
   },
   mounted() {
@@ -56,10 +56,10 @@ export default {
     window.removeEventListener("resize", this.onResize);
   },
   watch: {
-    value: function(val) {
+    value: function (val) {
       this.dialog = val;
       // if (!this.width) this.width = "500px";
-    }
+    },
   },
   components: {},
   methods: {
@@ -77,12 +77,12 @@ export default {
     deleteWin() {
       this.dialog = false;
       if (this.redirect) {
-        this.$router.push("/" + this.redirect).catch(err => {});
+        this.$router.push("/" + this.redirect).catch((err) => {});
       }
       this.$emit("input", false);
       this.$emit("close");
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">
