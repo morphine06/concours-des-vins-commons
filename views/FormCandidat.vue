@@ -12,7 +12,7 @@
           ></m-form-text>
           <m-form-text
             class="mb-1"
-            label="Adresse"
+            label="Adresse *"
             :name="$Utils.randomstring('pa_address1')"
             v-model="row_pa.pa_address1"
           ></m-form-text>
@@ -24,14 +24,14 @@
           <div class="row mb-2">
             <div class="col-md-6">
               <m-form-text
-                label="Code postal"
+                label="Code postal *"
                 :name="$Utils.randomstring('pa_zip')"
                 v-model="row_pa.pa_zip"
               ></m-form-text>
             </div>
             <div class="col-md-6">
               <m-form-text
-                label="Ville"
+                label="Ville *"
                 :name="$Utils.randomstring('pa_city')"
                 v-model="row_pa.pa_city"
               ></m-form-text>
@@ -146,7 +146,7 @@
               ></m-form-text>
               <m-form-text
                 class="mb-1"
-                label="Adresse"
+                label="Adresse *"
                 :name="$Utils.randomstring('pa_address1_fac')"
                 v-model="row_pa.pa_address1_fac"
               ></m-form-text>
@@ -158,14 +158,14 @@
               <div class="row mb-2">
                 <div class="col-md-6">
                   <m-form-text
-                    label="Code postal"
+                    label="Code postal *"
                     :name="$Utils.randomstring('pa_zip_fac')"
                     v-model="row_pa.pa_zip_fac"
                   ></m-form-text>
                 </div>
                 <div class="col-md-6">
                   <m-form-text
-                    label="Ville"
+                    label="Ville *"
                     :name="$Utils.randomstring('pa_city_fac')"
                     v-model="row_pa.pa_city_fac"
                   ></m-form-text>
@@ -443,7 +443,14 @@ export default {
         },
         { field: "pa_civility", text: "civilité" },
         { field: "pa_name", text: "nom" },
-        { field: "pa_firstname", text: "prénom" },
+        { field: "pa_firstname", text: "prénom" }, 
+        { field: "pa_address1", text: "adresse" }, 
+        { field: "pa_zip", text: "code postal" }, 
+        { field: "pa_city", text: "ville" }, 
+        { field: "pa_society_fac", text: "coordonnées de facturation : nom de la société" }, 
+        { field: "pa_address1_fac", text: "coordonnées de facturation : adresse" }, 
+        { field: "pa_zip_fac", text: "coordonnées de facturation : code postal" }, 
+        { field: "pa_city_fac", text: "coordonnées de facturation : ville" }, 
       ];
       for (let ifi = 0; ifi < fieldRequired.length; ifi++) {
         const field = fieldRequired[ifi];
