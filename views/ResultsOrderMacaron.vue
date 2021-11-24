@@ -98,15 +98,20 @@ export default {
   async mounted() {},
   methods: {
     calculTotal() {
-      let total = 0;
+      let totaux = {ht:0, ttc:0, tva:0};
       let tt =
         this.row_or.or_or + this.row_or.or_argent + this.row_or.or_excellence;
-      if (this.row_or.or_price_macaron)
-        total = (tt / 1000) * this.row_or.or_price_macaron;
-      else total = (tt / 1000) * this.row_or.yp_macarons_price;
+      if (this.row_or.or_price_macaron){
+        totaux.ht = (tt / 1000) * this.row_or.or_price_macaron;
+        }
+      else {
+        totaux.ht = (tt / 1000) * this.row_or.yp_macarons_price;
+      }
+      totaux.tva = totaux.ht * (this.row_or.yp_tva / 100);
+      totaux.ttc = totaux.tva + totaux.ht;
 
-      this.$emit("changetotalOrder", total);
-    },
+      this.$emit("changetotalOrder", totaux);
+    }
   },
 };
 </script>
