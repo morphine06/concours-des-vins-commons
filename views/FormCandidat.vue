@@ -468,6 +468,17 @@ export default {
           err.push({ text: tabErrPassword[i] });
         }
       }
+      // champs obligatoire du candidat
+        if (this.row_pa.pa_candidat) {
+          if (!this.row_pa.pa_society_fac)
+            err.push({ text: "coordonnées de facturation : nom de la société" });
+          if (!this.row_pa.pa_address1_fac)
+            err.push({ text: "coordonnées de facturation : adresse" });
+          if (!this.row_pa.pa_zip_fac)
+            err.push({ text: "coordonnées de facturation : code postal" });
+          if (!this.row_pa.pa_city_fac)
+            err.push({ text: "coordonnées de facturation : ville" });
+        }
       // champs obligatoire du juré
       if (this.row_pa.pa_jure) {
         if (!this.row_pa.pa_firstparticipation)
