@@ -446,11 +446,7 @@ export default {
         { field: "pa_firstname", text: "prénom" }, 
         { field: "pa_address1", text: "adresse" }, 
         { field: "pa_zip", text: "code postal" }, 
-        { field: "pa_city", text: "ville" }, 
-        { field: "pa_society_fac", text: "coordonnées de facturation : nom de la société" }, 
-        { field: "pa_address1_fac", text: "coordonnées de facturation : adresse" }, 
-        { field: "pa_zip_fac", text: "coordonnées de facturation : code postal" }, 
-        { field: "pa_city_fac", text: "coordonnées de facturation : ville" }, 
+        { field: "pa_city", text: "ville" }
       ];
       for (let ifi = 0; ifi < fieldRequired.length; ifi++) {
         const field = fieldRequired[ifi];
