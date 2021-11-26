@@ -787,6 +787,7 @@ export default {
       this.row_wi.wi_medaille_commentaire_other =
         row_wi.wi_medaille_commentaire_other;
       this.row_wi.wi_medaille_auteur = row_wi.wi_medaille_auteur;
+      this.row_wi.wi_prixexcellence = row_wi.wi_prixexcellence;
     },
     tryToSaveWin(row_pa) {
       // console.log("row_pa", row_pa);
