@@ -100,7 +100,7 @@ Modiifer également le projet XXX
                   :rules="[$Validation.mandatory]"
                 ></m-form-select>
               </div>
-              <div class="col-md-5">
+              <div class="col-md-5 d-flex flex-no-wrap align-items-end">
                 <m-form-text
                   label="Nombre *"
                   type="number"
@@ -108,12 +108,15 @@ Modiifer également le projet XXX
                   :name="$Utils.randomstring('wi_nombre')"
                   @input="calculContenance(contenant)"
                 ></m-form-text>
-              </div>
-              <div class="col-md-1">
-                <div class="pointer" @click="deleteContenant(index)">
+                <div class="pointer  ms-2" @click="deleteContenant(index)">
                   <icon width="22" height="22" color="red" name="times"></icon>
                 </div>
               </div>
+              <!-- <div class="col-md-1">
+                <div class="pointer" @click="deleteContenant(index)">
+                  <icon width="22" height="22" color="red" name="times"></icon>
+                </div>
+              </div> -->
             </div>
           </div>
           <button
