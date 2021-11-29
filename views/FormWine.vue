@@ -794,10 +794,10 @@ export default {
       // console.log("this.row_wi", this.row_wi);
       let err = [];
       let fieldRequired = [
-        { field: "wi_name", text: "nom" },
+        { field: "wi_name", text: "Nom" },
         // { field: "wi_denomination", text: "dénomination" },
-        { field: "wi_couleur", text: "couleur" },
-        { field: "wi_millesime", text: "millesime" },
+        { field: "wi_couleur", text: "Couleur" },
+        { field: "wi_millesime", text: "Millesime" },
       ];
       if (!row_pa.pa_id) err.push({ text: "Candiadat" });
       for (let ifi = 0; ifi < fieldRequired.length; ifi++) {
@@ -824,7 +824,7 @@ export default {
 
       if (err.length) {
         this.dialogErrTxt =
-          "<span class='bis'>Vous devez remplir les champs : </span><br>";
+          "<span class='bis'>Les champs suivants sont obligatoires : </span><br>";
         for (let ierr = 0; ierr < err.length; ierr++) {
           const error = err[ierr];
           this.dialogErrTxt += "- " + error.text + " <br>";

@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-5 offset-md-7">
         <div>
-          Nombre de macaron or : {{ row_or.or_or | formatChiffreSimple }}
+          Nombre de macaron Or : {{ row_or.or_or | formatChiffreSimple }}
         </div>
         <div>
           Nombre de macaron Argent :

@@ -439,26 +439,26 @@ export default {
       let fieldRequired = [
         {
           field: "pa_society",
-          text: "nom de l'entreprise",
+          text: "Nom de l'entreprise",
         },
-        { field: "pa_civility", text: "civilité" },
-        { field: "pa_name", text: "nom" },
-        { field: "pa_firstname", text: "prénom" }, 
-        { field: "pa_address1", text: "adresse" }, 
-        { field: "pa_zip", text: "code postal" }, 
-        { field: "pa_city", text: "ville" }
+        { field: "pa_civility", text: "Civilité" },
+        { field: "pa_name", text: "Nom" },
+        { field: "pa_firstname", text: "Prénom" }, 
+        { field: "pa_address1", text: "Adresse" }, 
+        { field: "pa_zip", text: "Code postal" }, 
+        { field: "pa_city", text: "Ville" }
       ];
       for (let ifi = 0; ifi < fieldRequired.length; ifi++) {
         const field = fieldRequired[ifi];
         if (!this.row_pa[field.field]) err.push(field);
       }
       if (!this.row_pa.login.lo_login)
-        err.push({ text: "login (en bas de la fenêtre)" });
+        err.push({ text: "Login (en bas de la fenêtre)" });
       if (
         !this.row_pa.login.lo_pass &&
         (this.signup || !this.row_pa.login || !this.row_pa.login.lo_id)
       )
-        err.push({ text: "mot de passe" });
+        err.push({ text: "Mot de passe" });
       if (tabErrPassword && tabErrPassword.length > 0) {
         for (let i = 0; i < tabErrPassword.length; i++) {
           err.push({ text: tabErrPassword[i] });
@@ -467,31 +467,31 @@ export default {
       // champs obligatoire du candidat
         if (this.row_pa.pa_candidat) {
           if (!this.row_pa.pa_society_fac)
-            err.push({ text: "coordonnées de facturation : nom de la société" });
+            err.push({ text: "Coordonnées de facturation : nom de la société" });
           if (!this.row_pa.pa_address1_fac)
-            err.push({ text: "coordonnées de facturation : adresse" });
+            err.push({ text: "Coordonnées de facturation : adresse" });
           if (!this.row_pa.pa_zip_fac)
-            err.push({ text: "coordonnées de facturation : code postal" });
+            err.push({ text: "Coordonnées de facturation : code postal" });
           if (!this.row_pa.pa_city_fac)
-            err.push({ text: "coordonnées de facturation : ville" });
+            err.push({ text: "Coordonnées de facturation : ville" });
         }
       // champs obligatoire du juré
       if (this.row_pa.pa_jure) {
         if (!this.row_pa.pa_firstparticipation)
-          err.push({ text: "juré : première participation" });
+          err.push({ text: "Juré : première participation" });
         if (!this.row_pa.pa_typejure) err.push({ text: "juré : catégorie" });
         if (this.row_pa.pa_typejure === 9 && !this.row_pa.pa_typejure_other)
-          err.push({ text: "juré catégorie : précisez" });
+          err.push({ text: "Juré catégorie : précisez" });
         if (!this.row_pa.pa_coursdegustation)
-          err.push({ text: "juré : cours de dégustation" });
+          err.push({ text: "Juré : cours de dégustation" });
         if (!this.row_pa.pa_liensexistant)
-          err.push({ text: "juré : lien existant" });
+          err.push({ text: "Juré : lien existant" });
         if (
           (this.row_pa.pa_liensexistant === "1" ||
             this.row_pa.pa_liensexistant === 1) &&
           !this.row_pa.pa_liensexistant_more
         )
-          err.push({ text: "juré lien existant : précisez" });
+          err.push({ text: "Juré lien existant : précisez" });
       }
       // console.log("this.row_pa", this.row_pa);
       if (!this.row_pa.pa_candidat && !this.row_pa.pa_jure) {
@@ -502,7 +502,7 @@ export default {
       // console.log("err", err);
       if (err.length) {
         this.dialogErrTxt =
-          "<span class='fw-bold'>Vous devez remplir les champs : </span><br>";
+          "<span class='fw-bold'>Les champs suivants sont obligatoires : </span><br>";
         for (let ierr = 0; ierr < err.length; ierr++) {
           const error = err[ierr];
           this.dialogErrTxt += "- " + error.text + " <br>";
