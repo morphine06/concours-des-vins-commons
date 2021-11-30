@@ -53,19 +53,19 @@
           <div class="d-flex align-items-center">
             <div>HT :</div>
             <h5 class="color-red ms-2">
-              {{ row_or.or_price_ht | formatPriceDivisePar100 }} 
+              {{ totaux.ht | formatPriceDivisePar100 }}
             </h5>
           </div>
           <div class="d-flex align-items-center">
             <div>TVA :</div>
             <h5 class="color-red ms-2">
-              {{ row_or.or_price_tva | formatPriceDivisePar100 }} 
+              {{ totaux.tva | formatPriceDivisePar100 }}
             </h5>
           </div>
           <div class="d-flex align-items-center">
             <div>Total TTC :</div>
             <h2 class="color-red ms-2">
-              {{ row_or.or_price_ttc | formatPriceDivisePar100 }} TTC
+              {{ totaux.ttc | formatPriceDivisePar100 }} TTC
             </h2>
           </div>
           <div class="color-red">
@@ -95,23 +95,25 @@ export default {
       this.calculTotal();
     },
   },
-  async mounted() {},
+  async mounted() {
+    this.calculTotal();
+  },
   methods: {
     calculTotal() {
-      let totaux = {ht:0, ttc:0, tva:0};
+      let totaux = { ht: 0, ttc: 0, tva: 0 };
       let tt =
         this.row_or.or_or + this.row_or.or_argent + this.row_or.or_excellence;
-      if (this.row_or.or_price_macaron){
+      if (this.row_or.or_price_macaron) {
         totaux.ht = (tt / 1000) * this.row_or.or_price_macaron;
-        }
-      else {
+      } else {
         totaux.ht = (tt / 1000) * this.row_or.yp_macarons_price;
       }
       totaux.tva = totaux.ht * (this.row_or.yp_tva / 100);
       totaux.ttc = totaux.tva + totaux.ht;
+      this.totaux = totaux;
 
       this.$emit("changetotalOrder", totaux);
-    }
+    },
   },
 };
 </script>
