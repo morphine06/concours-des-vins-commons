@@ -102,7 +102,7 @@
           v-model="row_pa.pa_candidat"
           @change="checkboxCandidat"
           :disabled="
-            $dayjs().isAfter(row_yp2.yp_end_inscription_date_candidate)
+            $dayjs().isAfter(row_yp2.yp_end_inscription_date_candidate, 'day')
           "
         ></m-form-checkbox>
         <div
@@ -184,7 +184,9 @@
           :name="$Utils.randomstring('pa_jure')"
           v-model="row_pa.pa_jure"
           @input="checkboxJure"
-          :disabled="$dayjs().isAfter(row_yp2.yp_end_inscription_date_jure)"
+          :disabled="
+            $dayjs().isAfter(row_yp2.yp_end_inscription_date_jure, 'day')
+          "
         ></m-form-checkbox>
 
         <div
@@ -443,10 +445,10 @@ export default {
         },
         { field: "pa_civility", text: "Civilité" },
         { field: "pa_name", text: "Nom" },
-        { field: "pa_firstname", text: "Prénom" }, 
-        { field: "pa_address1", text: "Adresse" }, 
-        { field: "pa_zip", text: "Code postal" }, 
-        { field: "pa_city", text: "Ville" }
+        { field: "pa_firstname", text: "Prénom" },
+        { field: "pa_address1", text: "Adresse" },
+        { field: "pa_zip", text: "Code postal" },
+        { field: "pa_city", text: "Ville" },
       ];
       for (let ifi = 0; ifi < fieldRequired.length; ifi++) {
         const field = fieldRequired[ifi];
@@ -465,16 +467,16 @@ export default {
         }
       }
       // champs obligatoire du candidat
-        if (this.row_pa.pa_candidat) {
-          if (!this.row_pa.pa_society_fac)
-            err.push({ text: "Coordonnées de facturation : nom de la société" });
-          if (!this.row_pa.pa_address1_fac)
-            err.push({ text: "Coordonnées de facturation : adresse" });
-          if (!this.row_pa.pa_zip_fac)
-            err.push({ text: "Coordonnées de facturation : code postal" });
-          if (!this.row_pa.pa_city_fac)
-            err.push({ text: "Coordonnées de facturation : ville" });
-        }
+      if (this.row_pa.pa_candidat) {
+        if (!this.row_pa.pa_society_fac)
+          err.push({ text: "Coordonnées de facturation : nom de la société" });
+        if (!this.row_pa.pa_address1_fac)
+          err.push({ text: "Coordonnées de facturation : adresse" });
+        if (!this.row_pa.pa_zip_fac)
+          err.push({ text: "Coordonnées de facturation : code postal" });
+        if (!this.row_pa.pa_city_fac)
+          err.push({ text: "Coordonnées de facturation : ville" });
+      }
       // champs obligatoire du juré
       if (this.row_pa.pa_jure) {
         if (!this.row_pa.pa_firstparticipation)
