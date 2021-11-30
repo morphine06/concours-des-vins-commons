@@ -87,6 +87,7 @@ export default {
   },
   data() {
     return {
+      totaux: { ht: 0, ttc: 0, tva: 0 },
       showFraisDePort: false,
     };
   },
