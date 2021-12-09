@@ -272,7 +272,7 @@
             ></m-form-text>
           </div>
         </div>
-        <hr />
+<!--         <hr />
         <h4>Centres de dégustations</h4>
         <p class="fw-bold">Choisissez votre centre de dégustation :</p>
         <m-form-radio
@@ -281,7 +281,7 @@
           id="pa_centredegustation"
           v-model="row_pa.pa_centredegustation"
           :items="items_centredegustation"
-        ></m-form-radio>
+        ></m-form-radio> -->
 
         <!-- <m-form-checkbox
           class="mt-3 ps-5"
