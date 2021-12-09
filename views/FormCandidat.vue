@@ -102,7 +102,13 @@
           v-model="row_pa.pa_candidat"
           @change="checkboxCandidat"
           :disabled="
-            $dayjs().isAfter(row_yp2.yp_end_inscription_date_candidate)
+            from !== 'backoffice' &&
+            !$dayjs().isBetween(
+              row_pa.yearpreferences.yp_start_inscription_date,
+              row_pa.yearpreferences.yp_end_inscription_date_candidate,
+              'day',
+              '[]'
+            )
           "
         ></m-form-checkbox>
         <div
@@ -184,7 +190,15 @@
           :name="$Utils.randomstring('pa_jure')"
           v-model="row_pa.pa_jure"
           @input="checkboxJure"
-          :disabled="$dayjs().isAfter(row_yp2.yp_end_inscription_date_jure)"
+          :disabled="
+            from !== 'backoffice' &&
+            !$dayjs().isBetween(
+              row_pa.yearpreferences.yp_start_inscription_date,
+              row_pa.yearpreferences.yp_end_inscription_date_jure,
+              'day',
+              '[]'
+            )
+          "
         ></m-form-checkbox>
 
         <div
@@ -343,6 +357,7 @@ export default {
         pa_address2_fac: "",
         pa_city_fac: "",
         pa_zip_fac: "",
+        yearpreferences: {},
       },
       jureValide: false,
       confirmJureValide: false,
@@ -354,7 +369,7 @@ export default {
         { value: 4, text: "Vignoble 4" },
         { value: 5, text: "Vignoble 5" },
       ],
-      row_yp2: {},
+      // row_yp2: {},
       confirmDevalidDialog: false,
       devalidWinesCandidat: false,
     };
@@ -363,13 +378,18 @@ export default {
     row_pa_tocopy: function (v) {
       this.loadParticipation();
     },
+    pa_id: function (v) {
+      this.loadParticipation();
+    },
   },
   async mounted() {
     await this.loadParticipation();
-    this.row_yp2 = this.row_yp ? this.row_yp : this.row_pa.yearpreferences;
+    // console.log("this.row_yp", this.row_yp, this.row_pa.yearpreferences);
+    // this.row_yp2 = this.row_yp ? this.row_yp : this.row_pa.yearpreferences;
   },
   methods: {
     async loadParticipation() {
+      // console.log('this.pa_id', this.pa_id);
       let route = this.from === "candidats" ? "candidats" : "backoffice";
       let params = {};
       // console.log("this.route, from", this.route, this.from);
@@ -385,6 +405,14 @@ export default {
           { params }
         );
         this.row_pa = response.data.data;
+        // console.log('this.row_pa.yearpreferences', this.row_pa.yearpreferences);
+        let diff = this.$dayjs().isBetween(
+          this.row_pa.yearpreferences.yp_start_inscription_date,
+          this.row_pa.yearpreferences.yp_end_inscription_date_candidate,
+          "day"
+        );
+        // console.log('diff', diff,this.row_pa.yearpreferences.yp_end_inscription_date_candidate);
+        // console.log('this.row_pa1', this.row_pa);
         this.jureValide = this.row_pa.pa_jure_valide;
         this.$emit("participationLoaded", this.row_pa);
       }
@@ -443,10 +471,10 @@ export default {
         },
         { field: "pa_civility", text: "Civilité" },
         { field: "pa_name", text: "Nom" },
-        { field: "pa_firstname", text: "Prénom" }, 
-        { field: "pa_address1", text: "Adresse" }, 
-        { field: "pa_zip", text: "Code postal" }, 
-        { field: "pa_city", text: "Ville" }
+        { field: "pa_firstname", text: "Prénom" },
+        { field: "pa_address1", text: "Adresse" },
+        { field: "pa_zip", text: "Code postal" },
+        { field: "pa_city", text: "Ville" },
       ];
       for (let ifi = 0; ifi < fieldRequired.length; ifi++) {
         const field = fieldRequired[ifi];
@@ -465,16 +493,16 @@ export default {
         }
       }
       // champs obligatoire du candidat
-        if (this.row_pa.pa_candidat) {
-          if (!this.row_pa.pa_society_fac)
-            err.push({ text: "Coordonnées de facturation : nom de la société" });
-          if (!this.row_pa.pa_address1_fac)
-            err.push({ text: "Coordonnées de facturation : adresse" });
-          if (!this.row_pa.pa_zip_fac)
-            err.push({ text: "Coordonnées de facturation : code postal" });
-          if (!this.row_pa.pa_city_fac)
-            err.push({ text: "Coordonnées de facturation : ville" });
-        }
+      if (this.row_pa.pa_candidat) {
+        if (!this.row_pa.pa_society_fac)
+          err.push({ text: "Coordonnées de facturation : nom de la société" });
+        if (!this.row_pa.pa_address1_fac)
+          err.push({ text: "Coordonnées de facturation : adresse" });
+        if (!this.row_pa.pa_zip_fac)
+          err.push({ text: "Coordonnées de facturation : code postal" });
+        if (!this.row_pa.pa_city_fac)
+          err.push({ text: "Coordonnées de facturation : ville" });
+      }
       // champs obligatoire du juré
       if (this.row_pa.pa_jure) {
         if (!this.row_pa.pa_firstparticipation)
