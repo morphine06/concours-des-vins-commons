@@ -108,7 +108,7 @@ Modiifer également le projet XXX
                   :name="$Utils.randomstring('wi_nombre')"
                   @input="calculContenance(contenant)"
                 ></m-form-text>
-                <div class="pointer  ms-2" @click="deleteContenant(index)">
+                <div class="pointer ms-2" @click="deleteContenant(index)">
                   <icon width="22" height="22" color="red" name="times"></icon>
                 </div>
               </div>
@@ -332,7 +332,7 @@ Modiifer également le projet XXX
         </div>
       </div>
 
-      <div class="row mb-4 d-flex align-items-center">
+      <div class="row mb-4 d-flex align-items-center" v-if="showphoto">
         <div class="col-md-3">
           <label class="label"
             >Photo du vin (sera affiché sur le site web si le vin est
@@ -391,6 +391,7 @@ export default {
   props: {
     wi_id: Number,
     from: String,
+    showphoto: { default: false, type: Boolean },
   },
   data() {
     return {
