@@ -286,7 +286,7 @@
             ></m-form-text>
           </div>
         </div>
-<!--         <hr />
+        <!--         <hr />
         <h4>Centres de dégustations</h4>
         <p class="fw-bold">Choisissez votre centre de dégustation :</p>
         <m-form-radio
@@ -406,11 +406,11 @@ export default {
         );
         this.row_pa = response.data.data;
         // console.log('this.row_pa.yearpreferences', this.row_pa.yearpreferences);
-        let diff = this.$dayjs().isBetween(
-          this.row_pa.yearpreferences.yp_start_inscription_date,
-          this.row_pa.yearpreferences.yp_end_inscription_date_candidate,
-          "day"
-        );
+        // let diff = this.$dayjs().isBetween(
+        //   this.row_pa.yearpreferences.yp_start_inscription_date,
+        //   this.row_pa.yearpreferences.yp_end_inscription_date_candidate,
+        //   "day"
+        // );
         // console.log('diff', diff,this.row_pa.yearpreferences.yp_end_inscription_date_candidate);
         // console.log('this.row_pa1', this.row_pa);
         this.jureValide = this.row_pa.pa_jure_valide;

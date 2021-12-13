@@ -181,7 +181,7 @@ Modiifer également le projet XXX
           >
             Télécharger
           </button>
-          <div v-else>
+          <div v-else-if="wi_revendication_stop">
             <img
               style="width: 30px"
               src="/images/icons/icon-stop.png"
@@ -285,7 +285,7 @@ Modiifer également le projet XXX
           >
             Télécharger
           </button>
-          <div v-else>
+          <div v-else-if="wi_analyse_stop">
             <img
               style="width: 30px"
               src="/images/icons/icon-stop.png"
@@ -395,6 +395,8 @@ export default {
   },
   data() {
     return {
+      wi_revendication_stop: true,
+      wi_analyse_stop: true,
       dialogErr: false,
       dialogErrTxt: "",
       confirmdelete: false,
@@ -479,6 +481,8 @@ export default {
       this.denominations = rows_de;
     },
     async loadWine() {
+      this.wi_revendication_stop = true;
+      this.wi_analyse_stop = true;
       let route = this.from === "candidats" ? "candidats" : "backoffice";
       let params = {};
       if (this.wi_id == -1) params = {};
@@ -704,11 +708,21 @@ export default {
       this.contenants.splice(index, 1);
       this.calculContenance();
     },
+    getFiles() {
+      let files = [];
+      if (this.filesSelected.file1) files.push("wi_revendication");
+      if (this.filesSelected.file2) files.push("wi_analyse");
+      return files;
+    },
     fileJusteSelected1(files) {
       this.filesSelected.file1 = files[0];
+      this.wi_revendication_stop = false;
+      this.$emit("fileJustSelected", this.getFiles());
     },
     fileJusteSelected2(files) {
       this.filesSelected.file2 = files[0];
+      this.wi_analyse_stop = false;
+      this.$emit("fileJustSelected", this.getFiles());
     },
     fileJusteSelected3(files) {
       this.filesSelected.file3 = files[0];
