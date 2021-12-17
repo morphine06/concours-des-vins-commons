@@ -1,5 +1,5 @@
 <template>
-  <label class="m-form-checkbox">
+  <label class="m-form-checkbox  mw-100">
     <input
       type="checkbox"
       :disabled="disabled"
@@ -7,7 +7,7 @@
       :name="name2"
       @change="onchange($event)"
     />
-    <span class="ms-2" v-html="label"></span>
+    <span class="ms-2 mw-100" v-html="label"></span>
   </label>
 </template>
 
