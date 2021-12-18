@@ -286,19 +286,21 @@
             ></m-form-text>
           </div>
         </div>
-        <hr/>
+        <hr />
         <div>
           <m-form-checkbox
-          label="Je reconnais avoir lu et compris le consentement au traitement de mes données personnelles, et j'accepte que mes données soient utilisées aux fins décrites dans le présent texte."
-          :name="$Utils.randomstring('pa_jure_consentement')"
-          v-model="row_pa.pa_jure_consentement"
+            label="Je reconnais avoir lu et compris le consentement au traitement de mes données personnelles, et j'accepte que mes données soient utilisées aux fins décrites dans le présent texte."
+            :name="$Utils.randomstring('pa_jure_consentement')"
+            v-model="row_pa.pa_jure_consentement"
           ></m-form-checkbox>
-          <a class='text-blue pointer' @click.stop='showConsentement'>Plus d'infos sur le traitement de mes données personnelles</a>
-           <m-form-checkbox
-          class="mt-2"
-          label="Je ne souhaite pas que mes données personnelles soient conservées. Je reconnais que je ne pourrais donc pas participer au concours des vins du Sud-ouest."
-          :name="$Utils.randomstring('pa_jure_consentement')"
-          v-model="noConsentement"
+          <a class="text-blue pointer" @click.stop="showConsentement"
+            >Plus d'infos sur le traitement de mes données personnelles</a
+          >
+          <m-form-checkbox
+            class="mt-2"
+            label="Je ne souhaite pas que mes données personnelles soient conservées. Je reconnais que je ne pourrais donc pas participer au concours des vins du Sud-ouest."
+            :name="$Utils.randomstring('pa_jure_consentement')"
+            v-model="noConsentement"
           ></m-form-checkbox>
         </div>
         <!--         <hr />
@@ -344,7 +346,7 @@
       title="Erreur"
       :text="dialogErrTxt"
     ></m-message-dialog>
-     <m-message-dialog
+    <m-message-dialog
       v-model="showModalConsentement"
       title="Confirmation de consentement au traitement de vos données personnelles"
       :text="consentementTxt"
@@ -394,9 +396,9 @@ export default {
       // row_yp2: {},
       confirmDevalidDialog: false,
       devalidWinesCandidat: false,
-      noConsentement:false,
-      showModalConsentement:false,
-      consentementTxt :`<p class="text-justify">En postulant en tant que juré, vous nous autorisez à collecter vos données personnelles et à les utiliser dans le cadre de l’organisation du concours des vins du sud-ouest.<br/>
+      noConsentement: false,
+      showModalConsentement: false,
+      consentementTxt: `<p class="text-justify">En postulant en tant que juré, vous nous autorisez à collecter vos données personnelles et à les utiliser dans le cadre de l’organisation du concours des vins du sud-ouest.<br/>
 Vos données à caractère personnel font l’objet d’un traitement automatisé destiné à l’IVSO (Centre INRA – CS52637 – 31321 Castanet-Tolosan cedex). Nous collectons et traitons les données suivantes : vos nom, prénom(s), âge, adresse postale, adresse email ainsi que les liens directs ou indirects avec les entreprises, établissements, organisations professionnelles ou que vous avez déclaré ci-dessus (ci-après vos « Données »). Vos Données seront utilisées pour vous contacter, traiter votre candidature et la bonne organisation du concours des vins du Sud-ouest.<br/>
 Il est rappelé que dans le cadre du traitement de vos Données, et conformément aux dispositions aux dispositions du règlement (UE) 2016/679 du Parlement Européen et du Conseil du 27 avril 2016 applicable à compter du 25 mai 2018 (ci-après « RGPD ») et de la Loi n°78-17 du 6 janvier 1978 modifiée, relative à l’informatique, aux fichiers et aux libertés, vous avez le droit de savoir si nous détenons vos Données et, si c’est le cas, vous disposez des droits suivants dans les conditions précisées dans le RGPD: </p>
 <ul>
@@ -424,7 +426,7 @@ Tous les droits énumérés ci-dessus sont personnels et ne peuvent être exerc�
 Pour exercer vos droits ou pour formuler toute autre demande concernant le traitement de vos Données, vous pouvez contacter directement l’IVSO par le moyen suivant dpo@france-sudouest.com.<br/>
 Vous avez également la possibilité de saisir l’autorité de contrôle, la CNIL : https://www.cnil.fr
 Aux fins des présentes, vos Données pourront être conservées par l’IVSO pendant un délai maximum de 3 ans après la fin du traitement.
-Dans le cadre du traitement décrit aux présentes, sont prises toutes les mesures techniques, organisationnelles et de sécurité appropriée contre tout accès non autorisé, altération, divulgation, destruction et perte de vos Données, lesquelles sont hébergées dans des centres de données localisés au sein de l’Union Européenne pour toute la durée des traitements. Sauf disposition législative, règlementaire ou décision de justice contraire, l’accès à vos Données sera restreint aux collaborateurs habilités au sein de l’IVSO et le cas échéant à leurs prestataires, lorsque ces derniers ont besoin de les consulter et/ou de les utiliser pour les finalités décrites ci-dessus.</p>`
+Dans le cadre du traitement décrit aux présentes, sont prises toutes les mesures techniques, organisationnelles et de sécurité appropriée contre tout accès non autorisé, altération, divulgation, destruction et perte de vos Données, lesquelles sont hébergées dans des centres de données localisés au sein de l’Union Européenne pour toute la durée des traitements. Sauf disposition législative, règlementaire ou décision de justice contraire, l’accès à vos Données sera restreint aux collaborateurs habilités au sein de l’IVSO et le cas échéant à leurs prestataires, lorsque ces derniers ont besoin de les consulter et/ou de les utiliser pour les finalités décrites ci-dessus.</p>`,
     };
   },
   watch: {
@@ -512,12 +514,12 @@ Dans le cadre du traitement décrit aux présentes, sont prises toutes les mesur
       if (this.row_pa.pa_jure) this.disabledJure = false;
       else this.disabledJure = true;
     },
-    showConsentement(){
+    showConsentement() {
       this.showModalConsentement = true;
     },
     tryToSaveWin(login, tabErrPassword) {
-      if(this.noConsentement && this.row_pa.pa_jure){
-         this.dialogErrTxt =
+      if (this.noConsentement && this.row_pa.pa_jure) {
+        this.dialogErrTxt =
           "<span class='fw-bold'>Vous ne souhaitez pas que l'on enregirtre vos données personnelles, vous ne pouvez donc pas continuer.</span><br>";
         this.dialogErr = true;
         return;
