@@ -299,7 +299,7 @@
           <m-form-checkbox
             class="mt-2"
             label="Je ne souhaite pas que mes données personnelles soient conservées. Je reconnais que je ne pourrais donc pas participer au concours des vins du Sud-ouest."
-            :name="$Utils.randomstring('pa_jure_consentement')"
+            :name="$Utils.randomstring('noConsentement')"
             v-model="noConsentement"
           ></m-form-checkbox>
         </div>
@@ -584,6 +584,9 @@ Dans le cadre du traitement décrit aux présentes, sont prises toutes les mesur
           !this.row_pa.pa_liensexistant_more
         )
           err.push({ text: "Juré lien existant : précisez" });
+        if(!this.row_pa.pa_jure_consentement){
+          err.push({ text: "Consentement sur mes données personnelles" });
+        }
       }
       // console.log("this.row_pa", this.row_pa);
       if (!this.row_pa.pa_candidat && !this.row_pa.pa_jure) {
