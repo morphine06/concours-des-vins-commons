@@ -1,5 +1,5 @@
 <template>
-  <label class="m-form-checkbox  mw-100">
+  <label class="m-form-checkbox mw-100">
     <input
       type="checkbox"
       :disabled="disabled"
@@ -7,7 +7,14 @@
       :name="name2"
       @change="onchange($event)"
     />
-    <span class="ms-2 mw-100" v-html="label"></span>
+    <span
+      :class="{
+        'ms-2': true,
+        'mw-100': true,
+        whitespacecanceled: labelwhitespace,
+      }"
+      v-html="label"
+    ></span>
   </label>
 </template>
 
@@ -30,6 +37,10 @@ export default {
       type: Boolean,
     },
     disabled: {
+      default: false,
+      type: Boolean,
+    },
+    labelwhitespace: {
       default: false,
       type: Boolean,
     },
@@ -95,4 +106,7 @@ export default {
 //   width: auto;
 //   margin-right: 8px;
 // }
+.whitespacecanceled {
+  white-space: break-spaces;
+}
 </style>
