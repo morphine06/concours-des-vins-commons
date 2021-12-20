@@ -292,6 +292,7 @@
             label="Je reconnais avoir lu et compris le consentement au traitement de mes données personnelles, et j'accepte que mes données soient utilisées aux fins décrites dans le présent texte."
             :name="$Utils.randomstring('pa_jure_consentement')"
             v-model="row_pa.pa_jure_consentement"
+            :labelwhitespace="true"
           ></m-form-checkbox>
           <a class="text-blue pointer" @click.stop="showConsentement"
             >Plus d'infos sur le traitement de mes données personnelles</a
@@ -301,6 +302,7 @@
             label="Je ne souhaite pas que mes données personnelles soient conservées. Je reconnais que je ne pourrais donc pas participer au concours des vins du Sud-ouest."
             :name="$Utils.randomstring('pa_jure_consentement')"
             v-model="noConsentement"
+            :labelwhitespace="true"
           ></m-form-checkbox>
         </div>
         <!--         <hr />
@@ -520,7 +522,7 @@ Dans le cadre du traitement décrit aux présentes, sont prises toutes les mesur
     tryToSaveWin(login, tabErrPassword) {
       if (this.noConsentement && this.row_pa.pa_jure) {
         this.dialogErrTxt =
-          "<span class='fw-bold'>Vous ne souhaitez pas que l'on enregirtre vos données personnelles, vous ne pouvez donc pas continuer.</span><br>";
+          "<span class='fw-bold'>Vous ne souhaitez pas que l'on enregistre vos données personnelles, vous ne pouvez donc pas continuer.</span><br>";
         this.dialogErr = true;
         return;
       }
