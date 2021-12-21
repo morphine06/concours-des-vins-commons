@@ -98,6 +98,7 @@ Modiifer également le projet XXX
                   :items="$store.state.items_contenants"
                   v-model="contenant.contenant"
                   :rules="[$Validation.mandatory]"
+                  @input="calculContenance(contenant)"
                 ></m-form-select>
               </div>
               <div class="col-md-5 d-flex flex-no-wrap align-items-end">
