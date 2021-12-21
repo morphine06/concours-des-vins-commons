@@ -561,13 +561,13 @@ Dans le cadre du traitement décrit aux présentes, sont prises toutes les mesur
       // champs obligatoire du candidat
       if (this.row_pa.pa_candidat) {
         if (!this.row_pa.pa_society_fac)
-          err.push({ text: "Coordonnées de facturation : nom de la société" });
+          err.push({ text: "Adresse de facturation : nom de la société" });
         if (!this.row_pa.pa_address1_fac)
-          err.push({ text: "Coordonnées de facturation : adresse" });
+          err.push({ text: "Adresse de facturation : adresse" });
         if (!this.row_pa.pa_zip_fac)
-          err.push({ text: "Coordonnées de facturation : code postal" });
+          err.push({ text: "Adresse de facturation : code postal" });
         if (!this.row_pa.pa_city_fac)
-          err.push({ text: "Coordonnées de facturation : ville" });
+          err.push({ text: "Adresse de facturation : ville" });
       }
       // champs obligatoire du juré
       if (this.row_pa.pa_jure) {
