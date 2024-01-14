@@ -457,9 +457,21 @@ export default {
     getFileUrl(num) {
       let res = "";
       if (this.from === "backoffice")
-        res = `${this.$config.server_url}/backoffice/1.0/wines/thumb/${this.row_wi.wi_id}/files/${num}/${this.row_wi.wi_year}?icon=true&forcereload=${this.forcereload}&token=${this.$store.state.accesstoken}&origin=${this.$config.backoffice_url}`;
+        res = `${this.$config.server_url}/backoffice/1.0/wines/thumb/${
+          this.row_wi.wi_id
+        }/files/${num}/${this.row_wi.wi_year}?icon=true&forcereload=${
+          this.forcereload
+        }&token=${this.$store.state.accesstoken}&origin=${
+          this.$config.backoffice_url
+        }&d=${this.$dayjs().format("YYYYMMDDHHmmss")}`;
       if (this.from === "candidats")
-        res = `${this.$config.server_url}/candidats/1.0/wines/thumb/${this.row_wi.wi_id}/files/${num}/${this.row_wi.wi_year}?icon=true&forcereload=${this.forcereload}&token=${this.$store.state.accesstoken}&origin=${this.$config.candidats_url}`;
+        res = `${this.$config.server_url}/candidats/1.0/wines/thumb/${
+          this.row_wi.wi_id
+        }/files/${num}/${this.row_wi.wi_year}?icon=true&forcereload=${
+          this.forcereload
+        }&token=${this.$store.state.accesstoken}&origin=${
+          this.$config.candidats_url
+        }&d=${this.$dayjs().format("YYYYMMDDHHmmss")}`;
       return res;
     },
     async loadDenominations() {
