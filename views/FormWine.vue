@@ -164,8 +164,7 @@ Modiifer également le projet XXX
           <li>
             Numéro de lot (obligatoire pour les produits déjà embouteillés)
           </li>
-          <li>Le</li>
-          volume total du lot ou partiel
+          <li>Le volume total du lot ou partiel</li>
         </ul>
         L’absence de l’une de ces mentions entrainera l’exclusion de
         l’échantillon présenté au concours.
