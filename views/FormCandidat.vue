@@ -77,16 +77,16 @@
           <div class="row mb-2">
             <div class="col-md-6">
               <m-form-text
-                label="Téléphone fixe"
-                :name="$Utils.randomstring('pa_phone_fix')"
-                v-model="row_pa.pa_phone_fix"
+                label="Téléphone mobile *"
+                :name="$Utils.randomstring('pa_phone_mobile')"
+                v-model="row_pa.pa_phone_mobile"
               ></m-form-text>
             </div>
             <div class="col-md-6">
               <m-form-text
-                label="Téléphone mobile"
-                :name="$Utils.randomstring('pa_phone_mobile')"
-                v-model="row_pa.pa_phone_mobile"
+                label="Téléphone fixe"
+                :name="$Utils.randomstring('pa_phone_fix')"
+                v-model="row_pa.pa_phone_fix"
               ></m-form-text>
             </div>
           </div>
@@ -568,6 +568,8 @@ Dans le cadre du traitement décrit aux présentes, sont prises toutes les mesur
           err.push({ text: "Adresse de facturation : code postal" });
         if (!this.row_pa.pa_city_fac)
           err.push({ text: "Adresse de facturation : ville" });
+        if (!this.row_pa.pa_phone_mobile)
+          err.push({ text: "Téléphone mobile" });
       }
       // champs obligatoire du juré
       if (this.row_pa.pa_jure) {
@@ -586,7 +588,7 @@ Dans le cadre du traitement décrit aux présentes, sont prises toutes les mesur
           !this.row_pa.pa_liensexistant_more
         )
           err.push({ text: "Juré lien existant : précisez" });
-        if(!this.row_pa.pa_jure_consentement){
+        if (!this.row_pa.pa_jure_consentement) {
           err.push({ text: "Consentement sur mes données personnelles" });
         }
       }

@@ -148,6 +148,28 @@ Modiifer également le projet XXX
     </div>
     <div class="frame">
       <h4>Fichiers</h4>
+      <div>
+        Nous vous rappelons que les bulletins d'analyse doivent reprendre
+        obligatoirement les éléments suivants :
+        <ul>
+          <li>Outre les éléments permettant d’identifier l’opérateur</li>
+          <li>Nom de la cuvée présentée</li>
+          <li>Mention de la dénomination</li>
+          <li>Couleur de l'échantillon présenté</li>
+          <li>Son millésime</li>
+          <li>
+            La(les) référence(s) du(des) contenant(s) (nature et identification)
+            lorsque les vins sont en vrac
+          </li>
+          <li>
+            Numéro de lot (obligatoire pour les produits déjà embouteillés)
+          </li>
+          <li>Le</li>
+          volume total du lot ou partiel
+        </ul>
+        L’absence de l’une de ces mentions entrainera l’exclusion de
+        l’échantillon présenté au concours.
+      </div>
       <div class="row mb-4 d-flex align-items-center">
         <div class="col-md-3">
           <label class="label">Déclaration de revendication 1 *</label>
