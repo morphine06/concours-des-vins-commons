@@ -180,6 +180,26 @@
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col">
+            <div class="mt-3">
+              <m-form-checkbox
+                label="Je m'engage à tenir à disposition des agents des DREETS les éléments de traçabilités et homogénéités des vins présentés."
+                :name="$Utils.randomstring('pa_candidat_consent1')"
+                v-model="row_pa.pa_candidat_consent1"
+                :labelwhitespace="true"
+              ></m-form-checkbox>
+            </div>
+            <div class="mt-3">
+              <m-form-checkbox
+                label="Je m'engage à transmettre mes échantillons, mis en bouteille et habillés avec leur étiquette de commercialisation conforme à la législation en vigueur sur l'étiquetage. En savoir plus sur la réglementation sur l'étiquetage ici."
+                :name="$Utils.randomstring('pa_candidat_consent2')"
+                v-model="row_pa.pa_candidat_consent2"
+                :labelwhitespace="true"
+              ></m-form-checkbox>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="frame">
@@ -570,6 +590,12 @@ Dans le cadre du traitement décrit aux présentes, sont prises toutes les mesur
           err.push({ text: "Adresse de facturation : ville" });
         if (!this.row_pa.pa_phone_mobile)
           err.push({ text: "Téléphone mobile" });
+        if (!this.row_pa.pa_candidat_consent1)
+          err.push({
+            text: "Je m'engage à tenir à disposition des agents des DREETS...",
+          });
+        if (!this.row_pa.pa_candidat_consent2)
+          err.push({ text: "Je m'engage à transmettre mes échantillons..." });
       }
       // champs obligatoire du juré
       if (this.row_pa.pa_jure) {
