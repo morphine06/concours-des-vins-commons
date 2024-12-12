@@ -833,7 +833,12 @@ export default {
     wineValidChange(val) {
       this.row_wi.wi_valid = val;
     },
+    wineValidChange2(val) {
+      this.row_wi.wi_valid2 = val;
+    },
     wineMedailleChange(row_wi) {
+      this.row_wi.wi_explain = row_wi.wi_explain;
+      this.row_wi.wi_numechantillon = row_wi.wi_numechantillon;
       this.row_wi.wi_medaille = row_wi.wi_medaille;
       this.row_wi.wi_medaille_commentaire = row_wi.wi_medaille_commentaire;
       this.row_wi.wi_medaille_commentaire_other =
